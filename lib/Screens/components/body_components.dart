@@ -10,7 +10,7 @@ Column buildTopBar(Size size, String title) {
           Container(
             height: size.height * SVConst.kHeighBarRatio,
             decoration: BoxDecoration(
-                color: SVConst.topbarColor,
+                color: SVConst.barColor,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(SVConst.radiusComponent),
                   bottomRight: Radius.circular(SVConst.radiusComponent),
@@ -34,4 +34,23 @@ Column buildTopBar(Size size, String title) {
       ),
     ],
   );
+}
+
+class TopBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+  final Size size;
+  final Function onPressed;
+  final Function onTitleTapped;
+  final Widget child;
+
+  @override
+  final Size preferredSize;
+
+  TopBar(this.size,
+      {@required this.title, this.child, this.onPressed, this.onTitleTapped})
+      : preferredSize = Size.fromHeight(size.height * SVConst.kHeighBarRatio);
+  @override
+  Widget build(BuildContext context) {
+    return buildTopBar(size, title);
+  }
 }

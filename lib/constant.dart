@@ -3,9 +3,18 @@ import 'package:flutter/material.dart';
 //USE THIS CLASS FOR ONLY CONSTANT.
 
 abstract class SVConst {
+  //TITLE APPBAR
+  static const String titleAppBar = "Status Vaccini";
+
+  //VIEW ROUTE
+  static const String MainRoute = '/';
+  static const String InfoViewRoute = '/info';
+  static const String HomeViewRoute = '/home';
+  static const String RecapViewRoute = '/recap';
   //COLOR CONSTANT
-  static const topbarColor = Colors.cyan;
+  static const barColor = Colors.cyan;
   static const textColor = Colors.white;
+  static const backColor = Colors.white;
 
   //RADIUS ELEMENT
   static const double radiusComponent = 40;

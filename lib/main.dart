@@ -1,5 +1,7 @@
+import 'package:StatusVaccini/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:StatusVaccini/Screens/HomePage.dart';
+import 'Screens/undefined_screen.dart';
+import 'router.dart' as router;
 
 void main() => runApp(MyApp());
 
@@ -7,12 +9,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Status Vaccini",
-        theme: ThemeData.light(),
-        debugShowCheckedModeBanner: false,
-        routes: <String, WidgetBuilder>{
-          HomePage.routeName: (BuildContext context) =>
-              HomePage(title: "Status Vaccini"),
-        });
+      title: "Status Vaccini",
+      theme: ThemeData.light(),
+      debugShowCheckedModeBanner: false,
+      initialRoute: SVConst.MainRoute,
+      onGenerateRoute: router.generateRoute,
+      onUnknownRoute: (settings) => MaterialPageRoute(
+          builder: (context) => UndefinedScreen(name: settings.name)),
+    );
   }
 }
