@@ -16,9 +16,9 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 
 - [ 100% ]  Creazione template app.
 - [ 70% ]   Cattura dei dati dai repository e divisione in categorie. 
-- [ ]    Creare la pagina "home" con i grafici dei dati forniti dagli OpenData nazionali.
-- [ ]    Creare una mappa con i colori dell'italia nella pagina "recap".
-- [ ]    Creare la pagina "info" con i dettagli sul progetto e informazioni varie, tra cui link a questo repository.
+- [ 0% ]    Creare la pagina "home" con i grafici dei dati forniti dagli OpenData nazionali.
+- [ 0% ]    Creare una mappa con i colori dell'italia nella pagina "recap".
+- [ 0% ]    Creare la pagina "info" con i dettagli sul progetto e informazioni varie, tra cui link a questo repository.
 
 *Per informazioni:*
 
