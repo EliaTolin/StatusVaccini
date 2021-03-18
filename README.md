@@ -1,4 +1,4 @@
-# StatusVaccini 🧬
+![logoStatus](https://user-images.githubusercontent.com/60351315/111628344-687f3500-87f0-11eb-9c74-88e804c07da9.png)
 
 L'obiettivo di Status Vaccini è creare un'applicazione per il monitoraggio della compagna vaccinale Italiana.
 
