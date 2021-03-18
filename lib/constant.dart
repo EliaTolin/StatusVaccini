@@ -22,3 +22,9 @@ abstract class SVConst {
   //SIZE ELEMENT
   static const double kHeighBarRatio = 0.15;
 }
+
+abstract class URLConst {
+  //URL
+  static const String latestSummaryUrl =
+      'https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/vaccini-summary-latest.json';
+}
