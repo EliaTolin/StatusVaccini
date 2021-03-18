@@ -1,6 +1,6 @@
 # StatusVaccini 🧬
 
-L'obiettivo di Status Vaccini è creare una piattaforma per il monitoraggio della compagna vaccinale Italiana.
+L'obiettivo di Status Vaccini è creare un'applicazione per il monitoraggio della compagna vaccinale Italiana.
 
 ## Funzionalità 💉
 
@@ -13,9 +13,12 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 
 
 **TO DO:**
-- [ ] Creare la pagina "home" con i grafici dei dati forniti dagli OpenData nazionali.
-- [ ] Creare una mappa con i colori dell'italia nella pagina "recap".
-- [ ] Creare la pagina "info" con i dettagli sul progetto e informazioni varie, tra cui link a questo repository.
+
+- [ 100% ]  Creazione template app.
+- [ 70% ]   Cattura dei dati dai repository e divisione in categorie. 
+- [ ]    Creare la pagina "home" con i grafici dei dati forniti dagli OpenData nazionali.
+- [ ]    Creare una mappa con i colori dell'italia nella pagina "recap".
+- [ ]    Creare la pagina "info" con i dettagli sul progetto e informazioni varie, tra cui link a questo repository.
 
 *Per informazioni:*
 
