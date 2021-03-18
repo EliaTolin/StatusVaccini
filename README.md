@@ -17,7 +17,7 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 - [ ] Creare una mappa con i colori dell'italia nella pagina "recap".
 - [ ] Creare la pagina "info" con i dettagli sul progetto e informazioni varie, tra cui link a questo repository.
 
-_Per informazioni:_ 
+*Per informazioni:*
 
-Elia Tolin 
+_Elia Tolin_
 mail@eliatolin.it
