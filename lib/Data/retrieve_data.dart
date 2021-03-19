@@ -31,7 +31,6 @@ ___________________
   VEN	 |	Veneto
 */
 
-
 Future<Map<String, dynamic>> getVacciniSummaryLatest() async {
   var response = await http.get(URLConst.vacciniSummaryLatest);
   var regioniLatest = new Map<String, dynamic>();
@@ -69,6 +68,7 @@ Future<Map<String, dynamic>> getConsegneVacciniLatest() async {
         'fornitore': consegna['fornitore'],
         'data_consegna': consegna['data_consegna'],
         'numero_dosi': consegna['numero_dosi'],
+        'nome_area': consegna['nome_area']
       };
     }
   }
@@ -93,10 +93,8 @@ Future<Map<String, dynamic>> getSommistrazioneVacciniLatest() async {
         'fascia_anagrafica': sommistrazione['fascia_anagrafica'],
         'sesso_maschile': sommistrazione['sesso_maschile'],
         'sesso_femminile': sommistrazione['sesso_femminile'],
-        'categoria_operatori_sanitari_sociosanitari':
-            sommistrazione['categoria_operatori_sanitari_sociosanitari'],
-        'categoria_personale_non_sanitario':
-            sommistrazione['categoria_personale_non_sanitario'],
+        'categoria_operatori_sanitari_sociosanitari': sommistrazione['categoria_operatori_sanitari_sociosanitari'],
+        'categoria_personale_non_sanitario': sommistrazione['categoria_personale_non_sanitario'],
         'categoria_ospiti_rsa': sommistrazione['categoria_ospiti_rsa'],
         'categoria_over80': sommistrazione['categoria_over80'],
         'prima_dose': sommistrazione['prima_dose'],
@@ -126,10 +124,8 @@ Future<Map<String, dynamic>> getSommistrazioneVacciniSummaryLatest() async {
         'fascia_anagrafica': sommistrazione['fascia_anagrafica'],
         'sesso_maschile': sommistrazione['sesso_maschile'],
         'sesso_femminile': sommistrazione['sesso_femminile'],
-        'categoria_operatori_sanitari_sociosanitari':
-            sommistrazione['categoria_operatori_sanitari_sociosanitari'],
-        'categoria_personale_non_sanitario':
-            sommistrazione['categoria_personale_non_sanitario'],
+        'categoria_operatori_sanitari_sociosanitari': sommistrazione['categoria_operatori_sanitari_sociosanitari'],
+        'categoria_personale_non_sanitario': sommistrazione['categoria_personale_non_sanitario'],
         'categoria_ospiti_rsa': sommistrazione['categoria_ospiti_rsa'],
         'categoria_over80': sommistrazione['categoria_over80'],
         'prima_dose': sommistrazione['prima_dose'],
@@ -181,10 +177,8 @@ Future<Map<String, dynamic>> getAnagraficaVacciniSummaryLatest() async {
         'fascia_anagrafica': sommistrazione['fascia_anagrafica'],
         'sesso_maschile': sommistrazione['sesso_maschile'],
         'sesso_femminile': sommistrazione['sesso_femminile'],
-        'categoria_operatori_sanitari_sociosanitari':
-            sommistrazione['categoria_operatori_sanitari_sociosanitari'],
-        'categoria_personale_non_sanitario':
-            sommistrazione['categoria_personale_non_sanitario'],
+        'categoria_operatori_sanitari_sociosanitari': sommistrazione['categoria_operatori_sanitari_sociosanitari'],
+        'categoria_personale_non_sanitario': sommistrazione['categoria_personale_non_sanitario'],
         'categoria_ospiti_rsa': sommistrazione['categoria_ospiti_rsa'],
         'categoria_over80': sommistrazione['categoria_over80'],
         'prima_dose': sommistrazione['prima_dose'],
