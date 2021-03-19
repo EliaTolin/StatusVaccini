@@ -31,8 +31,7 @@ ___________________
   VEN	 |	Veneto
 */
 
-// Ritorna un summary delle dosi per regione.
-// CHIAVE: SIGLA REGIONE
+
 Future<Map<String, dynamic>> getVacciniSummaryLatest() async {
   var response = await http.get(URLConst.vacciniSummaryLatest);
   var regioniLatest = new Map<String, dynamic>();
@@ -44,10 +43,10 @@ Future<Map<String, dynamic>> getVacciniSummaryLatest() async {
     for (dynamic regione in jsonData) {
       regioniLatest[regione['area'].toString()] = {
         'index': regione['index'],
-        'dosiConsegnate': regione['dosi_consegnate'],
-        'dosiSomministrate': regione['dosi_somministrate'],
-        'percentualeSomministrazione': regione['percentuale_somministrazione'],
-        'nomeRegione': regione['nome_area']
+        'dosi_consegnate': regione['dosi_consegnate'],
+        'dosi_somministrate': regione['dosi_somministrate'],
+        'percentuale_somministrazione': regione['percentuale_somministrazione'],
+        'nome_area': regione['nome_area']
       };
     }
   }
