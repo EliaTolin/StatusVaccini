@@ -21,11 +21,13 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  curved_navigation_bar: ^0.3.7 
   flutter:
     sdk: flutter
+  curved_navigation_bar: ^0.3.7 
   http: ^0.12.2
   charts_flutter: ^0.10.0
+  fl_chart: ^0.20.1
+  flutter_svg: ^0.21.0-nullsafety.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -48,8 +50,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+     - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
