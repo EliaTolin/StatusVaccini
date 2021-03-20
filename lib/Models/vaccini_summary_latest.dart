@@ -4,9 +4,9 @@ import 'package:StatusVaccini/constant.dart';
 
 // ignore_for_file: non_constant_identifier_names
 
-// vaccini-summary-latest: 
-// dati sul totale delle consegne e somministrazioni 
-// avvenute sino ad oggi, includendo la percentuale di dosi somministrate 
+// vaccini-summary-latest:
+// dati sul totale delle consegne e somministrazioni
+// avvenute sino ad oggi, includendo la percentuale di dosi somministrate
 // (sul totale delle dosi consegnate) suddivise per regioni.
 
 // CHIAVE: SIGLA REGIONE
@@ -28,7 +28,7 @@ class VacciniSummaryLatest {
 
   // Ritorna la lista degli oggetti scaricata dagli OpenData in rete.
   static Future<List<VacciniSummaryLatest>> getListData() async {
-    var response = await http.get(URLConst.vacciniSummaryLatest);
+    var response = await http.get(Uri.parse(URLConst.vacciniSummaryLatest));
     List<VacciniSummaryLatest> list = [];
 
     if (response.statusCode == 200) {

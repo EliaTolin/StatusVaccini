@@ -21,7 +21,7 @@ class PuntiSommistrazioneTipologia {
       this.nome_regione});
 
   static Future<List<PuntiSommistrazioneTipologia>> getListData() async {
-    var response = await http.get(URLConst.puntiSommistrazioneTipologia);
+    var response = await http.get(Uri.parse(URLConst.puntiSommistrazioneTipologia));
     List<PuntiSommistrazioneTipologia> list = [];
 
     if (response.statusCode == 200) {

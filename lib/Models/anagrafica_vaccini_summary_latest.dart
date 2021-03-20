@@ -29,7 +29,7 @@ class AnagraficaVacciniSummaryLatest {
       this.seconda_dose});
 
   Future<List<AnagraficaVacciniSummaryLatest>> getListData() async {
-    var response = await http.get(URLConst.anagraficaVacciniSummaryLatest);
+    var response = await http.get(Uri.parse(URLConst.anagraficaVacciniSummaryLatest));
     List<AnagraficaVacciniSummaryLatest> list = [];
 
     if (response.statusCode == 200) {

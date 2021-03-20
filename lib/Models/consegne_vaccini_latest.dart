@@ -25,7 +25,7 @@ class ConsegneVacciniLatest {
       this.nome_area});
 
   static Future<List<ConsegneVacciniLatest>> getListData() async {
-    var response = await http.get(URLConst.consegneVacciniLatest);
+    var response = await http.get(Uri.parse(URLConst.consegneVacciniLatest));
     List<ConsegneVacciniLatest> list = [];
 
     if (response.statusCode == 200) {

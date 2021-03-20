@@ -5,7 +5,7 @@ import 'package:StatusVaccini/constant.dart';
 //RITORNA L'ULTIMO AGGIORNAMENTO DELLE INFORMAZIONI.
 abstract class OpenData {
   Future<String> getLastUpdateData() async {
-    var response = await http.get(URLConst.lastUpdateDataSet);
+    var response = await http.get(Uri.parse(URLConst.lastUpdateDataSet));
     String lastUpdate;
 
     if (response.statusCode == 200) {

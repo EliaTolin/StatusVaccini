@@ -12,7 +12,7 @@ import 'package:StatusVaccini/constant.dart';
 class SommistrazioneVacciniSummaryLatest {
   final int index;
   final String area;
-  final String data_sommistrazione;
+  final String data_somministrazione;
   final int totale;
   final int sesso_maschile;
   final int sesso_femminile;
@@ -27,7 +27,7 @@ class SommistrazioneVacciniSummaryLatest {
   SommistrazioneVacciniSummaryLatest(
       {this.index,
       this.area,
-      this.data_sommistrazione,
+      this.data_somministrazione,
       this.totale,
       this.sesso_maschile,
       this.sesso_femminile,
@@ -40,7 +40,8 @@ class SommistrazioneVacciniSummaryLatest {
       this.nome_regione});
 
   static Future<List<SommistrazioneVacciniSummaryLatest>> getListData() async {
-    var response = await http.get(URLConst.somministrazioneVacciniLatest);
+    var response =
+        await http.get(Uri.parse(URLConst.sommistrazioneVacciniSummaryLatest));
     List<SommistrazioneVacciniSummaryLatest> list = [];
 
     if (response.statusCode == 200) {
@@ -51,7 +52,7 @@ class SommistrazioneVacciniSummaryLatest {
         list.add(new SommistrazioneVacciniSummaryLatest(
           index: element['index'],
           area: element['area'],
-          data_sommistrazione: element['data_sommistrazione'],
+          data_somministrazione: element['data_somministrazione'],
           totale: element['totale'],
           sesso_maschile: element['sesso_maschile'],
           sesso_femminile: element['sesso_femminile'],
@@ -77,7 +78,7 @@ class SommistrazioneVacciniSummaryLatest {
       list.add(new SommistrazioneVacciniSummaryLatest(
         index: value['index'],
         area: value['area'],
-        data_sommistrazione: value['data_sommistrazione'],
+        data_somministrazione: value['data_somministrazione'],
         totale: value['totale'],
         sesso_maschile: value['sesso_maschile'],
         sesso_femminile: value['sesso_femminile'],

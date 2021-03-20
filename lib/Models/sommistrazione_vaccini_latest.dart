@@ -13,7 +13,7 @@ class SommistrazioneVacciniLatest {
   final int index;
   final String area;
   final String fornitore;
-  final String data_sommistrazione;
+  final String data_somministrazione;
   final String fascia_anagrafica;
   final int sesso_maschile;
   final int sesso_femminile;
@@ -29,7 +29,7 @@ class SommistrazioneVacciniLatest {
       {this.index,
       this.area,
       this.fornitore,
-      this.data_sommistrazione,
+      this.data_somministrazione,
       this.fascia_anagrafica,
       this.sesso_maschile,
       this.sesso_femminile,
@@ -42,7 +42,8 @@ class SommistrazioneVacciniLatest {
       this.nome_regione});
 
   static Future<List<SommistrazioneVacciniLatest>> getListData() async {
-    var response = await http.get(URLConst.somministrazioneVacciniLatest);
+    var response =
+        await http.get(Uri.parse(URLConst.somministrazioneVacciniLatest));
     List<SommistrazioneVacciniLatest> list = [];
 
     if (response.statusCode == 200) {
@@ -54,7 +55,7 @@ class SommistrazioneVacciniLatest {
           index: element['index'],
           area: element['area'],
           fornitore: element['fornitore'],
-          data_sommistrazione: element['data_sommistrazione'],
+          data_somministrazione: element['data_somministrazione'],
           fascia_anagrafica: element['fascia_anagrafica'],
           sesso_maschile: element['sesso_maschile'],
           sesso_femminile: element['sesso_femminile'],
@@ -81,7 +82,7 @@ class SommistrazioneVacciniLatest {
         index: value['index'],
         area: value['area'],
         fornitore: value['fornitore'],
-        data_sommistrazione: value['data_sommistrazione'],
+        data_somministrazione: value['data_somministrazione'],
         fascia_anagrafica: value['fascia_anagrafica'],
         sesso_maschile: value['sesso_maschile'],
         sesso_femminile: value['sesso_femminile'],
