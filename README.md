@@ -14,9 +14,9 @@ L'idea è nata per offrire una piattaforma sotto forma di Applicazione per il mo
 giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da disponibili.
 
 
-**TO DO:**
+#### **TO DO:**
 
-- [ 100% ]  Creazione template app.
+##### - [ 100% ]  Creazione template app.
 
     -> [ 100% ] Creare la pagina "Home"
 
@@ -24,7 +24,7 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 
     -> [ 100% ] Creare la pagina "Info"
 
-- [ 100% ]  Cattura dei dati dai repository e divisione in categorie.
+##### - [ 100% ]  Cattura dei dati dai repository e divisione in categorie.
 
     -> [ 100% ] Creazioni constanti URL 
 
@@ -32,7 +32,7 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 
     -> [ 100% ] Organizzazione informazioni
 
-- [ 0% ]    Creare la pagina contente i grafici dei dati forniti dagli OpenData nazionali.
+##### - [ 0% ]    Creare la pagina contente i grafici dei dati forniti dagli OpenData nazionali.
 
     VACCINAZIONI GENERALE
 
@@ -71,7 +71,7 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
     -> [ 0 % ] Creare il grafico linerare con le dosi consegnate per regioni
 
 
-- [ 0% ]    Creare una mappa con i colori dell'italia nella pagina "recap".
+##### - [ 0% ]    Creare una mappa con i colori dell'italia nella pagina "recap".
 
     -> [ 0 % ] Informazioni sintetiche sulle totali vaccinazioni
 
@@ -81,7 +81,7 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 
     -> [ 0 % ] Informazioni sintetiche sul totale delle dosi consegnate
 
-- [ 0% ]    Creare la pagina "info" con i dettagli sul progetto e informazioni varie, tra cui link a questo repository.
+##### - [ 0% ]    Creare la pagina "info" con i dettagli sul progetto e informazioni varie, tra cui link a questo repository.
 
     -> [ 0 % ] Inserire nella link al repository GitHub 
 
