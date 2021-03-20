@@ -10,7 +10,7 @@ Column buildTopBar(Size size, String title) {
           Container(
             height: size.height * SVConst.kHeighBarRatio,
             decoration: BoxDecoration(
-                color: SVConst.barColor,
+                color: SVConst.mainColor,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(SVConst.radiusComponent),
                   bottomRight: Radius.circular(SVConst.radiusComponent),

@@ -12,7 +12,7 @@ abstract class SVConst {
   static const String HomeViewRoute = '/home';
   static const String RecapViewRoute = '/recap';
   //COLOR CONSTANT
-  static const barColor = Colors.cyan;
+  static const mainColor = Colors.cyan;
   static const textColor = Colors.white;
   static const backColor = Colors.white;
 
@@ -21,6 +21,7 @@ abstract class SVConst {
 
   //SIZE ELEMENT
   static const double kHeighBarRatio = 0.15;
+  static const double kSizeIcons = 30;
 }
 
 abstract class URLConst {

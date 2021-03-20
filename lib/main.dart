@@ -10,7 +10,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Status Vaccini",
-      theme: ThemeData.light(),
+      theme: ThemeData(
+        primaryColor: SVConst.mainColor,
+        scaffoldBackgroundColor: SVConst.backColor,
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: SVConst.MainRoute,
       onGenerateRoute: router.generateRoute,

@@ -25,9 +25,9 @@ class _TabsPageState extends State<TabsPage> {
       bottomNavigationBar: CurvedNavigationBar(
         onTap: (int index) => setState(() => _currentIndex = index),
         index: _currentIndex,
-        buttonBackgroundColor: SVConst.barColor,
+        buttonBackgroundColor: SVConst.mainColor,
         backgroundColor: SVConst.backColor,
-        color: SVConst.barColor,
+        color: SVConst.mainColor,
         items: <Widget>[
           for (final tabItem in TabNavigationItem.items) tabItem.icon
         ],
