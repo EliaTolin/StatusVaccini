@@ -17,13 +17,13 @@ class TabNavigationItem {
 
   static List<TabNavigationItem> get items => [
         TabNavigationItem(
-          page: InfoView(),
+          page: RecapScreen(),
           icon: Icon(
-            Icons.help,
+            Icons.add_chart,
             color: SVConst.backColor,
             size: 35,
           ),
-          title: "Info",
+          title: "Recap",
         ),
         TabNavigationItem(
           page: HomePageView(),
@@ -35,13 +35,13 @@ class TabNavigationItem {
           title: "Home",
         ),
         TabNavigationItem(
-          page: RecapScreen(),
+          page: InfoView(),
           icon: Icon(
-            Icons.add_chart,
+            Icons.help,
             color: SVConst.backColor,
             size: 35,
           ),
-          title: "Recap",
+          title: "Info",
         ),
       ];
 }
