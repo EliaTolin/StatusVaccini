@@ -29,11 +29,11 @@ abstract class URLConst {
 
   //anagrafica-vaccini-summary-latest: totali delle somministrazioni per fasce d'età.
   static const String anagraficaVacciniSummaryLatest =
-      'https://github.com/italia/covid19-opendata-vaccini/blob/master/dati/anagrafica-vaccini-summary-latest.json';
+      'https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/anagrafica-vaccini-summary-latest.json';
 
   //consegne-vaccini-latest: dati sul totale delle consegne giornaliere dei vaccini suddivise per regioni.
   static const String consegneVacciniLatest =
-      'https://github.com/italia/covid19-opendata-vaccini/blob/master/dati/consegne-vaccini-latest.json';
+      'https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/consegne-vaccini-latest.json';
 
   //punti-somministrazione-latest: punti di somministrazione per ciascuna Regione e Provincia Autonoma.
   static const String puntiSommistrazioneLatest =
