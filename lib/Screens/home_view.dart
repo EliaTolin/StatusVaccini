@@ -1,9 +1,7 @@
-import 'package:StatusVaccini/Models/opendata.dart';
+import 'package:StatusVaccini/Screens/components/home_items.dart';
 import 'package:StatusVaccini/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:StatusVaccini/Screens/components/body_components.dart';
-
-import 'components/graph_card.dart';
 
 class HomePageView extends StatefulWidget {
   @override
@@ -16,14 +14,14 @@ class _HomePageViewState extends State<HomePageView> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: TopBar(size, title: SVConst.titleAppBar),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: GraphCard(
-          typeinfo: "Dosi",
-          labelText: "Vaccini sommistrati",
-          iconpath: "assets/virus.svg",
-          funTextInformation: () => OpenData.getSomministrazioniTotali(),
-          funGetData: () => OpenData.graphVacciniForDay(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            children: <Widget>[
+              for (final homeItem in HomeItems.items) homeItem.card,
+            ],
+          ),
         ),
       ),
     );

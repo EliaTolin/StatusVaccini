@@ -26,26 +26,12 @@ class _TabsPageState extends State<TabsPage> {
         onTap: (int index) => setState(() => _currentIndex = index),
         index: _currentIndex,
         buttonBackgroundColor: SVConst.mainColor,
-        backgroundColor: SVConst.backColor,
+        backgroundColor: Colors.transparent,
         color: SVConst.mainColor,
         items: <Widget>[
           for (final tabItem in TabNavigationItem.items) tabItem.icon
         ],
       ),
-    );
-  }
-
-  BottomNavigationBar buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: (int index) => setState(() => _currentIndex = index),
-      items: <BottomNavigationBarItem>[
-        for (final tabItem in TabNavigationItem.items)
-          BottomNavigationBarItem(
-            icon: tabItem.icon,
-            label: tabItem.title,
-          ),
-      ],
     );
   }
 }
