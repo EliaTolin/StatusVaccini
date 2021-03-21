@@ -3,6 +3,7 @@ import 'package:StatusVaccini/Models/sommistrazione_vaccini_summary_latest.dart'
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:StatusVaccini/constant.dart';
+import 'package:intl/intl.dart';
 
 //RITORNA L'ULTIMO AGGIORNAMENTO DELLE INFORMAZIONI.
 abstract class OpenData {
@@ -18,27 +19,27 @@ abstract class OpenData {
     return lastUpdate;
   }
 
-  static Future<int> getVaccinatiTotale() async {
+  //Ritorna una striga formattata con il totali di dosi somministrate
+  static Future<String> getSomministrazioniTotali() async {
+    final NumberFormat format = NumberFormat.decimalPattern('it');
     var summary;
     int vacctot = 0;
 
-    await SommistrazioneVacciniSummaryLatest.getListData()
-        .then((value) => summary = value);
+    await SommistrazioneVacciniSummaryLatest.getListData().then((value) => summary = value);
 
     for (SommistrazioneVacciniSummaryLatest element in summary) {
       vacctot += element.prima_dose;
       vacctot += element.seconda_dose;
     }
-
-    return vacctot;
+    String vacctotString = format.format(vacctot);
+    return vacctotString;
   }
 
   static Future<List<FlSpot>> graphVacciniForDay() async {
     List<FlSpot> data = [];
 
     var summary;
-    await SommistrazioneVacciniSummaryLatest.getListData()
-        .then((value) => summary = value);
+    await SommistrazioneVacciniSummaryLatest.getListData().then((value) => summary = value);
 
     int vacctot = 0;
     for (SommistrazioneVacciniSummaryLatest element in summary) {

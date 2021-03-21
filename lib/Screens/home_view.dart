@@ -22,7 +22,7 @@ class _HomePageViewState extends State<HomePageView> {
           typeinfo: "Dosi",
           labelText: "Vaccini sommistrati",
           iconpath: "assets/virus.svg",
-          funTextInformation: () => OpenData.getVaccinatiTotale(),
+          funTextInformation: () => OpenData.getSomministrazioniTotali(),
           funGetData: () => OpenData.graphVacciniForDay(),
         ),
       ),
