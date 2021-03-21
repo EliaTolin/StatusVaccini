@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:StatusVaccini/constant.dart';
 import 'package:intl/intl.dart';
+import 'package:sortedmap/sortedmap.dart';
 
 //RITORNA L'ULTIMO AGGIORNAMENTO DELLE INFORMAZIONI.
 abstract class OpenData {
@@ -37,16 +38,28 @@ abstract class OpenData {
 
   static Future<List<FlSpot>> graphVacciniForDay() async {
     List<FlSpot> data = [];
-
     var summary;
     await SommistrazioneVacciniSummaryLatest.getListData().then((value) => summary = value);
-
-    int sommTot = 0;
+    //{'giorno':dosi}
+    Map<String, int> somministrazioniPerDay = new SortedMap<String, int>(Ordering.byKey());
+    //int sommTot = 0;
+    int count = 0;
     for (SommistrazioneVacciniSummaryLatest element in summary) {
-      sommTot += element.prima_dose;
-      sommTot += element.seconda_dose;
-      data.add(FlSpot(element.index.toDouble(), sommTot.toDouble()));
+      String date = element.data_somministrazione.substring(0, 10);
+      //sommTot += (element.prima_dose + element.seconda_dose);
+      int tempTot = element.prima_dose + element.seconda_dose;
+      if (!somministrazioniPerDay.containsKey(date)) {
+        somministrazioniPerDay.putIfAbsent(date, () => tempTot);
+      } else {
+        somministrazioniPerDay.update(date, (value) => value + tempTot);
+      }
     }
+
+    somministrazioniPerDay.forEach((key, value) {
+      count += 1;
+      data.add(FlSpot(count.toDouble(), value.toDouble()));
+    });
+
     return data;
   }
 }
