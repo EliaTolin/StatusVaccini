@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:StatusVaccini/constant.dart';
 
@@ -24,20 +25,21 @@ class SommistrazioneVacciniSummaryLatest {
   final int seconda_dose;
   final String nome_regione;
 
-  SommistrazioneVacciniSummaryLatest(
-      {this.index,
-      this.area,
-      this.data_somministrazione,
-      this.totale,
-      this.sesso_maschile,
-      this.sesso_femminile,
-      this.categoria_operatori_sanitari_sociosanitari,
-      this.categoria_personale_non_sanitario,
-      this.categoria_ospiti_rsa,
-      this.categoria_over80,
-      this.prima_dose,
-      this.seconda_dose,
-      this.nome_regione});
+  SommistrazioneVacciniSummaryLatest({
+    this.index,
+    this.area,
+    this.data_somministrazione,
+    this.totale,
+    this.sesso_maschile,
+    this.sesso_femminile,
+    this.categoria_operatori_sanitari_sociosanitari,
+    this.categoria_personale_non_sanitario,
+    this.categoria_ospiti_rsa,
+    this.categoria_over80,
+    this.prima_dose,
+    this.seconda_dose,
+    this.nome_regione,
+  });
 
   static Future<List<SommistrazioneVacciniSummaryLatest>> getListData() async {
     var response =
@@ -95,4 +97,5 @@ class SommistrazioneVacciniSummaryLatest {
     });
     return list;
   }
+
 }
