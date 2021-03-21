@@ -1,4 +1,4 @@
-import 'package:StatusVaccini/Models/tabs_navigation.dart';
+import 'package:StatusVaccini/Screens/components/tabs_navigation.dart';
 import 'package:StatusVaccini/constant.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';

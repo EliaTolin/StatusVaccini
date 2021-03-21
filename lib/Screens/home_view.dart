@@ -3,7 +3,7 @@ import 'package:StatusVaccini/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:StatusVaccini/Screens/components/body_components.dart';
 
-import 'components/GraphCard.dart';
+import 'components/graph_card.dart';
 
 class HomePageView extends StatefulWidget {
   @override
