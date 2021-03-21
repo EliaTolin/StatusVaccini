@@ -23,16 +23,16 @@ abstract class OpenData {
   static Future<String> getSomministrazioniTotali() async {
     final NumberFormat format = NumberFormat.decimalPattern('it');
     var summary;
-    int vacctot = 0;
+    int sommTot = 0;
 
     await SommistrazioneVacciniSummaryLatest.getListData().then((value) => summary = value);
 
     for (SommistrazioneVacciniSummaryLatest element in summary) {
-      vacctot += element.prima_dose;
-      vacctot += element.seconda_dose;
+      sommTot += element.prima_dose;
+      sommTot += element.seconda_dose;
     }
-    String vacctotString = format.format(vacctot);
-    return vacctotString;
+    String sommTotString = format.format(sommTot);
+    return sommTotString;
   }
 
   static Future<List<FlSpot>> graphVacciniForDay() async {
@@ -41,11 +41,11 @@ abstract class OpenData {
     var summary;
     await SommistrazioneVacciniSummaryLatest.getListData().then((value) => summary = value);
 
-    int vacctot = 0;
+    int sommTot = 0;
     for (SommistrazioneVacciniSummaryLatest element in summary) {
-      vacctot += element.prima_dose;
-      vacctot += element.seconda_dose;
-      data.add(FlSpot(element.index.toDouble(), vacctot.toDouble()));
+      sommTot += element.prima_dose;
+      sommTot += element.seconda_dose;
+      data.add(FlSpot(element.index.toDouble(), sommTot.toDouble()));
     }
     return data;
   }
