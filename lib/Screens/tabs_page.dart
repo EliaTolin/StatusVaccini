@@ -16,6 +16,7 @@ class _TabsPageState extends State<TabsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: IndexedStack(
         index: _currentIndex,
         children: <Widget>[
@@ -26,7 +27,7 @@ class _TabsPageState extends State<TabsPage> {
         onTap: (int index) => setState(() => _currentIndex = index),
         index: _currentIndex,
         buttonBackgroundColor: SVConst.mainColor,
-        backgroundColor: Colors.transparent,
+        backgroundColor: SVConst.backColor,
         color: SVConst.mainColor,
         items: <Widget>[
           for (final tabItem in TabNavigationItem.items) tabItem.icon

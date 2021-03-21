@@ -13,6 +13,7 @@ class _HomePageViewState extends State<HomePageView> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      extendBody: true,
       appBar: TopBar(size, title: SVConst.titleAppBar),
       body: SingleChildScrollView(
         child: Padding(
