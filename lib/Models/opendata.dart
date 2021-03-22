@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'package:StatusVaccini/Models/consegne_vaccini_latest.dart';
 import 'package:StatusVaccini/Models/sommistrazione_vaccini_summary_latest.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
@@ -21,27 +22,30 @@ abstract class OpenData {
   }
 
   //Ritorna una striga formattata con il totali di dosi somministrate
-  static Future<String> getSomministrazioniTotali() async {
-    final NumberFormat format = NumberFormat.decimalPattern('it');
+  static Future<int> getSomministrazioniTotali() async {
+    //final NumberFormat format = NumberFormat.decimalPattern('it');
     var summary;
     int sommTot = 0;
 
-    await SommistrazioneVacciniSummaryLatest.getListData().then((value) => summary = value);
+    await SommistrazioneVacciniSummaryLatest.getListData()
+        .then((value) => summary = value);
 
     for (SommistrazioneVacciniSummaryLatest element in summary) {
       sommTot += element.prima_dose;
       sommTot += element.seconda_dose;
     }
-    String sommTotString = format.format(sommTot);
-    return sommTotString;
+    //String sommTotString = format.format(sommTot);
+    return sommTot;
   }
 
   static Future<List<FlSpot>> graphVacciniForDay() async {
     List<FlSpot> data = [];
     var summary;
-    await SommistrazioneVacciniSummaryLatest.getListData().then((value) => summary = value);
+    await SommistrazioneVacciniSummaryLatest.getListData()
+        .then((value) => summary = value);
     //{'giorno':dosi}
-    Map<String, int> somministrazioniPerDay = new SortedMap<String, int>(Ordering.byKey());
+    Map<String, int> somministrazioniPerDay =
+        new SortedMap<String, int>(Ordering.byKey());
     //int sommTot = 0;
     int count = 0;
     for (SommistrazioneVacciniSummaryLatest element in summary) {
@@ -62,4 +66,85 @@ abstract class OpenData {
 
     return data;
   }
+
+  //RITORNA IL NUMERO DELLA CONSEGNE DI DOSI PER GIORNO
+  static Future<List<FlSpot>> graphDeliveryForDay() async {
+    List<FlSpot> data = [];
+    var summary;
+    await ConsegneVacciniLatest.getListData().then((value) => summary = value);
+    //{'giorno':dosi}
+    Map<String, int> deliveryForDay =
+        new SortedMap<String, int>(Ordering.byKey());
+    //int sommTot = 0;
+    int count = 0;
+    for (ConsegneVacciniLatest element in summary) {
+      String date = element.data_consegna.substring(0, 10);
+      //sommTot += (element.prima_dose + element.seconda_dose);
+      int tempTot = element.numero_dosi;
+      if (!deliveryForDay.containsKey(date)) {
+        deliveryForDay.putIfAbsent(date, () => tempTot);
+      } else {
+        deliveryForDay.update(date, (value) => value + tempTot);
+      }
+    }
+
+    deliveryForDay.forEach((key, value) {
+      count += 1;
+      data.add(FlSpot(count.toDouble(), value.toDouble()));
+    });
+
+    return data;
+  }
+
+  //RITORNA IL NUMERO TOTALE DELLE DOSI CONSEGNATE
+  static Future<int> getDosiTotali() async {
+    var summary;
+    int sommTot = 0;
+
+    await ConsegneVacciniLatest.getListData().then((value) => summary = value);
+
+    for (ConsegneVacciniLatest element in summary) {
+      sommTot += element.numero_dosi;
+    }
+
+    return sommTot;
+  }
+
+  static Future<List<Fornitore>> getDosiPerFornitore() async {
+    var data;
+    List<Fornitore> fornitori = [];
+    await ConsegneVacciniLatest.getListData().then((value) => data = value);
+    for (ConsegneVacciniLatest element in data) {
+      var exist = fornitori.where((f) => (f.nome == element.fornitore));
+      if (exist.isEmpty) {
+        fornitori.add(Fornitore(
+            nome: element.fornitore, numeroDosi: element.numero_dosi));
+      } else {
+        fornitori.forEach((f) {
+          if (f.nome == element.fornitore) {
+            f.numeroDosi += element.numero_dosi;
+          }
+        });
+      }
+    }
+
+    int numeroTotaleDosi;
+    await getDosiTotali().then((value) => numeroTotaleDosi = value);
+
+    fornitori.forEach((element) {
+      element.percentualeSuTot = (element.numeroDosi * 100) / numeroTotaleDosi;
+      element.percentualeSuTot =
+          double.parse(element.percentualeSuTot.toStringAsFixed(2));
+    });
+
+    return fornitori;
+  }
+}
+
+class Fornitore {
+  String nome;
+  int numeroDosi;
+  double percentualeSuTot;
+
+  Fornitore({this.nome, this.numeroDosi, this.percentualeSuTot});
 }
