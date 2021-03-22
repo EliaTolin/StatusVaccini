@@ -21,6 +21,10 @@ class _HomePageViewState extends State<HomePageView> {
           child: Column(
             children: <Widget>[
               for (final homeItem in HomeItems.items) homeItem.card,
+              //HACK ELIA
+              SizedBox(
+                height: 100,
+              ),
             ],
           ),
         ),
