@@ -1,5 +1,4 @@
 import 'dart:convert' as convert;
-import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:StatusVaccini/constant.dart';
 
@@ -97,5 +96,4 @@ class SommistrazioneVacciniSummaryLatest {
     });
     return list;
   }
-
 }
