@@ -17,6 +17,19 @@ abstract class SVConst {
   static Color backColor = Colors.grey.shade200;
   static const iconColor = mainColor;
   static const cardColor = Colors.white;
+  static const List<Color> pieColors = [
+    Color.fromARGB(255, 172, 25, 100),
+    Color.fromRGBO(255, 172, 25, 100),
+    Color.fromRGBO(13, 255, 118, 100),
+    Color.fromRGBO(255, 43, 25, 100),
+    Color.fromRGBO(13, 128, 255, 100),
+    Color.fromARGB(100, 255, 172, 25),
+    Colors.blue,
+    Colors.red,
+    Colors.amber,
+    Colors.grey,
+    Colors.cyan,
+  ];
   //RADIUS ELEMENT
   static const double radiusComponent = 40;
 
