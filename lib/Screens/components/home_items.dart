@@ -13,10 +13,28 @@ class HomeItems {
         HomeItems(
           card: GraphLinearCard(
             typeinfo: "sommistrazioni",
+            labelText: "Sommistrazioni oggi",
+            iconpath: "assets/date.svg",
+            funTextInformation: () => OpenData.getSommistrazioniOggi(),
+            funGetData: () => OpenData.graphVacciniForDay(),
+          ),
+        ),
+        HomeItems(
+          card: GraphLinearCard(
+            typeinfo: "sommistrazioni",
             labelText: "Vaccini sommistrati",
             iconpath: "assets/virus.svg",
             funTextInformation: () => OpenData.getSomministrazioniTotali(),
-            funGetData: () => OpenData.graphVacciniForDay(),
+            funGetData: () => OpenData.graphVacciniTotal(),
+          ),
+        ),
+        HomeItems(
+          card: GraphPieCard(
+            typeinfo: "Dosi",
+            labelText: "Dosi per fornitore",
+            iconpath: "assets/order.svg",
+            funTextInformation: () => OpenData.getDosiTotali(),
+            funGetData: () => OpenData.graphDeliveryForDay(),
           ),
         ),
         HomeItems(
@@ -29,12 +47,12 @@ class HomeItems {
           ),
         ),
         HomeItems(
-          card: GraphPieCard(
+          card: GraphLinearCard(
             typeinfo: "Dosi",
-            labelText: "Dosi per fornitore",
-            iconpath: "assets/order.svg",
-            funTextInformation: () => OpenData.getDosiTotali(),
-            funGetData: () => OpenData.graphDeliveryForDay(),
+            labelText: "Dosi oggi",
+            iconpath: "assets/date.svg",
+            funTextInformation: () => OpenData.getDosiConsegnateOggi(),
+            funGetData: () => OpenData.graphDeliveryTotal(),
           ),
         ),
       ];
