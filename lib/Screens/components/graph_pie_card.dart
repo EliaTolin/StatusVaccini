@@ -30,7 +30,7 @@ class GraphPieCard extends StatefulWidget {
 
 // ignore: must_be_immutable
 class _GraphPieCardState extends State<GraphPieCard> {
-  //Flag use for ready information
+  //Flag use for ready information, all information are loaded
   bool _readyGraph = false;
   //Used for the chart select event. Indicates the selected part
   int touchedIndex;

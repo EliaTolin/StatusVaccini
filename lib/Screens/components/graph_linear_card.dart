@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
 
+//Class for draw Card with Linear Card 
 // ignore: must_be_immutable
 class GraphLinearCard extends StatefulWidget {
   String typeinfo = "";
@@ -30,12 +31,16 @@ class GraphLinearCard extends StatefulWidget {
 
 // ignore: must_be_immutable
 class _GraphLinearCardState extends State<GraphLinearCard> {
+  //The information showed in the card
   String _textInformation = "NOT SET INFORMATION";
+  //Flag for use ready Graph, all information are loaded
   bool _readyGraph = false;
+  //Flag for use ready Text Information, all informatiomn are loaded
   bool _readyTextInformation = false;
-
+  //List of FlSpot, are element of graph 
   List<FlSpot> data = [];
 
+  //InitState with preload data Information
   @override
   void initState() {
     super.initState();
@@ -73,6 +78,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
     );
   }
 
+  //Return if the all data are ready.
   bool ready() {
     return _readyGraph && _readyTextInformation;
   }
@@ -114,11 +120,13 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
             ],
           ),
         ),
+        //If the data aren't ready, show wait status.
         ready() ? futureInformationContent() : waitFutureInformation(),
       ],
     );
   }
 
+  //Draw the information when are ready
   Row futureInformationContent() {
     return Row(
       children: <Widget>[
@@ -151,6 +159,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
     );
   }
 
+  //Show the wait status
   Column waitFutureInformation() {
     return Column(children: <Widget>[
       SizedBox(height: 40), // ELIA HACK, PER CENTRARE IL CARICAMENTO
@@ -163,6 +172,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
     ]);
   }
 
+  //Load the text information.
   void getTextInformation() async {
     final NumberFormat format = NumberFormat.decimalPattern('it');
     int tempValue;
@@ -174,6 +184,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
     });
   }
 
+  //Load graph if are ready.
   AspectRatio drawGraph() {
     return AspectRatio(
       aspectRatio: 1.5,
@@ -196,6 +207,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
     );
   }
 
+  //Load information for graph.
   void getInfoData() async {
     await widget.funGetData().then((value) => data = value);
 
