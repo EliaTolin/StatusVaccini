@@ -1,13 +1,12 @@
 // ignore: must_be_immutable
-import 'package:StatusVaccini/Models/consegne_vaccini_latest.dart';
 import 'package:StatusVaccini/constant.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:StatusVaccini/Models/opendata.dart';
-import 'package:http/http.dart';
 
+//Class for draw Card with Pie Chart
 // ignore: must_be_immutable
 class GraphPieCard extends StatefulWidget {
   String typeinfo = "";
@@ -31,18 +30,20 @@ class GraphPieCard extends StatefulWidget {
 
 // ignore: must_be_immutable
 class _GraphPieCardState extends State<GraphPieCard> {
-  String _textInformation = "NOT SET INFORMATION";
+  //Flag use for ready information
   bool _readyGraph = false;
-  bool _readyTextInformation = false;
+  //Used for the chart select event. Indicates the selected part
   int touchedIndex;
+  //List with all providers
   List<Fornitore> data = [];
+  //List with section of PieChart
   List<PieItem> sectionPieList = [];
 
+  //InitState with preload data Information
   @override
   void initState() {
     super.initState();
     //GET INFORMATION
-    getTextInformation();
     getInfoData();
   }
 
@@ -67,8 +68,9 @@ class _GraphPieCardState extends State<GraphPieCard> {
     );
   }
 
+  //Return if the all data are ready.
   bool ready() {
-    return _readyGraph && _readyTextInformation;
+    return _readyGraph;
   }
 
   Column cardContent() {
@@ -83,11 +85,10 @@ class _GraphPieCardState extends State<GraphPieCard> {
                 height: SVConst.kSizeIcons,
                 width: SVConst.kSizeIcons,
                 decoration: BoxDecoration(
-                  //color: SVConst.iconColor,
                   shape: BoxShape.circle,
                 ),
                 child: SvgPicture.asset(
-                  widget.iconpath,
+                  widget.iconpath, // ICON OF CARD
                   height: SVConst.kSizeIcons,
                   width: SVConst.kSizeIcons,
                 ),
@@ -108,29 +109,28 @@ class _GraphPieCardState extends State<GraphPieCard> {
             ],
           ),
         ),
-        ready() ? drawGraph() : waitFutureInformation(),
-        ready() ? drawSection() : waitFutureInformation(),
+        ready() ? drawGraph() : waitFutureInformation(), //DRAW GRAPH
+        ready() ? drawLegend() : waitFutureInformation(), //DRAW LEGEND
       ],
     );
   }
 
-  Padding drawSection() {
+  //Draw the legend of graph
+  Padding drawLegend() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            for (final section in sectionPieList) section,
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          for (final section in sectionPieList) section,
+        ],
       ),
     );
   }
 
+  //Show a wait status
   Column waitFutureInformation() {
     return Column(children: <Widget>[
-      SizedBox(height: 40), // ELIA HACK, PER CENTRARE IL CARICAMENTO
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -140,30 +140,24 @@ class _GraphPieCardState extends State<GraphPieCard> {
     ]);
   }
 
-  void getTextInformation() async {
-    await widget
-        .funTextInformation()
-        .then((value) => _textInformation = value.toString());
-    setState(() {
-      _readyTextInformation = true;
-    });
-  }
-
+  //Draw Pie Chart
   AspectRatio drawGraph() {
     return AspectRatio(
-      aspectRatio: 1,
+      aspectRatio: 1.5,
       child: PieChart(
         PieChartData(
-            pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
-              setState(() {
-                if (pieTouchResponse.touchInput is FlLongPressEnd ||
-                    pieTouchResponse.touchInput is FlPanEnd) {
-                  touchedIndex = -1;
-                } else {
-                  touchedIndex = pieTouchResponse.touchedSectionIndex;
-                }
-              });
-            }),
+            pieTouchData: PieTouchData(
+              touchCallback: (pieTouchResponse) {
+                setState(() {
+                  if (pieTouchResponse.touchInput is FlLongPressEnd ||
+                      pieTouchResponse.touchInput is FlPanEnd) {
+                    touchedIndex = -1;
+                  } else {
+                    touchedIndex = pieTouchResponse.touchedSectionIndex;
+                  }
+                });
+              },
+            ),
             borderData: FlBorderData(
               show: false,
             ),
@@ -174,6 +168,8 @@ class _GraphPieCardState extends State<GraphPieCard> {
     );
   }
 
+  //Create the sections of the graph.
+  //Return the list of sections
   List<PieChartSectionData> showingSections() {
     return List.generate(data.length, (i) {
       final isTouched = i == touchedIndex;
@@ -188,13 +184,13 @@ class _GraphPieCardState extends State<GraphPieCard> {
         titleStyle: TextStyle(
           fontSize: fontSize,
           fontWeight: FontWeight.bold,
-          // color: const Color(0xffffffff)),
           color: textColor,
         ),
       );
     });
   }
 
+  //Method for get information from OpenData
   void getInfoData() async {
     await OpenData.getDosiPerFornitore().then((value) => data = value);
     loadSection();
@@ -217,6 +213,7 @@ class _GraphPieCardState extends State<GraphPieCard> {
   }
 }
 
+//The class for items of legend
 class PieItem extends StatelessWidget {
   final Color colorItem;
   final String textItem;
@@ -231,28 +228,38 @@ class PieItem extends StatelessWidget {
         bottom: 8,
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
-            percentuale,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
+          Expanded(
+            flex: 2,
+            child: Text(
+              percentuale,
+              maxLines: 1,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
             ),
           ),
-          SizedBox(width: 10),
           SizedBox(
             width: 20,
             height: 20,
             child: Container(color: colorItem),
           ),
-          SizedBox(width: 10),
-          Text(
-            textItem,
-            maxLines: 2,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+          Expanded(
+            flex: 1,
+            child: SizedBox(width: 10),
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(
+              textItem,
+              maxLines: 2,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.left,
             ),
-            textAlign: TextAlign.left,
           ),
         ],
       ),

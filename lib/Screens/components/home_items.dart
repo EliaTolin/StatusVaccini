@@ -11,15 +11,6 @@ class HomeItems {
 
   static List<HomeItems> get items => [
         HomeItems(
-          card: GraphPieCard(
-            typeinfo: "Dosi",
-            labelText: "Dosi consegnate",
-            iconpath: "assets/order.svg",
-            funTextInformation: () => OpenData.getDosiTotali(),
-            funGetData: () => OpenData.graphDeliveryForDay(),
-          ),
-        ),
-        HomeItems(
           card: GraphLinearCard(
             typeinfo: "sommistrazioni",
             labelText: "Vaccini sommistrati",
@@ -32,6 +23,15 @@ class HomeItems {
           card: GraphLinearCard(
             typeinfo: "Dosi",
             labelText: "Dosi consegnate",
+            iconpath: "assets/order.svg",
+            funTextInformation: () => OpenData.getDosiTotali(),
+            funGetData: () => OpenData.graphDeliveryForDay(),
+          ),
+        ),
+        HomeItems(
+          card: GraphPieCard(
+            typeinfo: "Dosi",
+            labelText: "Dosi per fornitore",
             iconpath: "assets/order.svg",
             funTextInformation: () => OpenData.getDosiTotali(),
             funGetData: () => OpenData.graphDeliveryForDay(),
