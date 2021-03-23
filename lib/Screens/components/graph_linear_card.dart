@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
 
-//Class for draw Card with Linear Card 
+//Class for draw Card with Linear Card
 // ignore: must_be_immutable
 class GraphLinearCard extends StatefulWidget {
   String typeinfo = "";
@@ -37,7 +37,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
   bool _readyGraph = false;
   //Flag for use ready Text Information, all informatiomn are loaded
   bool _readyTextInformation = false;
-  //List of FlSpot, are element of graph 
+  //List of FlSpot, are element of graph
   List<FlSpot> data = [];
 
   //InitState with preload data Information
@@ -198,8 +198,12 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
               spots: data,
               isCurved: true,
               dotData: FlDotData(show: false),
-              belowBarData: BarAreaData(show: false),
+              //belowBarData: BarAreaData(show: false),
               colors: [SVConst.mainColor],
+              belowBarData: BarAreaData(
+                show: true,
+                colors: [Colors.cyan.withAlpha(30)],
+              ),
             )
           ],
         ),
