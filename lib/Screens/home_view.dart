@@ -21,7 +21,9 @@ class _HomePageViewState extends State<HomePageView> {
           child: Column(
             children: <Widget>[
               for (final homeItem in HomeItems.items) homeItem.card,
-              //HACK ELIA
+              // TO DO
+              // FIX HEIGHT BODY.
+              // WITHOUT SIZEDBOX THE ELEMENT GOING UNDER BOTTOMBAR AT THE END
               SizedBox(
                 height: 100,
               ),

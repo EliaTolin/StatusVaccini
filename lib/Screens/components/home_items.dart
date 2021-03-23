@@ -1,5 +1,6 @@
 import 'package:StatusVaccini/Models/opendata.dart';
 import 'package:StatusVaccini/Screens/components/graph_linear_card.dart';
+import 'package:StatusVaccini/Screens/components/graph_multiple_linear_card.dart';
 import 'package:flutter/material.dart';
 
 import 'graph_pie_card.dart';
@@ -10,6 +11,17 @@ class HomeItems {
   HomeItems({@required this.card});
 
   static List<HomeItems> get items => [
+        HomeItems(
+          card: GraphMultipleLinearCard(
+            typeinfo: "Dosi",
+            labelText: "Prime e seconde dosi",
+            iconpath: "assets/date.svg",
+            funGetData: [
+              () => OpenData.graphPrimeDosi(),
+              () => OpenData.graphSecondeDosi(),
+            ],
+          ),
+        ),
         HomeItems(
           card: GraphLinearCard(
             typeinfo: "sommistrazioni",
