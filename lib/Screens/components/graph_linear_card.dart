@@ -172,17 +172,6 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
     ]);
   }
 
-  //Load the text information.
-  void getTextInformation() async {
-    final NumberFormat format = NumberFormat.decimalPattern('it');
-    int tempValue;
-    await widget.funTextInformation().then((value) => tempValue = value);
-    //_textInformation = format.format(value)
-    _textInformation = format.format(tempValue);
-    setState(() {
-      _readyTextInformation = true;
-    });
-  }
 
   //Load graph if are ready.
   AspectRatio drawGraph() {
@@ -211,6 +200,18 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
     );
   }
 
+  //Load the text information.
+  void getTextInformation() async {
+    final NumberFormat format = NumberFormat.decimalPattern('it');
+    int tempValue;
+    await widget.funTextInformation().then((value) => tempValue = value);
+    //_textInformation = format.format(value)
+    _textInformation = format.format(tempValue);
+    setState(() {
+      _readyTextInformation = true;
+    });
+  }
+  
   //Load information for graph.
   void getInfoData() async {
     await widget.funGetData().then((value) => data = value);
