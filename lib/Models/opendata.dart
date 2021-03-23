@@ -7,6 +7,7 @@ import 'package:StatusVaccini/constant.dart';
 import 'package:sortedmap/sortedmap.dart';
 
 abstract class OpenData {
+  //RITORNA L'ULTIMO AGGIORNAMENTO DELLE INFORMAZIONI
   Future<String> getLastUpdateData() async {
     var response = await http.get(Uri.parse(URLConst.lastUpdateDataSet));
     String lastUpdate;
@@ -19,6 +20,7 @@ abstract class OpenData {
     return lastUpdate;
   }
 
+  //RITORNA IL NUMERO DELLE SOMMISTRAZIONI EFFETTUATE OGGI
   static Future<int> getSommistrazioniOggi() async {
     var summary;
     int vaccTot = 0;
@@ -45,7 +47,7 @@ abstract class OpenData {
     return vaccTot;
   }
 
-  //Ritorna una striga formattata con il totali di dosi somministrate
+  //RITORNA IL NUMERO DELLE SOMMISTRAZIONI TOTALI
   static Future<int> getSomministrazioniTotali() async {
     var summary;
     int sommTot = 0;
@@ -60,6 +62,7 @@ abstract class OpenData {
     return sommTot;
   }
 
+  //RITORNA IL GRAFICO DELLA SOMMISTRAZIONI TOTALI
   static Future<List<FlSpot>> graphVacciniTotal() async {
     List<FlSpot> data = [];
     var summary;
@@ -77,6 +80,7 @@ abstract class OpenData {
     return data;
   }
 
+  //RITORNA IL GRAFICO DELLA DOSI SOMMISTRATE PER GIORNO
   static Future<List<FlSpot>> graphVacciniForDay() async {
     List<FlSpot> data = [];
     var summary;
@@ -133,6 +137,7 @@ abstract class OpenData {
     return data;
   }
 
+  //RITORNA IL GRAFICO DELLA CONSEGNE TOTALI
   static Future<List<FlSpot>> graphDeliveryTotal() async {
     List<FlSpot> data = [];
     var summary;
@@ -162,6 +167,7 @@ abstract class OpenData {
     return sommTot;
   }
 
+  //RITORNA IL NUMERO DELLE DOSI PER FORNITORE
   static Future<List<Fornitore>> getDosiPerFornitore() async {
     var data;
     List<Fornitore> fornitori = [];
@@ -192,6 +198,7 @@ abstract class OpenData {
     return fornitori;
   }
 
+  //RITORNA IL NUMERO DELLA DOSI CONSEGNATE OGGI
   static Future<int> getDosiConsegnateOggi() async {
     var summary;
     int dosiTot = 0;
@@ -214,6 +221,64 @@ abstract class OpenData {
       }
     }
     return dosiTot;
+  }
+
+  //RITORNA IL GRAFICO DELLE PRIME DOSI PER GIORNO
+  static Future<List<FlSpot>> graphPrimeDosi() async {
+    List<FlSpot> data = [];
+    var summary;
+    await SommistrazioneVacciniSummaryLatest.getListData()
+        .then((value) => summary = value);
+    //{'giorno':dosi}
+    Map<String, int> deliveryForDay =
+        new SortedMap<String, int>(Ordering.byKey());
+
+    for (SommistrazioneVacciniSummaryLatest element in summary) {
+      String date = element.data_somministrazione.substring(0, 10);
+
+      int dosiTemp = element.prima_dose;
+      if (!deliveryForDay.containsKey(date)) {
+        deliveryForDay.putIfAbsent(date, () => dosiTemp);
+      } else {
+        deliveryForDay.update(date, (value) => value + dosiTemp);
+      }
+    }
+
+    deliveryForDay.forEach((key, value) {
+      data.add(FlSpot(DateTime.parse(key).millisecondsSinceEpoch.toDouble(),
+          value.toDouble()));
+    });
+
+    return data;
+  }
+
+  //RITORNA IL GRAFICO DELLE SECONDE DOSI PER GIORNO
+  static Future<List<FlSpot>> graphSecondeDosi() async {
+    List<FlSpot> data = [];
+    var summary;
+    await SommistrazioneVacciniSummaryLatest.getListData()
+        .then((value) => summary = value);
+    //{'giorno':dosi}
+    Map<String, int> deliveryForDay =
+        new SortedMap<String, int>(Ordering.byKey());
+
+    for (SommistrazioneVacciniSummaryLatest element in summary) {
+      String date = element.data_somministrazione.substring(0, 10);
+
+      int dosiTemp = element.seconda_dose;
+      if (!deliveryForDay.containsKey(date)) {
+        deliveryForDay.putIfAbsent(date, () => dosiTemp);
+      } else {
+        deliveryForDay.update(date, (value) => value + dosiTemp);
+      }
+    }
+
+    deliveryForDay.forEach((key, value) {
+      data.add(FlSpot(DateTime.parse(key).millisecondsSinceEpoch.toDouble(),
+          value.toDouble()));
+    });
+
+    return data;
   }
 }
 
