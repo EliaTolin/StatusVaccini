@@ -21,6 +21,32 @@ abstract class OpenData {
     return lastUpdate;
   }
 
+  static Future<int> getSommistrazioniOggi() async {
+    var summary;
+    int vaccTot = 0;
+    DateTime now = DateTime.now();
+    String todayDate = "";
+
+    todayDate += now.year.toString() + "-";
+    if (now.month < 10)
+      todayDate += ("0" + now.month.toString());
+    else
+      todayDate += now.month.toString();
+    todayDate += ("-" + now.day.toString());
+
+    await SommistrazioneVacciniSummaryLatest.getListData()
+        .then((value) => summary = value);
+
+    for (SommistrazioneVacciniSummaryLatest element in summary) {
+      String date = element.data_somministrazione.substring(0, 10);
+      if (date == todayDate) {
+        vaccTot += element.prima_dose;
+        vaccTot += element.seconda_dose;
+      }
+    }
+    return vaccTot;
+  }
+
   //Ritorna una striga formattata con il totali di dosi somministrate
   static Future<int> getSomministrazioniTotali() async {
     //final NumberFormat format = NumberFormat.decimalPattern('it');
@@ -36,6 +62,23 @@ abstract class OpenData {
     }
     //String sommTotString = format.format(sommTot);
     return sommTot;
+  }
+
+  static Future<List<FlSpot>> graphVacciniTotal() async {
+    List<FlSpot> data = [];
+    var summary;
+    int vaccini = 0;
+
+    await SommistrazioneVacciniSummaryLatest.getListData()
+        .then((value) => summary = value);
+
+    for (SommistrazioneVacciniSummaryLatest element in summary) {
+      vaccini += element.prima_dose;
+      vaccini += element.seconda_dose;
+      data.add(FlSpot(element.index.toDouble(), vaccini.toDouble()));
+    }
+
+    return data;
   }
 
   static Future<List<FlSpot>> graphVacciniForDay() async {
@@ -96,6 +139,21 @@ abstract class OpenData {
     return data;
   }
 
+  static Future<List<FlSpot>> graphDeliveryTotal() async {
+    List<FlSpot> data = [];
+    var summary;
+    int dosiConsegnate = 0;
+
+    await ConsegneVacciniLatest.getListData().then((value) => summary = value);
+
+    for (ConsegneVacciniLatest element in summary) {
+      dosiConsegnate += element.numero_dosi;
+      data.add(FlSpot(element.index.toDouble(), dosiConsegnate.toDouble()));
+    }
+
+    return data;
+  }
+
   //RITORNA IL NUMERO TOTALE DELLE DOSI CONSEGNATE
   static Future<int> getDosiTotali() async {
     var summary;
@@ -138,6 +196,30 @@ abstract class OpenData {
     });
 
     return fornitori;
+  }
+
+  static Future<int> getDosiConsegnateOggi() async {
+    var summary;
+    int dosiTot = 0;
+    DateTime now = DateTime.now();
+    String todayDate = "";
+
+    todayDate += now.year.toString() + "-";
+    if (now.month < 10)
+      todayDate += ("0" + now.month.toString());
+    else
+      todayDate += now.month.toString();
+    todayDate += ("-" + now.day.toString());
+
+    await ConsegneVacciniLatest.getListData().then((value) => summary = value);
+
+    for (ConsegneVacciniLatest element in summary) {
+      String date = element.data_consegna.substring(0, 10);
+      if (date == todayDate) {
+        dosiTot += element.numero_dosi;
+      }
+    }
+    return dosiTot;
   }
 }
 
