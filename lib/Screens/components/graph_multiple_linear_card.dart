@@ -11,17 +11,22 @@ class GraphMultipleLinearCard extends StatefulWidget {
   String typeinfo = "";
   String labelText = "";
   String iconpath = "";
-  List<Function> funGetData;
-  List<Function> funTextInformation;
-
+  List<Function> funGetData = [];
+  List<String> textLegends = [];
   @override
   GraphMultipleLinearCard({
     this.typeinfo,
     this.labelText,
     this.iconpath,
     this.funGetData,
+    this.textLegends,
     Key key,
-  }) : super(key: key);
+  }) : super(key: key) {
+    if (funGetData.length != textLegends.length)
+      throw new Exception(
+          "Error lenght different for element in the graph and legend labels" +
+              runtimeType.toString());
+  }
 
   _GraphMultipleLinearCardState createState() =>
       _GraphMultipleLinearCardState();
@@ -33,13 +38,13 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
   bool _readyGraph = false;
   //List of FlSpot, are element of graph
   List<dynamic> data = [];
-
+  //Legend of chart
+  List<ChartItem> chartItemList = [];
   //InitState with preload data Information
   @override
   void initState() {
     super.initState();
     //GET INFORMATION
-    //getTextInformation();
     getInfoData();
   }
 
@@ -114,8 +119,20 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
             ],
           ),
         ),
-        //If the data aren't ready, show wait status.
-        ready() ? futureInformationContent() : waitFutureInformation(),
+        ready()
+            ? Stack(
+                children: <Widget>[
+                  //If the data aren't ready, show wait status.
+                  futureInformationContent(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Column(
+                      children: [chartItemList[0], chartItemList[1]],
+                    ),
+                  )
+                ],
+              )
+            : waitFutureInformation(),
       ],
     );
   }
@@ -130,7 +147,6 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
   //Show the wait status
   Column waitFutureInformation() {
     return Column(children: <Widget>[
-      SizedBox(height: 40), // ELIA HACK, PER CENTRARE IL CARICAMENTO
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -163,7 +179,6 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
           spots: data[i],
           isCurved: true,
           dotData: FlDotData(show: false),
-          //belowBarData: BarAreaData(show: false),
           colors: [SVConst.linearColors[i]],
           belowBarData: BarAreaData(
             show: true,
@@ -184,6 +199,60 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
     if (data != List.empty())
       setState(() {
         _readyGraph = true;
+        loadSection();
       });
+  }
+
+  //Load the legend of graph
+  void loadSection() {
+    for (int i = 0; i < widget.textLegends.length; i++) {
+      chartItemList.add(ChartItem(
+        textItem: widget.textLegends[i],
+        colorItem: SVConst.linearColors[i],
+      ));
+    }
+  }
+}
+
+//The class for items of legend
+class ChartItem extends StatelessWidget {
+  final Color colorItem;
+  final String textItem;
+  ChartItem({
+    this.colorItem,
+    @required this.textItem,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 8,
+        bottom: 8,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+            width: 20,
+            height: 20,
+            child: Container(color: colorItem),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(
+              textItem,
+              maxLines: 2,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
