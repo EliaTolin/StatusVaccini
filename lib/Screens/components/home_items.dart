@@ -20,6 +20,7 @@ class HomeItems {
               () => OpenData.graphPrimeDosi(),
               () => OpenData.graphSecondeDosi(),
             ],
+            textLegends: ["Prime dosi", "Seconde dosi"],
           ),
         ),
         HomeItems(
