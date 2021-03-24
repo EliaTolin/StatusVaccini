@@ -132,8 +132,8 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: RichText(
-            text: TextSpan(
+          child: AutoSizeText.rich(
+            TextSpan(
               style: TextStyle(color: Colors.black),
               children: [
                 TextSpan(
@@ -172,7 +172,6 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
     ]);
   }
 
-
   //Load graph if are ready.
   AspectRatio drawGraph() {
     return AspectRatio(
@@ -187,7 +186,6 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
               spots: data,
               isCurved: true,
               dotData: FlDotData(show: false),
-              //belowBarData: BarAreaData(show: false),
               colors: [SVConst.mainColor],
               belowBarData: BarAreaData(
                 show: true,
@@ -211,7 +209,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
       _readyTextInformation = true;
     });
   }
-  
+
   //Load information for graph.
   void getInfoData() async {
     await widget.funGetData().then((value) => data = value);
