@@ -1,4 +1,5 @@
 import 'package:StatusVaccini/Models/opendata.dart';
+import 'package:StatusVaccini/Screens/components/graph_bar_card.dart';
 import 'package:StatusVaccini/Screens/components/graph_linear_card.dart';
 import 'package:StatusVaccini/Screens/components/graph_multiple_linear_card.dart';
 import 'package:flutter/material.dart';
@@ -12,15 +13,11 @@ class HomeItems {
 
   static List<HomeItems> get items => [
         HomeItems(
-          card: GraphMultipleLinearCard(
-            typeinfo: "Dosi",
-            labelText: "Prime e seconde dosi",
-            iconpath: "assets/date.svg",
-            funGetData: [
-              () => OpenData.graphPrimeDosi(),
-              () => OpenData.graphSecondeDosi(),
-            ],
-            textLegends: ["Prime dosi", "Seconde dosi"],
+          card: GraphBarCard(
+            labelText: "Sommistrazioni",
+            secondLabelText: "Per fascia d'età",
+            iconpath: "assets/bar-chart.svg",
+            funGetData: () => OpenData.getInfoSommistrazioni(),
           ),
         ),
         HomeItems(
@@ -66,6 +63,18 @@ class HomeItems {
             iconpath: "assets/date.svg",
             funTextInformation: () => OpenData.getDosiConsegnateOggi(),
             funGetData: () => OpenData.graphDeliveryTotal(),
+          ),
+        ),
+        HomeItems(
+          card: GraphMultipleLinearCard(
+            typeinfo: "Dosi",
+            labelText: "Prime e seconde dosi",
+            iconpath: "assets/date.svg",
+            funGetData: [
+              () => OpenData.graphPrimeDosi(),
+              () => OpenData.graphSecondeDosi(),
+            ],
+            textLegends: ["Prime dosi", "Seconde dosi"],
           ),
         ),
       ];
