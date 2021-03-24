@@ -110,7 +110,7 @@ class _GraphPieCardState extends State<GraphPieCard> {
           ),
         ),
         ready() ? drawGraph() : waitFutureInformation(), //DRAW GRAPH
-        ready() ? drawLegend() : waitFutureInformation(), //DRAW LEGEND
+        ready() ? drawLegend() : {}, //DRAW LEGEND
       ],
     );
   }
