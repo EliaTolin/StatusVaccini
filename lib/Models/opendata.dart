@@ -1,5 +1,6 @@
 import 'dart:convert' as convert;
 import 'package:StatusVaccini/Models/consegne_vaccini_latest.dart';
+import 'package:StatusVaccini/Models/sommistrazione_vaccini_latest.dart';
 import 'package:StatusVaccini/Models/sommistrazione_vaccini_summary_latest.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
@@ -279,6 +280,31 @@ abstract class OpenData {
     });
 
     return data;
+  }
+
+  //RITORNA UNA MAPPA CON LE SOMMISTRAZIONI PER FASCE D'ETA'
+  static Future<Map<String, int>> getInfoSommistrazioni() async {
+    var summary;
+    await SommistrazioneVacciniLatest.getListData()
+        .then((value) => summary = value);
+    //{'giorno':dosi}
+    Map<String, int> fasceEtaInfo =
+        new SortedMap<String, int>(Ordering.byKey());
+
+    for (SommistrazioneVacciniLatest element in summary) {
+      String eta = element.fascia_anagrafica;
+
+      int dosiTemp = 0;
+
+      dosiTemp += (element.prima_dose + element.seconda_dose);
+
+      if (!fasceEtaInfo.containsKey(eta)) {
+        fasceEtaInfo.putIfAbsent(eta, () => dosiTemp);
+      } else {
+        fasceEtaInfo.update(eta, (value) => value + dosiTemp);
+      }
+    }
+    return fasceEtaInfo;
   }
 }
 
