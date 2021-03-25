@@ -46,9 +46,9 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 
     PRIME SECONDI DOSI
 
-    -> [ 70 % ] Creare il grafico lineare contente le prime e secondi dosi
+    -> [ 100 % ] Creare il grafico lineare contente le prime e secondi dosi
 
-    -> [ 0 % ] Creare il grafico a barre per fasce d'età con la percentuali del totale vacinato con la prima dose 
+    -> [ 100 % ] Creare il grafico a barre per fasce d'età con la percentuali del totale vacinato con la prima dose 
 
     -> [ 0 % ] Creare il grafico a barre per fasce d'età con la percentuali del totale vacinato con la seconda dose 
 
