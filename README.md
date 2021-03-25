@@ -40,7 +40,7 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 
     -> [ 100 % ] Creare il grafico lineare contente le nuove vaccinazioni giornaliere
 
-    -> [ 0 % ] Creare il grafico a barre contente le vaccinazioni per fasce d'età
+    -> [ 100 % ] Creare il grafico a barre contente le vaccinazioni per fasce d'età
 
     -> [ 0 % ] Creare il grafico a barre contente le prime e seconde dosi per fasce d'età
 
@@ -49,9 +49,6 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
     -> [ 100 % ] Creare il grafico lineare contente le prime e secondi dosi
 
     -> [ 100 % ] Creare il grafico a barre per fasce d'età con la percentuali del totale vacinato con la prima dose 
-
-    -> [ 0 % ] Creare il grafico a barre per fasce d'età con la percentuali del totale vacinato con la seconda dose 
-
 
     DOSI CONSEGNATE
 
