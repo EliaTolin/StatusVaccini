@@ -49,8 +49,10 @@ abstract class SVConst {
   static const Color itemBarColor = Colors.cyan;
   static const Color itemSelectedBarColor = Color.fromARGB(255, 172, 25, 100);
   static const Color itemBackBarColor = Colors.white;
-  static const Color tooltipDataBarColor = Color(0xff81e5cd);
+  static const Color tooltipDataBarColor =
+      Color.fromARGB(255, 172, 25, 100); //Color(0xff81e5cd);
   static const Color textBarColor = Colors.black;
+  static const Color textItemBarColor = Colors.white;
   //RADIUS ELEMENT
   static const double radiusComponent = 40;
 
