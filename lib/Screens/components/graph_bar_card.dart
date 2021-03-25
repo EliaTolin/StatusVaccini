@@ -34,7 +34,7 @@ class _GraphBarCardState extends State<GraphBarCard> {
   Map<String, int> data = new Map<String, int>();
 
   final Duration animDuration = const Duration(milliseconds: 250);
-
+  int dosiTotali = 0;
   int touchedIndex;
 
   //InitState with preload data Information
@@ -228,8 +228,24 @@ class _GraphBarCardState extends State<GraphBarCard> {
               //RITORNA IL RANGE D'ETA PER LA DATATIP
               String rangeEta;
               rangeEta = data.keys.elementAt(group.x.toInt());
-              return BarTooltipItem(rangeEta + '\n' + (rod.y - 1).toString(),
-                  TextStyle(color: Colors.black));
+              var tmp = (rod.y - 1).toString().split('.');
+              int dosi = int.parse(tmp[0]);
+
+              double percentuale =
+                  double.parse(((dosi * 100) / dosiTotali).toStringAsFixed(2));
+
+              String textContent = rangeEta +
+                  '\n' +
+                  (dosi).toString() +
+                  '\n' +
+                  percentuale.toString() +
+                  "%";
+              return BarTooltipItem(
+                  textContent,
+                  TextStyle(
+                      fontSize: 15,
+                      color: SVConst.textItemBarColor,
+                      fontWeight: FontWeight.bold));
             }),
         touchCallback: (barTouchResponse) {
           setState(() {
@@ -275,9 +291,13 @@ class _GraphBarCardState extends State<GraphBarCard> {
   void getInfoData() async {
     await widget.funGetData().then((value) => data = value);
 
-    if (data.isNotEmpty)
+    if (data.isNotEmpty) {
       setState(() {
         _readyGraph = true;
       });
+      data.forEach((key, value) {
+        dosiTotali += value;
+      });
+    }
   }
 }
