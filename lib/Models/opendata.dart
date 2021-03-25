@@ -306,6 +306,13 @@ abstract class OpenData {
     }
     return fasceEtaInfo;
   }
+
+  static Future<double> getPercentualeSuTot(int val) async {
+    int numeroTotaleDosi = 0;
+    await getDosiTotali().then((value) => numeroTotaleDosi = value);
+    if (val > numeroTotaleDosi) return -1;
+    return double.parse(((val * 100) / numeroTotaleDosi).toStringAsFixed(2));
+  }
 }
 
 class Fornitore {
