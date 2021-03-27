@@ -59,9 +59,7 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 
     REGIONI 
 
-    -> [ 0 % ] Creare il grafico linerare con la vaccinazioni giornaliere per regioni
-
-    -> [ 0 % ] Creare il grafico linerare con le dosi consegnate per regioni
+    -> [ 100 % ] Creare informazioni riguardo alle dosi sommistrate nelle regioni
 
 ##### - [ 0% ] Per ogni grafico sintetico creare la possibilità di espansione di esso per consultare i dati. 
      
@@ -97,6 +95,13 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
     
     -> [ 0 % ] Inserire il contatto per informazioni
 
+
+#### Aggiungere controllo verifica connessione prima del download
+#### Aggiungere cache per il download delle informazioni
+
+#### PROBLEMS
+
+    -> Non salva le informazioni quando si cambia screen e si torna sul precendente
 
 *Per informazioni:*
 
