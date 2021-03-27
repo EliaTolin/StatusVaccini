@@ -1,4 +1,5 @@
 // ignore: must_be_immutable
+import 'package:StatusVaccini/Models/opendata.dart';
 import 'package:StatusVaccini/constant.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +13,16 @@ import 'package:intl/intl.dart';
 class GraphLinearCard extends StatefulWidget {
   String typeinfo = "";
   String labelText = "";
+  String secondLabelText = "";
   String iconpath = "";
   Function funTextInformation;
   Function funGetData;
-
+  
   @override
   GraphLinearCard({
     this.typeinfo,
     this.labelText,
+    secondLabelText,
     this.iconpath,
     this.funTextInformation,
     this.funGetData,
@@ -39,7 +42,8 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
   bool _readyTextInformation = false;
   //List of FlSpot, are element of graph
   List<FlSpot> data = [];
-
+  //If the receive data is old
+  bool oldData = false;
   //InitState with preload data Information
   @override
   void initState() {
@@ -95,7 +99,6 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
                 height: SVConst.kSizeIcons,
                 width: SVConst.kSizeIcons,
                 decoration: BoxDecoration(
-                  //color: SVConst.iconColor,
                   shape: BoxShape.circle,
                 ),
                 child: SvgPicture.asset(
@@ -107,14 +110,30 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
               SizedBox(width: 25),
               Flexible(
                 fit: FlexFit.tight,
-                child: AutoSizeText(
-                  widget.labelText.toString(),
-                  maxLines: 1,
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.normal,
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    AutoSizeText(
+                      widget.labelText,
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    AutoSizeText(
+                      widget.secondLabelText,
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          color: const Color(0xff379982),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -139,7 +158,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
                 TextSpan(
                   text: _textInformation + "\n",
                   style: GoogleFonts.roboto(
-                    fontSize: 40,
+                    fontSize: 30,
                   ),
                 ),
                 TextSpan(
@@ -200,11 +219,40 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
 
   //Load the text information.
   void getTextInformation() async {
-    final NumberFormat format = NumberFormat.decimalPattern('it');
-    int tempValue;
+    final NumberFormat numberFormat = NumberFormat.decimalPattern('it');
+    var tempValue;
+    // DateTime now = DateTime.now();
     await widget.funTextInformation().then((value) => tempValue = value);
-    //_textInformation = format.format(value)
-    _textInformation = format.format(tempValue);
+
+    bool isUltimeConsegne = tempValue is UltimaConsegna ? true : false;
+    bool isUltimeSommistrazioni =
+        tempValue is UltimeSommistrazioni ? true : false;
+
+    if (isUltimeSommistrazioni) {
+      UltimeSommistrazioni ultimeSommistrazioni = tempValue;
+      DateTime now = new DateTime.now();
+      var formatter = new DateFormat('dd/MM/yyyy');
+      if (now.difference(ultimeSommistrazioni.data).inDays == 0) {
+        widget.secondLabelText = "Oggi";
+      } else {
+        widget.secondLabelText =
+            "il giorno " + formatter.format(ultimeSommistrazioni.data);
+      }
+      _textInformation = numberFormat.format(ultimeSommistrazioni.dosiTotali);
+    } else if (isUltimeConsegne) {
+      UltimaConsegna ultimaConsegna = tempValue;
+      DateTime now = new DateTime.now();
+      var formatter = new DateFormat('dd/MM/yyyy');
+      if (now.difference(ultimaConsegna.data).inDays == 0) {
+        widget.secondLabelText = "Oggi";
+      } else {
+        widget.secondLabelText = "ultima consegna il giorno " +
+            formatter.format(ultimaConsegna.data);
+      }
+      _textInformation = numberFormat.format(ultimaConsegna.dosi);
+    } else {
+      _textInformation = numberFormat.format(tempValue);
+    }
     setState(() {
       _readyTextInformation = true;
     });
