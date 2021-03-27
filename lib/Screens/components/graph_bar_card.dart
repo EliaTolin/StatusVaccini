@@ -134,17 +134,19 @@ class _GraphBarCardState extends State<GraphBarCard> {
     );
   }
 
-  //Show the wait status
+ //Show the wait status
   Column waitFutureInformation() {
-    return Column(children: <Widget>[
-      SizedBox(height: 40), // ELIA HACK, PER CENTRARE IL CARICAMENTO
-      Row(
+    return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          CircularProgressIndicator(),
-        ],
-      )
-    ]);
+          SizedBox(height: 40),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CircularProgressIndicator(),
+            ],
+          )
+        ]);
   }
 
   //Load graph if are ready.

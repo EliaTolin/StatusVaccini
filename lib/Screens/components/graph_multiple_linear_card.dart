@@ -144,16 +144,19 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
     );
   }
 
-  //Show the wait status
+//Show the wait status
   Column waitFutureInformation() {
-    return Column(children: <Widget>[
-      Row(
+    return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          CircularProgressIndicator(),
-        ],
-      )
-    ]);
+          SizedBox(height: 40),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CircularProgressIndicator(),
+            ],
+          )
+        ]);
   }
 
   //Load graph if are ready.

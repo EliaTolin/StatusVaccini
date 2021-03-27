@@ -128,15 +128,16 @@ class _GraphPieCardState extends State<GraphPieCard> {
     );
   }
 
-  //Show a wait status
+  //Show the wait status
   Column waitFutureInformation() {
     return Column(children: <Widget>[
+      SizedBox(height: 40), // ELIA HACK, PER CENTRARE IL CARICAMENTO
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           CircularProgressIndicator(),
         ],
-      ),
+      )
     ]);
   }
 
