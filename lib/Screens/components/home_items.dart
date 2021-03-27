@@ -2,6 +2,7 @@ import 'package:StatusVaccini/Models/opendata.dart';
 import 'package:StatusVaccini/Screens/components/graph_bar_card.dart';
 import 'package:StatusVaccini/Screens/components/graph_linear_card.dart';
 import 'package:StatusVaccini/Screens/components/graph_multiple_linear_card.dart';
+import 'package:StatusVaccini/Screens/components/regioni_card_view.dart';
 import 'package:flutter/material.dart';
 
 import 'graph_pie_card.dart';
@@ -13,19 +14,12 @@ class HomeItems {
 
   static List<HomeItems> get items => [
         HomeItems(
-          card: GraphBarCard(
-            labelText: "Sommistrazioni",
-            secondLabelText: "Per fascia d'età",
-            iconpath: "assets/bar-chart.svg",
-            funGetData: () => OpenData.getInfoSommistrazioni(),
-          ),
-        ),
-        HomeItems(
           card: GraphLinearCard(
             typeinfo: "sommistrazioni",
-            labelText: "Sommistrazioni oggi",
+            labelText: "Sommistrazioni",
+            secondLabelText: "Oggi",
             iconpath: "assets/date.svg",
-            funTextInformation: () => OpenData.getSommistrazioniOggi(),
+            funTextInformation: () => OpenData.getUltimeSommistrazioni(),
             funGetData: () => OpenData.graphVacciniForDay(),
           ),
         ),
@@ -33,9 +27,18 @@ class HomeItems {
           card: GraphLinearCard(
             typeinfo: "sommistrazioni",
             labelText: "Vaccini sommistrati",
+            secondLabelText: "",
             iconpath: "assets/virus.svg",
             funTextInformation: () => OpenData.getSomministrazioniTotali(),
             funGetData: () => OpenData.graphVacciniTotal(),
+          ),
+        ),
+        HomeItems(
+          card: GraphBarCard(
+            labelText: "Sommistrazioni",
+            secondLabelText: "Per fascia d'età",
+            iconpath: "assets/bar-chart.svg",
+            funGetData: () => OpenData.getInfoSommistrazioni(),
           ),
         ),
         HomeItems(
@@ -51,6 +54,7 @@ class HomeItems {
           card: GraphLinearCard(
             typeinfo: "Dosi",
             labelText: "Dosi consegnate",
+            secondLabelText: "in totale",
             iconpath: "assets/order.svg",
             funTextInformation: () => OpenData.getDosiTotali(),
             funGetData: () => OpenData.graphDeliveryForDay(),
@@ -59,9 +63,10 @@ class HomeItems {
         HomeItems(
           card: GraphLinearCard(
             typeinfo: "Dosi",
-            labelText: "Dosi oggi",
+            labelText: "Dosi consegnate",
+            secondLabelText: "oggi",
             iconpath: "assets/date.svg",
-            funTextInformation: () => OpenData.getDosiConsegnateOggi(),
+            funTextInformation: () => OpenData.getUltimeDosiConsegnate(),
             funGetData: () => OpenData.graphDeliveryTotal(),
           ),
         ),
@@ -75,6 +80,15 @@ class HomeItems {
               () => OpenData.graphSecondeDosi(),
             ],
             textLegends: ["Prime dosi", "Seconde dosi"],
+          ),
+        ),
+        HomeItems(
+          card: CardViewRegioni(
+            labelText: "Sommistrazioni",
+            iconpath: "assets/virus.svg",
+            funGetData: () => OpenData.getInfoPerRegione(),
+            firstLabel: "Sommistrazioni per regione",
+            secondLabel: "in rapporto agli abitanti",
           ),
         ),
       ];
