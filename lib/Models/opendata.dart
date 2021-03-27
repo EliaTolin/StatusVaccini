@@ -22,30 +22,39 @@ abstract class OpenData {
   }
 
   //RITORNA IL NUMERO DELLE SOMMISTRAZIONI EFFETTUATE OGGI
-  static Future<int> getSommistrazioniOggi() async {
+  static Future<UltimeSommistrazioni> getUltimeSommistrazioni() async {
     var summary;
-    int vaccTot = 0;
-    DateTime now = DateTime.now();
-    String todayDate = "";
+    UltimeSommistrazioni ultimeSommistrazioni = new UltimeSommistrazioni();
+    ultimeSommistrazioni.data = new DateTime(1979, 01, 01);
 
-    todayDate += now.year.toString() + "-";
-    if (now.month < 10)
-      todayDate += ("0" + now.month.toString());
-    else
-      todayDate += now.month.toString();
-    todayDate += ("-" + now.day.toString());
-
+    //GET INFORMATION
     await SommistrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
 
     for (SommistrazioneVacciniSummaryLatest element in summary) {
-      String date = element.data_somministrazione.substring(0, 10);
-      if (date == todayDate) {
-        vaccTot += element.prima_dose;
-        vaccTot += element.seconda_dose;
+      var dataTemp = element.data_somministrazione.substring(0, 10);
+
+      List<String> splitDate = dataTemp.split("-");
+
+      DateTime dataSommistrazione = new DateTime(int.parse(splitDate[0]),
+          int.parse(splitDate[1]), int.parse(splitDate[2]));
+
+      if (ultimeSommistrazioni.data.isBefore(dataSommistrazione)) {
+        if (element.prima_dose != 0 || element.seconda_dose != 0)
+          ultimeSommistrazioni = new UltimeSommistrazioni(
+              data: dataSommistrazione,
+              primaDose: element.prima_dose,
+              secondaDose: element.seconda_dose,
+              dosiTotali: (element.prima_dose + element.seconda_dose));
+      } else if (ultimeSommistrazioni.data
+          .isAtSameMomentAs(dataSommistrazione)) {
+        ultimeSommistrazioni.dosiTotali +=
+            (element.prima_dose + element.seconda_dose);
+        ultimeSommistrazioni.primaDose += element.prima_dose;
+        ultimeSommistrazioni.secondaDose += element.seconda_dose;
       }
     }
-    return vaccTot;
+    return ultimeSommistrazioni;
   }
 
   //RITORNA IL NUMERO DELLE SOMMISTRAZIONI TOTALI
@@ -200,28 +209,29 @@ abstract class OpenData {
   }
 
   //RITORNA IL NUMERO DELLA DOSI CONSEGNATE OGGI
-  static Future<int> getDosiConsegnateOggi() async {
+  static Future<UltimaConsegna> getUltimeDosiConsegnate() async {
     var summary;
-    int dosiTot = 0;
-    DateTime now = DateTime.now();
-    String todayDate = "";
 
-    todayDate += now.year.toString() + "-";
-    if (now.month < 10)
-      todayDate += ("0" + now.month.toString());
-    else
-      todayDate += now.month.toString();
-    todayDate += ("-" + now.day.toString());
+    UltimaConsegna ultimaConsegna = new UltimaConsegna();
+
+    ultimaConsegna.data = new DateTime(1979, 01, 01);
 
     await ConsegneVacciniLatest.getListData().then((value) => summary = value);
 
     for (ConsegneVacciniLatest element in summary) {
-      String date = element.data_consegna.substring(0, 10);
-      if (date == todayDate) {
-        dosiTot += element.numero_dosi;
+      var dataTemp = element.data_consegna.substring(0, 10);
+      List<String> splitDate = dataTemp.split("-");
+      DateTime dataConsegna = new DateTime(int.parse(splitDate[0]),
+          int.parse(splitDate[1]), int.parse(splitDate[2]));
+
+      if (ultimaConsegna.data.isBefore(dataConsegna)) {
+        ultimaConsegna =
+            new UltimaConsegna(data: dataConsegna, dosi: element.numero_dosi);
+      } else if (ultimaConsegna.data.difference(dataConsegna).inDays == 0) {
+        ultimaConsegna.dosi += element.numero_dosi;
       }
     }
-    return dosiTot;
+    return ultimaConsegna;
   }
 
   //RITORNA IL GRAFICO DELLE PRIME DOSI PER GIORNO
@@ -313,6 +323,99 @@ abstract class OpenData {
     if (val > numeroTotaleDosi) return -1;
     return double.parse(((val * 100) / numeroTotaleDosi).toStringAsFixed(2));
   }
+
+  static Future<Map<String, int>> getPrimaSommistrazionePerRegione() async {
+    var summary;
+
+    await SommistrazioneVacciniLatest.getListData()
+        .then((value) => summary = value);
+    //{'giorno':dosi}
+    Map<String, int> somministrazioniRegione =
+        new SortedMap<String, int>(Ordering.byKey());
+
+    for (SommistrazioneVacciniLatest element in summary) {
+      String sigla = element.area;
+
+      int dosiTemp = 0;
+
+      dosiTemp += (element.prima_dose);
+
+      if (!somministrazioniRegione.containsKey(sigla)) {
+        somministrazioniRegione.putIfAbsent(sigla, () => dosiTemp);
+      } else {
+        somministrazioniRegione.update(sigla, (value) => value + dosiTemp);
+      }
+    }
+
+    return somministrazioniRegione;
+  }
+
+  static Future<Map<String, int>> getSecondaSommistrazionePerRegione() async {
+    var summary;
+
+    await SommistrazioneVacciniLatest.getListData()
+        .then((value) => summary = value);
+    //{'giorno':dosi}
+    Map<String, int> somministrazioniRegione =
+        new SortedMap<String, int>(Ordering.byKey());
+
+    for (SommistrazioneVacciniLatest element in summary) {
+      String sigla = element.area;
+
+      int dosiTemp = 0;
+
+      dosiTemp += (element.seconda_dose);
+
+      if (!somministrazioniRegione.containsKey(sigla)) {
+        somministrazioniRegione.putIfAbsent(sigla, () => dosiTemp);
+      } else {
+        somministrazioniRegione.update(sigla, (value) => value + dosiTemp);
+      }
+    }
+
+    return somministrazioniRegione;
+  }
+
+  static Future<List<Regione>> getInfoPerRegione() async {
+    var data;
+    List<Regione> regioni = [];
+    await SommistrazioneVacciniLatest.getListData()
+        .then((value) => data = value);
+    for (SommistrazioneVacciniLatest element in data) {
+      var exist = regioni.where((f) => (f.sigla == element.area));
+      if (exist.isEmpty) {
+        regioni.add(Regione(
+          nome: element.nome_regione,
+          sigla: element.area,
+          totaleDosiSommistrate: 0,
+          primeDosi: element.prima_dose,
+          secondeDosi: element.seconda_dose,
+        ));
+      } else {
+        regioni.forEach((f) {
+          if (f.sigla == element.area) {
+            f.nome = element.nome_regione;
+            f.sigla = element.area;
+            f.primeDosi += element.prima_dose;
+            f.secondeDosi += element.seconda_dose;
+            f.totaleDosiSommistrate +=
+                (element.prima_dose + element.seconda_dose);
+          }
+        });
+      }
+    }
+
+    return regioni;
+  }
+}
+
+class UltimaConsegna {
+  DateTime data;
+  int dosi;
+  UltimaConsegna({
+    this.data,
+    this.dosi,
+  });
 }
 
 class Fornitore {
@@ -321,4 +424,33 @@ class Fornitore {
   double percentualeSuTot;
 
   Fornitore({this.nome, this.numeroDosi, this.percentualeSuTot});
+}
+
+class Regione {
+  String nome;
+  String sigla;
+  int totaleDosiSommistrate;
+  int primeDosi;
+  int secondeDosi;
+
+  Regione(
+      {this.nome,
+      this.sigla,
+      this.totaleDosiSommistrate,
+      this.primeDosi,
+      this.secondeDosi});
+}
+
+class UltimeSommistrazioni {
+  DateTime data;
+  int primaDose;
+  int secondaDose;
+  int dosiTotali;
+
+  UltimeSommistrazioni({
+    this.data,
+    this.primaDose = 0,
+    this.secondaDose = 0,
+    this.dosiTotali = 0,
+  });
 }
