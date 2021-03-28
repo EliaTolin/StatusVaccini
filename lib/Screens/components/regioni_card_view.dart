@@ -1,7 +1,7 @@
 // ignore: must_be_immutable
 import 'package:StatusVaccini/Models/opendata.dart';
-import 'package:StatusVaccini/Models/data_information.dart';
-import 'package:StatusVaccini/constant.dart';
+import 'package:StatusVaccini/Models/repositories/data_information.dart';
+import 'package:StatusVaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:auto_size_text/auto_size_text.dart';

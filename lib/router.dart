@@ -1,18 +1,18 @@
-import 'package:StatusVaccini/Screens/home_view.dart';
-import 'package:StatusVaccini/Screens/info_screen.dart';
-import 'package:StatusVaccini/Screens/undefined_screen.dart';
+import 'package:StatusVaccini/Screens/views/home_view.dart';
+import 'package:StatusVaccini/Screens/views/info_view.dart';
+import 'package:StatusVaccini/Screens/views/undefined_view.dart';
+import 'package:StatusVaccini/constants/route_constant.dart';
+import 'package:StatusVaccini/Screens/main_page.dart';
 import 'package:flutter/material.dart';
-import 'Screens/tabs_page.dart';
-import 'constant.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
-    case SVConst.MainRoute:
+    case RouteConstant.MainRoute:
       return MaterialPageRoute(
-          builder: (context) => TabsPage(title: "Status Vaccini"));
-    case SVConst.HomeViewRoute:
+          builder: (context) => MainPage(title: "Status Vaccini"));
+    case RouteConstant.HomeViewRoute:
       return MaterialPageRoute(builder: (context) => HomePageView());
-    case SVConst.InfoViewRoute:
+    case RouteConstant.InfoViewRoute:
       return MaterialPageRoute(builder: (context) => InfoView());
     default:
       return MaterialPageRoute(

@@ -1,5 +1,5 @@
 // ignore: must_be_immutable
-import 'package:StatusVaccini/constant.dart';
+import 'package:StatusVaccini/constants/constant.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/gestures.dart';

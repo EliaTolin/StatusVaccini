@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:StatusVaccini/constant.dart';
+import 'package:StatusVaccini/constants/constant.dart';
 
 Column buildTopBar(Size size, String title) {
   return Column(

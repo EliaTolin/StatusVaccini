@@ -1,16 +1,16 @@
 import 'package:StatusVaccini/Screens/components/tabs_navigation.dart';
-import 'package:StatusVaccini/constant.dart';
+import 'package:StatusVaccini/constants/constant.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-class TabsPage extends StatefulWidget {
+class MainPage extends StatefulWidget {
   final String title;
-  TabsPage({this.title, Key key}) : super(key: key);
+  MainPage({this.title, Key key}) : super(key: key);
   @override
-  _TabsPageState createState() => _TabsPageState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _TabsPageState extends State<TabsPage> {
+class _MainPageState extends State<MainPage> {
   int _currentIndex = 1;
 
   @override

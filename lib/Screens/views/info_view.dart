@@ -1,4 +1,4 @@
-import 'package:StatusVaccini/constant.dart';
+import 'package:StatusVaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:StatusVaccini/Screens/components/body_components.dart';
 

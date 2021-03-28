@@ -1,18 +1,11 @@
 import 'dart:convert' as convert;
+import 'package:StatusVaccini/constants/url_constant.dart';
 import 'package:http/http.dart' as http;
-import 'package:StatusVaccini/constant.dart';
 
 // ignore_for_file: non_constant_identifier_names
 
-// somministrazioni-vaccini-summary-latest:
-// dati sul totale delle somministrazioni giornaliere per regioni e
-// categorie di appartenenza dei soggetti vaccinati.
-
-//CHIAVE: INDEX
-class SommistrazioneVacciniSummaryLatest {
-  final int index;
-  final String area;
-  final String data_somministrazione;
+class AnagraficaVacciniSummaryLatest {
+  final String fascia_anagrafica;
   final int totale;
   final int sesso_maschile;
   final int sesso_femminile;
@@ -22,38 +15,29 @@ class SommistrazioneVacciniSummaryLatest {
   final int categoria_over80;
   final int prima_dose;
   final int seconda_dose;
-  final String nome_regione;
 
-  SommistrazioneVacciniSummaryLatest({
-    this.index,
-    this.area,
-    this.data_somministrazione,
-    this.totale,
-    this.sesso_maschile,
-    this.sesso_femminile,
-    this.categoria_operatori_sanitari_sociosanitari,
-    this.categoria_personale_non_sanitario,
-    this.categoria_ospiti_rsa,
-    this.categoria_over80,
-    this.prima_dose,
-    this.seconda_dose,
-    this.nome_regione,
-  });
+  AnagraficaVacciniSummaryLatest(
+      {this.fascia_anagrafica,
+      this.totale,
+      this.sesso_maschile,
+      this.sesso_femminile,
+      this.categoria_operatori_sanitari_sociosanitari,
+      this.categoria_personale_non_sanitario,
+      this.categoria_ospiti_rsa,
+      this.categoria_over80,
+      this.prima_dose,
+      this.seconda_dose});
 
-  static Future<List<SommistrazioneVacciniSummaryLatest>> getListData() async {
-    var response =
-        await http.get(Uri.parse(URLConst.sommistrazioneVacciniSummaryLatest));
-    List<SommistrazioneVacciniSummaryLatest> list = [];
+  Future<List<AnagraficaVacciniSummaryLatest>> getListData() async {
+    var response = await http.get(Uri.parse(URLConst.anagraficaVacciniSummaryLatest));
+    List<AnagraficaVacciniSummaryLatest> list = [];
 
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
       var jsonData = jsonResponse['data'];
-
-      for (var element in jsonData) {
-        list.add(new SommistrazioneVacciniSummaryLatest(
-          index: element['index'],
-          area: element['area'],
-          data_somministrazione: element['data_somministrazione'],
+      for (dynamic element in jsonData) {
+        list.add(new AnagraficaVacciniSummaryLatest(
+          fascia_anagrafica: element['fascia_anagrafica'],
           totale: element['totale'],
           sesso_maschile: element['sesso_maschile'],
           sesso_femminile: element['sesso_femminile'],
@@ -65,21 +49,18 @@ class SommistrazioneVacciniSummaryLatest {
           categoria_over80: element['categoria_over80'],
           prima_dose: element['prima_dose'],
           seconda_dose: element['seconda_dose'],
-          nome_regione: element['nome_regione'],
         ));
       }
     }
     return list;
   }
 
-  static List<SommistrazioneVacciniSummaryLatest> getListFromMap(
+  static List<AnagraficaVacciniSummaryLatest> getListFromMap(
       Map<String, dynamic> mapData) {
-    List<SommistrazioneVacciniSummaryLatest> list = [];
+    List<AnagraficaVacciniSummaryLatest> list = [];
     mapData.forEach((key, value) {
-      list.add(new SommistrazioneVacciniSummaryLatest(
-        index: value['index'],
-        area: value['area'],
-        data_somministrazione: value['data_somministrazione'],
+      list.add(new AnagraficaVacciniSummaryLatest(
+        fascia_anagrafica: value['fascia_anagrafica'],
         totale: value['totale'],
         sesso_maschile: value['sesso_maschile'],
         sesso_femminile: value['sesso_femminile'],
@@ -91,7 +72,6 @@ class SommistrazioneVacciniSummaryLatest {
         categoria_over80: value['categoria_over80'],
         prima_dose: value['prima_dose'],
         seconda_dose: value['seconda_dose'],
-        nome_regione: value['nome_regione'],
       ));
     });
     return list;

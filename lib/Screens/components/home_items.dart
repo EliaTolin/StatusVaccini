@@ -18,7 +18,7 @@ class HomeItems {
             typeinfo: "sommistrazioni",
             labelText: "Sommistrazioni",
             secondLabelText: "Oggi",
-            iconpath: "assets/date.svg",
+            iconpath: "assets/icons/date.svg",
             funTextInformation: () => OpenData.getUltimeSommistrazioni(),
             funGetData: () => OpenData.graphVacciniForDay(),
           ),
@@ -28,7 +28,7 @@ class HomeItems {
             typeinfo: "sommistrazioni",
             labelText: "Vaccini sommistrati",
             secondLabelText: "",
-            iconpath: "assets/virus.svg",
+            iconpath: "assets/icons/virus.svg",
             funTextInformation: () => OpenData.getSomministrazioniTotali(),
             funGetData: () => OpenData.graphVacciniTotal(),
           ),
@@ -37,7 +37,7 @@ class HomeItems {
           card: GraphBarCard(
             labelText: "Sommistrazioni",
             secondLabelText: "Per fascia d'età",
-            iconpath: "assets/bar-chart.svg",
+            iconpath: "assets/icons/bar-chart.svg",
             funGetData: () => OpenData.getInfoSommistrazioni(),
           ),
         ),
@@ -45,7 +45,7 @@ class HomeItems {
           card: GraphPieCard(
             typeinfo: "Dosi",
             labelText: "Dosi per fornitore",
-            iconpath: "assets/order.svg",
+            iconpath: "assets/icons/order.svg",
             funTextInformation: () => OpenData.getDosiTotali(),
             funGetData: () => OpenData.graphDeliveryForDay(),
           ),
@@ -55,7 +55,7 @@ class HomeItems {
             typeinfo: "Dosi",
             labelText: "Dosi consegnate",
             secondLabelText: "in totale",
-            iconpath: "assets/order.svg",
+            iconpath: "assets/icons/order.svg",
             funTextInformation: () => OpenData.getDosiTotali(),
             funGetData: () => OpenData.graphDeliveryForDay(),
           ),
@@ -65,7 +65,7 @@ class HomeItems {
             typeinfo: "Dosi",
             labelText: "Dosi consegnate",
             secondLabelText: "oggi",
-            iconpath: "assets/date.svg",
+            iconpath: "assets/icons/date.svg",
             funTextInformation: () => OpenData.getUltimeDosiConsegnate(),
             funGetData: () => OpenData.graphDeliveryTotal(),
           ),
@@ -74,7 +74,7 @@ class HomeItems {
           card: GraphMultipleLinearCard(
             typeinfo: "Dosi",
             labelText: "Prime e seconde dosi",
-            iconpath: "assets/medal.svg",
+            iconpath: "assets/icons/medal.svg",
             funGetData: [
               () => OpenData.graphPrimeDosi(),
               () => OpenData.graphSecondeDosi(),
@@ -85,7 +85,7 @@ class HomeItems {
         HomeItems(
           card: CardViewRegioni(
             labelText: "Sommistrazioni",
-            iconpath: "assets/placeholder.svg",
+            iconpath: "assets/icons/placeholder.svg",
             funGetData: () => OpenData.getInfoPerRegione(),
             firstLabel: "Sommistrazioni per regione",
             secondLabel: "in rapporto agli abitanti",

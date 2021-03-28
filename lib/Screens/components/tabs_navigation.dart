@@ -1,7 +1,7 @@
-import 'package:StatusVaccini/Screens/home_view.dart';
-import 'package:StatusVaccini/Screens/info_screen.dart';
-import 'package:StatusVaccini/Screens/recap_view.dart';
-import 'package:StatusVaccini/constant.dart';
+import 'package:StatusVaccini/Screens/views/home_view.dart';
+import 'package:StatusVaccini/Screens/views/info_view.dart';
+import 'package:StatusVaccini/Screens/views/recap_view.dart';
+import 'package:StatusVaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 
 class TabNavigationItem {

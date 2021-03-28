@@ -1,6 +1,7 @@
-import 'package:StatusVaccini/constant.dart';
+import 'package:StatusVaccini/constants/constant.dart';
+import 'package:StatusVaccini/constants/route_constant.dart';
 import 'package:flutter/material.dart';
-import 'Screens/undefined_screen.dart';
+import 'Screens/views/undefined_view.dart';
 import 'router.dart' as router;
 
 void main() => runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: SVConst.backColor,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: SVConst.MainRoute,
+      initialRoute: RouteConstant.MainRoute,
       onGenerateRoute: router.generateRoute,
       onUnknownRoute: (settings) => MaterialPageRoute(
           builder: (context) => UndefinedScreen(name: settings.name)),
