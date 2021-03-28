@@ -74,7 +74,7 @@ class HomeItems {
           card: GraphMultipleLinearCard(
             typeinfo: "Dosi",
             labelText: "Prime e seconde dosi",
-            iconpath: "assets/date.svg",
+            iconpath: "assets/medal.svg",
             funGetData: [
               () => OpenData.graphPrimeDosi(),
               () => OpenData.graphSecondeDosi(),
@@ -85,7 +85,7 @@ class HomeItems {
         HomeItems(
           card: CardViewRegioni(
             labelText: "Sommistrazioni",
-            iconpath: "assets/virus.svg",
+            iconpath: "assets/placeholder.svg",
             funGetData: () => OpenData.getInfoPerRegione(),
             firstLabel: "Sommistrazioni per regione",
             secondLabel: "in rapporto agli abitanti",
