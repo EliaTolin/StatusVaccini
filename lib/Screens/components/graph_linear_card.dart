@@ -17,12 +17,12 @@ class GraphLinearCard extends StatefulWidget {
   String iconpath = "";
   Function funTextInformation;
   Function funGetData;
-  
+
   @override
   GraphLinearCard({
     this.typeinfo,
     this.labelText,
-    secondLabelText,
+    this.secondLabelText,
     this.iconpath,
     this.funTextInformation,
     this.funGetData,
