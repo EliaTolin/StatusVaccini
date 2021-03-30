@@ -58,3 +58,25 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
         child: buildTopBar(preferredSize, title));
   }
 }
+
+class LabelUltimeConsegne extends ChangeNotifier {
+  LabelUltimeConsegne({this.str = "oggi"});
+  String str;
+  String get label => str;
+  void setLabel(String value) {
+    str = value;
+  }
+
+  notifyListeners();
+}
+
+class LabelUltimeSommistrazioni extends ChangeNotifier {
+  LabelUltimeSommistrazioni({this.str = "oggi"});
+  String str;
+  String get label => str;
+  void setLabel(String value) {
+    str = value;
+  }
+
+  notifyListeners();
+}

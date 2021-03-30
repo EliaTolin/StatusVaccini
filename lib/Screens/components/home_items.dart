@@ -1,9 +1,12 @@
 import 'package:StatusVaccini/Models/opendata.dart';
+import 'package:StatusVaccini/Screens/components/body_components.dart';
 import 'package:StatusVaccini/Screens/components/graph_bar_card.dart';
 import 'package:StatusVaccini/Screens/components/graph_linear_card.dart';
 import 'package:StatusVaccini/Screens/components/graph_multiple_linear_card.dart';
 import 'package:StatusVaccini/Screens/components/regioni_card_view.dart';
+import 'package:StatusVaccini/screens/components/graph_linear_ultime_consegne.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'graph_pie_card.dart';
 
@@ -61,10 +64,9 @@ class HomeItems {
           ),
         ),
         HomeItems(
-          card: GraphLinearCard(
+          card: GraphLinearUltimeConsegne(
             typeinfo: "Dosi",
             labelText: "Dosi consegnate",
-            secondLabelText: "oggi",
             iconpath: "assets/icons/date.svg",
             funTextInformation: () => OpenData.getUltimeDosiConsegnate(),
             funGetData: () => OpenData.graphDeliveryTotal(),
