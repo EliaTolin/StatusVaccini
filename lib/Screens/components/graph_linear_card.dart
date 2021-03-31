@@ -203,7 +203,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
           lineBarsData: [
             LineChartBarData(
               spots: data,
-              isCurved: true,
+              isCurved: false,
               dotData: FlDotData(show: false),
               colors: [SVConst.mainColor],
               belowBarData: BarAreaData(
