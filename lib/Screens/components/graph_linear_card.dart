@@ -224,35 +224,8 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
     // DateTime now = DateTime.now();
     await widget.funTextInformation().then((value) => tempValue = value);
 
-    bool isUltimeConsegne = tempValue is UltimaConsegna ? true : false;
-    bool isUltimeSommistrazioni =
-        tempValue is UltimeSommistrazioni ? true : false;
+    _textInformation = numberFormat.format(tempValue);
 
-    if (isUltimeSommistrazioni) {
-      UltimeSommistrazioni ultimeSommistrazioni = tempValue;
-      DateTime now = new DateTime.now();
-      var formatter = new DateFormat('dd/MM/yyyy');
-      if (now.difference(ultimeSommistrazioni.data).inDays == 0) {
-        widget.secondLabelText = "Oggi";
-      } else {
-        widget.secondLabelText =
-            "il giorno " + formatter.format(ultimeSommistrazioni.data);
-      }
-      _textInformation = numberFormat.format(ultimeSommistrazioni.dosiTotali);
-    } else if (isUltimeConsegne) {
-      UltimaConsegna ultimaConsegna = tempValue;
-      DateTime now = new DateTime.now();
-      var formatter = new DateFormat('dd/MM/yyyy');
-      if (now.difference(ultimaConsegna.data).inDays == 0) {
-        widget.secondLabelText = "Oggi";
-      } else {
-        widget.secondLabelText = "ultima consegna il giorno " +
-            formatter.format(ultimaConsegna.data);
-      }
-      _textInformation = numberFormat.format(ultimaConsegna.dosi);
-    } else {
-      _textInformation = numberFormat.format(tempValue);
-    }
     setState(() {
       _readyTextInformation = true;
     });
