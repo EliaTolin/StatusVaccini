@@ -1,39 +1,41 @@
 // ignore: must_be_immutable
 import 'package:StatusVaccini/Models/opendata.dart';
 import 'package:StatusVaccini/constants/constant.dart';
+import 'package:StatusVaccini/screens/components/body_components.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 //Class for draw Card with Linear Card
 // ignore: must_be_immutable
-class GraphLinearCard extends StatefulWidget {
+class GraphLinearUltimeSommistrazioni extends StatefulWidget {
   String typeinfo = "";
   String labelText = "";
-  String secondLabelText = "";
   String iconpath = "";
   Function funTextInformation;
   Function funGetData;
 
   @override
-  GraphLinearCard({
+  GraphLinearUltimeSommistrazioni({
     this.typeinfo,
     this.labelText,
-    this.secondLabelText,
     this.iconpath,
     this.funTextInformation,
     this.funGetData,
     Key key,
   }) : super(key: key);
 
-  _GraphLinearCardState createState() => _GraphLinearCardState();
+  _GraphLinearUltimeSommistrazioniState createState() =>
+      _GraphLinearUltimeSommistrazioniState();
 }
 
 // ignore: must_be_immutable
-class _GraphLinearCardState extends State<GraphLinearCard> {
+class _GraphLinearUltimeSommistrazioniState
+    extends State<GraphLinearUltimeSommistrazioni> {
   //The information showed in the card
   String _textInformation = "NOT SET INFORMATION";
   //Flag for use ready Graph, all information are loaded
@@ -88,6 +90,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
   }
 
   Column cardContent() {
+    final labelSommistrazioni = Provider.of<LabelUltimeSommistrazioni>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -126,7 +129,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
                       height: 4,
                     ),
                     AutoSizeText(
-                      widget.secondLabelText,
+                      labelSommistrazioni.label,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                           color: const Color(0xff379982),
@@ -203,7 +206,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
           lineBarsData: [
             LineChartBarData(
               spots: data,
-              isCurved: false,
+              isCurved: true,
               dotData: FlDotData(show: false),
               colors: [SVConst.mainColor],
               belowBarData: BarAreaData(
@@ -224,8 +227,21 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
     // DateTime now = DateTime.now();
     await widget.funTextInformation().then((value) => tempValue = value);
 
-    _textInformation = numberFormat.format(tempValue);
+    bool isUltimeSommistrazioni =
+        tempValue is UltimeSommistrazioni ? true : false;
 
+    if (isUltimeSommistrazioni) {
+      UltimeSommistrazioni ultimeSommistrazioni = tempValue;
+      DateTime now = new DateTime.now();
+      var formatter = new DateFormat('dd/MM/yyyy');
+      if (now.difference(ultimeSommistrazioni.data).inDays != 0) {
+        Provider.of<LabelUltimeSommistrazioni>(context, listen: false).setLabel(
+            "il giorno" + formatter.format(ultimeSommistrazioni.data));
+      }
+      _textInformation = numberFormat.format(ultimeSommistrazioni.dosiTotali);
+    } else {
+      throw new Exception("The data is not UltimaSommistrazione");
+    }
     setState(() {
       _readyTextInformation = true;
     });
