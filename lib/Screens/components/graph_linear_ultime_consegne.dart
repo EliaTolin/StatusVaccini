@@ -1,39 +1,40 @@
 // ignore: must_be_immutable
 import 'package:StatusVaccini/Models/opendata.dart';
 import 'package:StatusVaccini/constants/constant.dart';
+import 'package:StatusVaccini/screens/components/body_components.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 //Class for draw Card with Linear Card
 // ignore: must_be_immutable
-class GraphLinearCard extends StatefulWidget {
+class GraphLinearUltimeConsegne extends StatefulWidget {
   String typeinfo = "";
   String labelText = "";
-  String secondLabelText = "";
   String iconpath = "";
   Function funTextInformation;
   Function funGetData;
 
   @override
-  GraphLinearCard({
+  GraphLinearUltimeConsegne({
     this.typeinfo,
     this.labelText,
-    this.secondLabelText,
     this.iconpath,
     this.funTextInformation,
     this.funGetData,
     Key key,
   }) : super(key: key);
 
-  _GraphLinearCardState createState() => _GraphLinearCardState();
+  _GraphLinearUltimeConsegneState createState() =>
+      _GraphLinearUltimeConsegneState();
 }
 
 // ignore: must_be_immutable
-class _GraphLinearCardState extends State<GraphLinearCard> {
+class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
   //The information showed in the card
   String _textInformation = "NOT SET INFORMATION";
   //Flag for use ready Graph, all information are loaded
@@ -55,6 +56,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
 
   @override
   Widget build(BuildContext context) {
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(SVConst.radiusComponent),
@@ -88,6 +90,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
   }
 
   Column cardContent() {
+    final labelConsegne = Provider.of<LabelUltimeConsegne>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -126,7 +129,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
                       height: 4,
                     ),
                     AutoSizeText(
-                      widget.secondLabelText,
+                      labelConsegne.label,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                           color: const Color(0xff379982),
@@ -224,8 +227,21 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
     // DateTime now = DateTime.now();
     await widget.funTextInformation().then((value) => tempValue = value);
 
-    _textInformation = numberFormat.format(tempValue);
+    bool isUltimeConsegne = tempValue is UltimaConsegna ? true : false;
 
+    if (isUltimeConsegne) {
+      UltimaConsegna ultimaConsegna = tempValue;
+      DateTime now = new DateTime.now();
+      var formatter = new DateFormat('dd/MM/yyyy');
+      if (now.difference(ultimaConsegna.data).inDays != 0) {
+        Provider.of<LabelUltimeConsegne>(context, listen: false).setLabel(
+            "ultima consegna il giorno " +
+                formatter.format(ultimaConsegna.data));
+      }
+      _textInformation = numberFormat.format(ultimaConsegna.dosi);
+    } else {
+      throw new Exception("The data is not UltimaConsegna");
+    }
     setState(() {
       _readyTextInformation = true;
     });
