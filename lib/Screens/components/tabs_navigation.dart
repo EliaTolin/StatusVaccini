@@ -16,15 +16,6 @@ class TabNavigationItem {
 
   static List<TabNavigationItem> get items => [
         TabNavigationItem(
-          page: InfoView(),
-          icon: Icon(
-            Icons.help,
-            color: SVConst.backColor,
-            size: 35,
-          ),
-          title: "Info",
-        ),
-        TabNavigationItem(
           page: HomePageView(),
           icon: Icon(
             Icons.coronavirus,
@@ -32,6 +23,15 @@ class TabNavigationItem {
             size: 35,
           ),
           title: "Home",
+        ),
+        TabNavigationItem(
+          page: InfoView(),
+          icon: Icon(
+            Icons.help,
+            color: SVConst.backColor,
+            size: 35,
+          ),
+          title: "Info",
         ),
       ];
 }
