@@ -1,5 +1,5 @@
 import 'dart:convert' as convert;
-import 'package:StatusVaccini/constants/url_constant.dart';
+import 'package:statusvaccini/constants/url_constant.dart';
 import 'package:http/http.dart' as http;
 
 // ignore_for_file: non_constant_identifier_names
@@ -21,7 +21,8 @@ class PuntiSommistrazioneTipologia {
       this.nome_regione});
 
   static Future<List<PuntiSommistrazioneTipologia>> getListData() async {
-    var response = await http.get(Uri.parse(URLConst.puntiSommistrazioneTipologia));
+    var response =
+        await http.get(Uri.parse(URLConst.puntiSommistrazioneTipologia));
     List<PuntiSommistrazioneTipologia> list = [];
 
     if (response.statusCode == 200) {

@@ -1,10 +1,10 @@
-import 'package:StatusVaccini/Models/opendata.dart';
-import 'package:StatusVaccini/Screens/components/graph_bar_card.dart';
-import 'package:StatusVaccini/Screens/components/graph_linear_card.dart';
-import 'package:StatusVaccini/Screens/components/graph_multiple_linear_card.dart';
-import 'package:StatusVaccini/Screens/components/regioni_card_view.dart';
-import 'package:StatusVaccini/screens/components/graph_linear_ultime_consegne.dart';
-import 'package:StatusVaccini/screens/components/graph_linear_ultime_sommistrazioni.dart';
+import 'package:statusvaccini/Models/opendata.dart';
+import 'package:statusvaccini/Screens/components/graph_bar_card.dart';
+import 'package:statusvaccini/Screens/components/graph_linear_card.dart';
+import 'package:statusvaccini/Screens/components/graph_multiple_linear_card.dart';
+import 'package:statusvaccini/Screens/components/regioni_card_view.dart';
+import 'package:statusvaccini/screens/components/graph_linear_ultime_consegne.dart';
+import 'package:statusvaccini/screens/components/graph_linear_ultime_sommistrazioni.dart';
 import 'package:flutter/material.dart';
 
 import 'graph_pie_card.dart';

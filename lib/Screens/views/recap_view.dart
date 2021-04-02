@@ -1,6 +1,6 @@
-import 'package:StatusVaccini/constants/constant.dart';
+import 'package:statusvaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:StatusVaccini/Screens/components/body_components.dart';
+import 'package:statusvaccini/Screens/components/body_components.dart';
 
 class RecapScreen extends StatefulWidget {
   @override

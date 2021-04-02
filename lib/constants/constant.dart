@@ -97,6 +97,7 @@ class SVConst {
       Color.fromARGB(255, 172, 25, 100); //Color(0xff81e5cd);
   static const Color textBarColor = Colors.black;
   static const Color textItemBarColor = Colors.white;
+  static const Color textGreen = const Color(0xff379982);
   //RADIUS ELEMENT
   static const double radiusComponent = 40;
 

@@ -1,6 +1,6 @@
 ![logoStatus](https://user-images.githubusercontent.com/60351315/111628344-687f3500-87f0-11eb-9c74-88e804c07da9.png)
 
-# StatusVaccini 🧬
+# statusvaccini 🧬
 
 L'obiettivo di Status Vaccini è creare un'applicazione per il monitoraggio della compagna vaccinale Italiana.
 
@@ -95,13 +95,9 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
     
     -> [ 0 % ] Inserire il contatto per informazioni
 
-
-#### Aggiungere controllo verifica connessione prima del download
-#### Aggiungere cache per il download delle informazioni
-
 #### PROBLEMS
-
-    -> Non salva le informazioni quando si cambia screen e si torna sul precendente
+    --> Aggiungere i giorni con 0 vaccinazioni o 0 consegne nei grafici
+        --> nelle funzioni OpenData
 
 *Per informazioni:*
 

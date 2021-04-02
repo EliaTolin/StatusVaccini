@@ -1,5 +1,5 @@
 // ignore: must_be_immutable
-import 'package:StatusVaccini/constants/constant.dart';
+import 'package:statusvaccini/constants/constant.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/gestures.dart';
@@ -134,7 +134,7 @@ class _GraphBarCardState extends State<GraphBarCard> {
     );
   }
 
- //Show the wait status
+  //Show the wait status
   Column waitFutureInformation() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,

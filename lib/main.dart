@@ -1,6 +1,6 @@
-import 'package:StatusVaccini/constants/constant.dart';
-import 'package:StatusVaccini/constants/route_constant.dart';
-import 'package:StatusVaccini/screens/components/body_components.dart';
+import 'package:statusvaccini/constants/constant.dart';
+import 'package:statusvaccini/constants/route_constant.dart';
+import 'package:statusvaccini/screens/components/body_components.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Screens/views/undefined_view.dart';

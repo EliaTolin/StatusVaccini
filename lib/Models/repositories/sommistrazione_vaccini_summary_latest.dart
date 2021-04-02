@@ -1,5 +1,5 @@
 import 'dart:convert' as convert;
-import 'package:StatusVaccini/constants/url_constant.dart';
+import 'package:statusvaccini/constants/url_constant.dart';
 import 'package:http/http.dart' as http;
 
 // ignore_for_file: non_constant_identifier_names

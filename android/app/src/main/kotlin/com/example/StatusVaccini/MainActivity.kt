@@ -1,4 +1,4 @@
-package com.example.StatusVaccini
+package com.example.statusvaccini
 
 import io.flutter.embedding.android.FlutterActivity
 

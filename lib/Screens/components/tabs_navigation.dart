@@ -1,7 +1,6 @@
-import 'package:StatusVaccini/Screens/views/home_view.dart';
-import 'package:StatusVaccini/Screens/views/info_view.dart';
-import 'package:StatusVaccini/Screens/views/recap_view.dart';
-import 'package:StatusVaccini/constants/constant.dart';
+import 'package:statusvaccini/Screens/views/home_view.dart';
+import 'package:statusvaccini/Screens/views/info_view.dart';
+import 'package:statusvaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 
 class TabNavigationItem {
@@ -17,13 +16,13 @@ class TabNavigationItem {
 
   static List<TabNavigationItem> get items => [
         TabNavigationItem(
-          page: RecapScreen(),
+          page: InfoView(),
           icon: Icon(
-            Icons.add_chart,
+            Icons.help,
             color: SVConst.backColor,
             size: 35,
           ),
-          title: "Recap",
+          title: "Info",
         ),
         TabNavigationItem(
           page: HomePageView(),
@@ -33,15 +32,6 @@ class TabNavigationItem {
             size: 35,
           ),
           title: "Home",
-        ),
-        TabNavigationItem(
-          page: InfoView(),
-          icon: Icon(
-            Icons.help,
-            color: SVConst.backColor,
-            size: 35,
-          ),
-          title: "Info",
         ),
       ];
 }

@@ -1,5 +1,5 @@
 import 'dart:convert' as convert;
-import 'package:StatusVaccini/constants/url_constant.dart';
+import 'package:statusvaccini/constants/url_constant.dart';
 import 'package:http/http.dart' as http;
 
 // ignore_for_file: non_constant_identifier_names
@@ -29,7 +29,8 @@ class AnagraficaVacciniSummaryLatest {
       this.seconda_dose});
 
   Future<List<AnagraficaVacciniSummaryLatest>> getListData() async {
-    var response = await http.get(Uri.parse(URLConst.anagraficaVacciniSummaryLatest));
+    var response =
+        await http.get(Uri.parse(URLConst.anagraficaVacciniSummaryLatest));
     List<AnagraficaVacciniSummaryLatest> list = [];
 
     if (response.statusCode == 200) {

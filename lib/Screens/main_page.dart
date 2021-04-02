@@ -1,5 +1,5 @@
-import 'package:StatusVaccini/Screens/components/tabs_navigation.dart';
-import 'package:StatusVaccini/constants/constant.dart';
+import 'package:statusvaccini/Screens/components/tabs_navigation.dart';
+import 'package:statusvaccini/constants/constant.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {

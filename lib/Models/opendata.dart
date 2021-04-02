@@ -1,8 +1,8 @@
 import 'dart:convert' as convert;
-import 'package:StatusVaccini/constants/url_constant.dart';
-import 'package:StatusVaccini/models/repositories/consegne_vaccini_latest.dart';
-import 'package:StatusVaccini/models/repositories/sommistrazione_vaccini_summary_latest.dart';
-import 'package:StatusVaccini/models/repositories/sommistrazione_vaccini_latest.dart';
+import 'package:statusvaccini/constants/url_constant.dart';
+import 'package:statusvaccini/models/repositories/consegne_vaccini_latest.dart';
+import 'package:statusvaccini/models/repositories/sommistrazione_vaccini_summary_latest.dart';
+import 'package:statusvaccini/models/repositories/sommistrazione_vaccini_latest.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:sortedmap/sortedmap.dart';
