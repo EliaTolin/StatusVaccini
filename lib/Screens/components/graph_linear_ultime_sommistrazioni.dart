@@ -236,7 +236,7 @@ class _GraphLinearUltimeSommistrazioniState
       var formatter = new DateFormat('dd/MM/yyyy');
       if (now.difference(ultimeSommistrazioni.data).inDays != 0) {
         Provider.of<LabelUltimeSommistrazioni>(context, listen: false).setLabel(
-            "il giorno" + formatter.format(ultimeSommistrazioni.data));
+            "il giorno " + formatter.format(ultimeSommistrazioni.data));
       }
       _textInformation = numberFormat.format(ultimeSommistrazioni.dosiTotali);
     } else {
