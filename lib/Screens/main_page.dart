@@ -24,6 +24,7 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(
+        height: 60,
         onTap: (int index) => setState(() => _currentIndex = index),
         index: _currentIndex,
         buttonBackgroundColor: SVConst.mainColor,
