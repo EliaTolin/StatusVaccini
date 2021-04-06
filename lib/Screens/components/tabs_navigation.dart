@@ -1,5 +1,5 @@
-import 'package:statusvaccini/Screens/views/home_view.dart';
-import 'package:statusvaccini/Screens/views/info_view.dart';
+import 'package:statusvaccini/screens/views/home_view.dart';
+import 'package:statusvaccini/screens/views/info_view.dart';
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 

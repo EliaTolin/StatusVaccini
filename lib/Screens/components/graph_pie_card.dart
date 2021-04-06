@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:statusvaccini/Models/opendata.dart';
+import 'package:statusvaccini/models/opendata.dart';
 
 //Class for draw Card with Pie Chart
 // ignore: must_be_immutable

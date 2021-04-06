@@ -1,5 +1,5 @@
 // ignore: must_be_immutable
-import 'package:statusvaccini/Models/opendata.dart';
+import 'package:statusvaccini/models/opendata.dart';
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:statusvaccini/screens/components/body_components.dart';
 import 'package:fl_chart/fl_chart.dart';

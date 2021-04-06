@@ -1,8 +1,8 @@
-import 'package:statusvaccini/Screens/views/home_view.dart';
-import 'package:statusvaccini/Screens/views/info_view.dart';
-import 'package:statusvaccini/Screens/views/undefined_view.dart';
+import 'package:statusvaccini/screens/views/home_view.dart';
+import 'package:statusvaccini/screens/views/info_view.dart';
+import 'package:statusvaccini/screens/views/undefined_view.dart';
 import 'package:statusvaccini/constants/route_constant.dart';
-import 'package:statusvaccini/Screens/main_page.dart';
+import 'package:statusvaccini/screens/main_page.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {

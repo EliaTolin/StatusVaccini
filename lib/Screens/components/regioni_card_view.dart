@@ -1,6 +1,6 @@
 // ignore: must_be_immutable
-import 'package:statusvaccini/Models/opendata.dart';
-import 'package:statusvaccini/Models/repositories/data_information.dart';
+import 'package:statusvaccini/models/opendata.dart';
+import 'package:statusvaccini/models/repositories/data_information.dart';
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

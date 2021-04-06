@@ -1,8 +1,8 @@
-import 'package:statusvaccini/Models/opendata.dart';
-import 'package:statusvaccini/Screens/components/graph_bar_card.dart';
-import 'package:statusvaccini/Screens/components/graph_linear_card.dart';
-import 'package:statusvaccini/Screens/components/graph_multiple_linear_card.dart';
-import 'package:statusvaccini/Screens/components/regioni_card_view.dart';
+import 'package:statusvaccini/models/opendata.dart';
+import 'package:statusvaccini/screens/components/graph_bar_card.dart';
+import 'package:statusvaccini/screens/components/graph_linear_card.dart';
+import 'package:statusvaccini/screens/components/graph_multiple_linear_card.dart';
+import 'package:statusvaccini/screens/components/regioni_card_view.dart';
 import 'package:statusvaccini/screens/components/graph_linear_ultime_consegne.dart';
 import 'package:statusvaccini/screens/components/graph_linear_ultime_sommistrazioni.dart';
 import 'package:flutter/material.dart';
