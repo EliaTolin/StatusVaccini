@@ -39,7 +39,7 @@ class HomeItems {
             labelText: "Sommistrazioni",
             secondLabelText: "Per fascia d'età",
             iconpath: "assets/icons/bar-chart.svg",
-            funGetData: () => OpenData.getInfoSommistrazioni(),
+            funGetData: () => OpenData.getInfoSommistrazioniFasceEta(),
           ),
         ),
         HomeItems(
@@ -86,7 +86,8 @@ class HomeItems {
           card: CardViewRegioni(
             labelText: "Sommistrazioni",
             iconpath: "assets/icons/placeholder.svg",
-            funGetData: () => OpenData.getInfoSommistrazioniPerRegione(),
+            funGetData: () =>
+                OpenData.getInfoSommistrazioniFasceEtaPerRegione(),
             firstLabel: "Sommistrazioni per regione",
             secondLabel: "in rapporto agli abitanti",
           ),

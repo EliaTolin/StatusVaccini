@@ -324,7 +324,7 @@ abstract class OpenData {
   }
 
   //RITORNA UNA MAPPA CON LE SOMMISTRAZIONI PER FASCE D'ETA'
-  static Future<Map<String, int>> getInfoSommistrazioni() async {
+  static Future<Map<String, int>> getInfoSommistrazioniFasceEta() async {
     var summary;
     await SommistrazioneVacciniLatest.getListData()
         .then((value) => summary = value);
@@ -403,7 +403,7 @@ abstract class OpenData {
   }
 
   //RITORNA UNA LISTA DI CLASSE DI REGIONI CONTENTE LE INFORMAZIONI SULLE SOMMISTRAZIONI
-  static Future<List<Regione>> getInfoSommistrazioniPerRegione() async {
+  static Future<List<Regione>> getInfoSommistrazioniFasceEtaPerRegione() async {
     var data;
     List<Regione> regioni = [];
     await SommistrazioneVacciniLatest.getListData()
