@@ -58,7 +58,7 @@ class HomeItems {
             secondLabelText: "in totale",
             iconpath: "assets/icons/order.svg",
             funTextInformation: () => OpenData.getDosiTotali(),
-            funGetData: () => OpenData.graphDeliveryForDay(),
+            funGetData: () => OpenData.graphDeliveryTotal(),
           ),
         ),
         HomeItems(
@@ -67,7 +67,7 @@ class HomeItems {
             labelText: "Dosi consegnate",
             iconpath: "assets/icons/date.svg",
             funTextInformation: () => OpenData.getUltimeDosiConsegnate(),
-            funGetData: () => OpenData.graphDeliveryTotal(),
+            funGetData: () => OpenData.graphDeliveryForDay(),
           ),
         ),
         HomeItems(
@@ -86,7 +86,7 @@ class HomeItems {
           card: CardViewRegioni(
             labelText: "Sommistrazioni",
             iconpath: "assets/icons/placeholder.svg",
-            funGetData: () => OpenData.getInfoPerRegione(),
+            funGetData: () => OpenData.getInfoSommistrazioniPerRegione(),
             firstLabel: "Sommistrazioni per regione",
             secondLabel: "in rapporto agli abitanti",
           ),
