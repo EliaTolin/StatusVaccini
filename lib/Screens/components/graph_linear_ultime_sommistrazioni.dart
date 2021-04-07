@@ -206,7 +206,7 @@ class _GraphLinearUltimeSommistrazioniState
           lineBarsData: [
             LineChartBarData(
               spots: data,
-              isCurved: true,
+              isCurved: false,
               dotData: FlDotData(show: false),
               colors: [SVConst.mainColor],
               belowBarData: BarAreaData(

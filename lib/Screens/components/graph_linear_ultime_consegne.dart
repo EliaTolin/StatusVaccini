@@ -205,7 +205,7 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
           lineBarsData: [
             LineChartBarData(
               spots: data,
-              isCurved: true,
+              isCurved: false,
               dotData: FlDotData(show: false),
               colors: [SVConst.mainColor],
               belowBarData: BarAreaData(
