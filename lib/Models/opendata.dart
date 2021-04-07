@@ -6,6 +6,7 @@ import 'package:statusvaccini/models/repositories/sommistrazione_vaccini_latest.
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:sortedmap/sortedmap.dart';
+import 'package:intl/intl.dart';
 
 abstract class OpenData {
   //RITORNA L'ULTIMO AGGIORNAMENTO DELLE INFORMAZIONI
@@ -111,9 +112,20 @@ abstract class OpenData {
       }
     }
 
+    DateTime lastDate;
+    bool firstTime = false;
     somministrazioniPerDay.forEach((key, value) {
+      if (!firstTime) lastDate = DateTime.parse(key);
+      firstTime = true;
+      if (!lastDate.isAtSameMomentAs(DateTime.parse(key)) &&
+          lastDate.isBefore(DateTime.parse(key)))
+        while (lastDate.isBefore(DateTime.parse(key))) {
+          data.add(FlSpot(lastDate.millisecondsSinceEpoch.toDouble(), 0));
+          lastDate = lastDate.add(new Duration(days: 1));
+        }
       data.add(FlSpot(DateTime.parse(key).millisecondsSinceEpoch.toDouble(),
           value.toDouble()));
+      lastDate = lastDate.add(new Duration(days: 1));
     });
 
     return data;
@@ -139,9 +151,28 @@ abstract class OpenData {
       }
     }
 
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String formattedDate = formatter.format(now);
+
+    if (!deliveryForDay.containsKey(formattedDate)) {
+      deliveryForDay.putIfAbsent(formattedDate, () => 0);
+    }
+    DateTime lastDate;
+    bool firstTime = false;
+    //now.difference(ultimeSommistrazioni.data).inDays != 0
     deliveryForDay.forEach((key, value) {
+      if (!firstTime) lastDate = DateTime.parse(key);
+      firstTime = true;
+      if (!lastDate.isAtSameMomentAs(DateTime.parse(key)) &&
+          lastDate.isBefore(DateTime.parse(key)))
+        while (lastDate.isBefore(DateTime.parse(key))) {
+          data.add(FlSpot(lastDate.millisecondsSinceEpoch.toDouble(), 0));
+          lastDate = lastDate.add(new Duration(days: 1));
+        }
       data.add(FlSpot(DateTime.parse(key).millisecondsSinceEpoch.toDouble(),
           value.toDouble()));
+      lastDate = lastDate.add(new Duration(days: 1));
     });
 
     return data;
@@ -317,13 +348,7 @@ abstract class OpenData {
     return fasceEtaInfo;
   }
 
-  static Future<double> getPercentualeSuTot(int val) async {
-    int numeroTotaleDosi = 0;
-    await getDosiTotali().then((value) => numeroTotaleDosi = value);
-    if (val > numeroTotaleDosi) return -1;
-    return double.parse(((val * 100) / numeroTotaleDosi).toStringAsFixed(2));
-  }
-
+  //RITORNA UNA MAPPA CONTENTE IL NUMERO DI PRIME SOMMISTRAZIONI PER REGIONE
   static Future<Map<String, int>> getPrimaSommistrazionePerRegione() async {
     var summary;
 
@@ -350,6 +375,7 @@ abstract class OpenData {
     return somministrazioniRegione;
   }
 
+  //RITORNA UNA MAPPA CONTENTE IL NUMERO DI SECONDE SOMMISTRAZIONI PER REGIONE
   static Future<Map<String, int>> getSecondaSommistrazionePerRegione() async {
     var summary;
 
@@ -376,7 +402,8 @@ abstract class OpenData {
     return somministrazioniRegione;
   }
 
-  static Future<List<Regione>> getInfoPerRegione() async {
+  //RITORNA UNA LISTA DI CLASSE DI REGIONI CONTENTE LE INFORMAZIONI SULLE SOMMISTRAZIONI
+  static Future<List<Regione>> getInfoSommistrazioniPerRegione() async {
     var data;
     List<Regione> regioni = [];
     await SommistrazioneVacciniLatest.getListData()
