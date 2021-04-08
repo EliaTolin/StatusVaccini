@@ -74,7 +74,7 @@ abstract class OpenData {
   }
 
   //RITORNA IL GRAFICO DELLA SOMMISTRAZIONI TOTALI
-  static Future<List<FlSpot>> graphVacciniTotal() async {
+  static Future<List<FlSpot>> graphSommistrazioniTotali() async {
     List<FlSpot> data = [];
     var summary;
     int vaccini = 0;
@@ -92,29 +92,69 @@ abstract class OpenData {
   }
 
   //RITORNA IL GRAFICO DELLA DOSI SOMMISTRATE PER GIORNO
-  static Future<List<FlSpot>> graphVacciniForDay() async {
-    List<FlSpot> data = [];
+  static Future<Map<String, int>> getSommistrazioniPerGiorno() async {
     var summary;
     await SommistrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
-    Map<String, int> somministrazioniPerDay =
+    Map<String, int> somministrazioniPerGiorno =
         new SortedMap<String, int>(Ordering.byKey());
 
     for (SommistrazioneVacciniSummaryLatest element in summary) {
       String date = element.data_somministrazione.substring(0, 10);
       int tempTot = element.prima_dose + element.seconda_dose;
 
-      if (!somministrazioniPerDay.containsKey(date)) {
-        somministrazioniPerDay.putIfAbsent(date, () => tempTot);
+      if (!somministrazioniPerGiorno.containsKey(date)) {
+        somministrazioniPerGiorno.putIfAbsent(date, () => tempTot);
       } else {
-        somministrazioniPerDay.update(date, (value) => value + tempTot);
+        somministrazioniPerGiorno.update(date, (value) => value + tempTot);
       }
     }
 
     DateTime lastDate;
     bool firstTime = false;
-    somministrazioniPerDay.forEach((key, value) {
+    var formatter = new DateFormat('yyyy-MM-dd');
+
+    somministrazioniPerGiorno.forEach((key, value) {
+      if (!firstTime) lastDate = DateTime.parse(key);
+      firstTime = true;
+      if (!lastDate.isAtSameMomentAs(DateTime.parse(key)) &&
+          lastDate.isBefore(DateTime.parse(key)))
+        while (lastDate.isBefore(DateTime.parse(key))) {
+          somministrazioniPerGiorno.putIfAbsent(
+              formatter.format(lastDate), () => 0);
+          lastDate = lastDate.add(new Duration(days: 1));
+        }
+      lastDate = lastDate.add(new Duration(days: 1));
+    });
+
+    return somministrazioniPerGiorno;
+  }
+
+  //RITORNA IL GRAFICO DELLA DOSI SOMMISTRATE PER GIORNO
+  static Future<List<FlSpot>> graphSommistrazioniPerGiorno() async {
+    List<FlSpot> data = [];
+    var summary;
+    await SommistrazioneVacciniSummaryLatest.getListData()
+        .then((value) => summary = value);
+    //{'giorno':dosi}
+    Map<String, int> somministrazioniPerGiorno =
+        new SortedMap<String, int>(Ordering.byKey());
+
+    for (SommistrazioneVacciniSummaryLatest element in summary) {
+      String date = element.data_somministrazione.substring(0, 10);
+      int tempTot = element.prima_dose + element.seconda_dose;
+
+      if (!somministrazioniPerGiorno.containsKey(date)) {
+        somministrazioniPerGiorno.putIfAbsent(date, () => tempTot);
+      } else {
+        somministrazioniPerGiorno.update(date, (value) => value + tempTot);
+      }
+    }
+
+    DateTime lastDate;
+    bool firstTime = false;
+    somministrazioniPerGiorno.forEach((key, value) {
       if (!firstTime) lastDate = DateTime.parse(key);
       firstTime = true;
       if (!lastDate.isAtSameMomentAs(DateTime.parse(key)) &&
@@ -132,22 +172,22 @@ abstract class OpenData {
   }
 
   //RITORNA IL NUMERO DELLA CONSEGNE DI DOSI PER GIORNO
-  static Future<List<FlSpot>> graphDeliveryForDay() async {
+  static Future<List<FlSpot>> graphConsegnePerGiorno() async {
     List<FlSpot> data = [];
     var summary;
     await ConsegneVacciniLatest.getListData().then((value) => summary = value);
     //{'giorno':dosi}
-    Map<String, int> deliveryForDay =
+    Map<String, int> consegnePerGiorno =
         new SortedMap<String, int>(Ordering.byKey());
 
     for (ConsegneVacciniLatest element in summary) {
       String date = element.data_consegna.substring(0, 10);
       int tempTot = element.numero_dosi;
 
-      if (!deliveryForDay.containsKey(date)) {
-        deliveryForDay.putIfAbsent(date, () => tempTot);
+      if (!consegnePerGiorno.containsKey(date)) {
+        consegnePerGiorno.putIfAbsent(date, () => tempTot);
       } else {
-        deliveryForDay.update(date, (value) => value + tempTot);
+        consegnePerGiorno.update(date, (value) => value + tempTot);
       }
     }
 
@@ -155,13 +195,13 @@ abstract class OpenData {
     var formatter = new DateFormat('yyyy-MM-dd');
     String formattedDate = formatter.format(now);
 
-    if (!deliveryForDay.containsKey(formattedDate)) {
-      deliveryForDay.putIfAbsent(formattedDate, () => 0);
+    if (!consegnePerGiorno.containsKey(formattedDate)) {
+      consegnePerGiorno.putIfAbsent(formattedDate, () => 0);
     }
     DateTime lastDate;
     bool firstTime = false;
-    //now.difference(ultimeSommistrazioni.data).inDays != 0
-    deliveryForDay.forEach((key, value) {
+
+    consegnePerGiorno.forEach((key, value) {
       if (!firstTime) lastDate = DateTime.parse(key);
       firstTime = true;
       if (!lastDate.isAtSameMomentAs(DateTime.parse(key)) &&
@@ -179,7 +219,7 @@ abstract class OpenData {
   }
 
   //RITORNA IL GRAFICO DELLA CONSEGNE TOTALI
-  static Future<List<FlSpot>> graphDeliveryTotal() async {
+  static Future<List<FlSpot>> graphConsegneTotali() async {
     List<FlSpot> data = [];
     var summary;
     int dosiConsegnate = 0;
@@ -272,21 +312,21 @@ abstract class OpenData {
     await SommistrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
-    Map<String, int> deliveryForDay =
+    Map<String, int> consegnePerGiorno =
         new SortedMap<String, int>(Ordering.byKey());
 
     for (SommistrazioneVacciniSummaryLatest element in summary) {
       String date = element.data_somministrazione.substring(0, 10);
 
       int dosiTemp = element.prima_dose;
-      if (!deliveryForDay.containsKey(date)) {
-        deliveryForDay.putIfAbsent(date, () => dosiTemp);
+      if (!consegnePerGiorno.containsKey(date)) {
+        consegnePerGiorno.putIfAbsent(date, () => dosiTemp);
       } else {
-        deliveryForDay.update(date, (value) => value + dosiTemp);
+        consegnePerGiorno.update(date, (value) => value + dosiTemp);
       }
     }
 
-    deliveryForDay.forEach((key, value) {
+    consegnePerGiorno.forEach((key, value) {
       data.add(FlSpot(DateTime.parse(key).millisecondsSinceEpoch.toDouble(),
           value.toDouble()));
     });
@@ -301,21 +341,21 @@ abstract class OpenData {
     await SommistrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
-    Map<String, int> deliveryForDay =
+    Map<String, int> consegnePerGiorno =
         new SortedMap<String, int>(Ordering.byKey());
 
     for (SommistrazioneVacciniSummaryLatest element in summary) {
       String date = element.data_somministrazione.substring(0, 10);
 
       int dosiTemp = element.seconda_dose;
-      if (!deliveryForDay.containsKey(date)) {
-        deliveryForDay.putIfAbsent(date, () => dosiTemp);
+      if (!consegnePerGiorno.containsKey(date)) {
+        consegnePerGiorno.putIfAbsent(date, () => dosiTemp);
       } else {
-        deliveryForDay.update(date, (value) => value + dosiTemp);
+        consegnePerGiorno.update(date, (value) => value + dosiTemp);
       }
     }
 
-    deliveryForDay.forEach((key, value) {
+    consegnePerGiorno.forEach((key, value) {
       data.add(FlSpot(DateTime.parse(key).millisecondsSinceEpoch.toDouble(),
           value.toDouble()));
     });
@@ -403,7 +443,7 @@ abstract class OpenData {
   }
 
   //RITORNA UNA LISTA DI CLASSE DI REGIONI CONTENTE LE INFORMAZIONI SULLE SOMMISTRAZIONI
-  static Future<List<Regione>> getInfoSommistrazioniFasceEtaPerRegione() async {
+  static Future<List<Regione>> graphInfoSommistrazioniPerRegione() async {
     var data;
     List<Regione> regioni = [];
     await SommistrazioneVacciniLatest.getListData()

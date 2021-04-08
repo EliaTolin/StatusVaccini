@@ -21,7 +21,7 @@ class HomeItems {
             labelText: "Sommistrazioni",
             iconpath: "assets/icons/date.svg",
             funTextInformation: () => OpenData.getUltimeSommistrazioni(),
-            funGetData: () => OpenData.graphVacciniForDay(),
+            funGetData: () => OpenData.graphSommistrazioniPerGiorno(),
           ),
         ),
         HomeItems(
@@ -31,7 +31,7 @@ class HomeItems {
             secondLabelText: "",
             iconpath: "assets/icons/virus.svg",
             funTextInformation: () => OpenData.getSomministrazioniTotali(),
-            funGetData: () => OpenData.graphVacciniTotal(),
+            funGetData: () => OpenData.graphSommistrazioniTotali(),
           ),
         ),
         HomeItems(
@@ -48,7 +48,7 @@ class HomeItems {
             labelText: "Dosi per fornitore",
             iconpath: "assets/icons/order.svg",
             funTextInformation: () => OpenData.getDosiTotali(),
-            funGetData: () => OpenData.graphDeliveryForDay(),
+            funGetData: () => OpenData.graphConsegnePerGiorno(),
           ),
         ),
         HomeItems(
@@ -58,7 +58,7 @@ class HomeItems {
             secondLabelText: "in totale",
             iconpath: "assets/icons/order.svg",
             funTextInformation: () => OpenData.getDosiTotali(),
-            funGetData: () => OpenData.graphDeliveryTotal(),
+            funGetData: () => OpenData.graphConsegneTotali(),
           ),
         ),
         HomeItems(
@@ -67,7 +67,7 @@ class HomeItems {
             labelText: "Dosi consegnate",
             iconpath: "assets/icons/date.svg",
             funTextInformation: () => OpenData.getUltimeDosiConsegnate(),
-            funGetData: () => OpenData.graphDeliveryForDay(),
+            funGetData: () => OpenData.graphConsegnePerGiorno(),
           ),
         ),
         HomeItems(
@@ -86,8 +86,7 @@ class HomeItems {
           card: CardViewRegioni(
             labelText: "Sommistrazioni",
             iconpath: "assets/icons/placeholder.svg",
-            funGetData: () =>
-                OpenData.getInfoSommistrazioniFasceEtaPerRegione(),
+            funGetData: () => OpenData.graphInfoSommistrazioniPerRegione(),
             firstLabel: "Sommistrazioni per regione",
             secondLabel: "in rapporto agli abitanti",
           ),
