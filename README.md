@@ -32,7 +32,7 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 
     -> [ 100% ] Organizzazione informazioni
 
-##### - [ 60% ]    Creare la pagina contente i grafici sintetici dei dati forniti dagli OpenData nazionali.
+##### - [ 100% ]    Creare la pagina contente i grafici sintetici dei dati forniti dagli OpenData nazionali.
 
     VACCINAZIONI GENERALE
 
@@ -41,8 +41,6 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
     -> [ 100 % ] Creare il grafico lineare contente le nuove vaccinazioni giornaliere
 
     -> [ 100 % ] Creare il grafico a barre contente le vaccinazioni per fasce d'età
-
-    -> [ 0 % ] Creare il grafico a barre contente le prime e seconde dosi per fasce d'età
 
     PRIME SECONDI DOSI
 
@@ -69,7 +67,7 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
      
      -> [ 0 % ] Creare il grafico lineare contente le vaccinazioni giornaliere in media mobile
 
-##### - [ 0% ]    Creare una mappa con i colori dell'italia nella pagina "recap".
+##### - [ 0% ]    Inserire informazioni sintetiche nella pagina "recap".
 
     -> [ 0 % ] Informazioni sintetiche sulle totali vaccinazioni
 
@@ -77,27 +75,22 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 
     -> [ 0 % ] Informazioni sintetiche sulla seconda dose con percentuale sul totale della popolazione 
 
-    -> [ 0 % ] Informazioni sintetiche sul totale delle dosi consegnate
-    
     -> [ 0 % ] Aggiungere percentuali degli andamenti rispetto al giono prima. 
 
-##### - [ 0% ]    Creare la pagina "info" con i dettagli sul progetto e informazioni varie, tra cui link a questo repository.
+##### - [ 70% ]    Creare la pagina "info" con i dettagli sul progetto e informazioni varie, tra cui link a questo repository.
 
-    -> [ 0 % ] Inserire nella link al repository GitHub 
+    -> [ 100 % ] Inserire nella link al repository GitHub 
 
-    -> [ 0 % ] Inserire nella ringraziamenti degli sviluppatori
-
-    -> [ 0 % ] Inserire nella BuyMeACoffe per il supporto
+    -> [ 100 % ] Inserire nella BuyMeACoffe per il supporto
 
     -> [ 0 % ] Inserire nel condivisione app
 
     -> [ 0 % ] Inserire votazione nello store
     
-    -> [ 0 % ] Inserire il contatto per informazioni
+    -> [ 100 % ] Inserire il contatto per informazioni
 
 #### PROBLEMS
-    --> Aggiungere i giorni con 0 vaccinazioni o 0 consegne nei grafici
-        --> nelle funzioni OpenData
+    --> Sostituire nel grafico a torta le percentuali con il totale delle sommistrazioni per fornitore
 
 *Per informazioni:*
 
