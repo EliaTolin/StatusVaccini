@@ -139,6 +139,7 @@ class _RigaVariazioneState extends State<RigaVariazioneWidget> {
               flex: 1,
               child: AutoSizeText(
                 labelDifferenza,
+                maxLines: 1,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
@@ -149,7 +150,8 @@ class _RigaVariazioneState extends State<RigaVariazioneWidget> {
               flex: 1,
               child: AutoSizeText(
                 labelPercentuale,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.end,
+                maxLines: 1,
                 style: up
                     ? TextStyle(
                         color: Colors.green,
