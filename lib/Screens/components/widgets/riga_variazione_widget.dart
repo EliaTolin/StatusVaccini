@@ -21,6 +21,7 @@ class _RigaVariazioneState extends State<RigaVariazioneWidget> {
   bool up = false;
   double percentuale = 0;
   var formatter = new DateFormat('yyyy-MM-dd');
+  final NumberFormat numberFormat = NumberFormat.decimalPattern('it');
   int differenza = 0;
   @override
   Widget build(BuildContext context) {
@@ -86,11 +87,11 @@ class _RigaVariazioneState extends State<RigaVariazioneWidget> {
     if (percentuale > 0) {
       up = true;
       labelPercentuale = "+" + percentuale.toString() + "%";
-      labelDifferenza = "+" + differenza.toString();
+      labelDifferenza = "+" + numberFormat.format(differenza);
     } else {
       up = false;
       labelPercentuale = percentuale.toString() + "%";
-      labelDifferenza = differenza.toString();
+      labelDifferenza = numberFormat.format(differenza);
     }
 
     return Container(

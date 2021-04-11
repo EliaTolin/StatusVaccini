@@ -7,7 +7,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:sortedmap/sortedmap.dart';
 import 'package:intl/intl.dart';
-import 'package:statusvaccini/screens/components/cards/somministrazioni_summary_card.dart';
 
 abstract class OpenData {
   //RITORNA L'ULTIMO AGGIORNAMENTO DELLE INFORMAZIONI
@@ -404,7 +403,7 @@ abstract class OpenData {
   //RITORNA UNA MAPPA CON LE SOMMISTRAZIONI PER FASCE D'ETA'
   static Future<Map<String, int>> getInfoSommistrazioniFasceEta() async {
     var summary;
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SommistrazioneVacciniLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
     Map<String, int> fasceEtaInfo =
@@ -436,7 +435,7 @@ abstract class OpenData {
     Map<String, int> somministrazioniRegione =
         new SortedMap<String, int>(Ordering.byKey());
 
-    for (SommistrazioneVacciniLatest element in summary) {
+    for (SommistrazioneVacciniSummaryLatest element in summary) {
       String sigla = element.area;
 
       int dosiTemp = 0;
@@ -463,7 +462,7 @@ abstract class OpenData {
     Map<String, int> somministrazioniRegione =
         new SortedMap<String, int>(Ordering.byKey());
 
-    for (SommistrazioneVacciniLatest element in summary) {
+    for (SommistrazioneVacciniSummaryLatest element in summary) {
       String sigla = element.area;
 
       int dosiTemp = 0;
@@ -486,7 +485,7 @@ abstract class OpenData {
     List<Regione> regioni = [];
     await SommistrazioneVacciniSummaryLatest.getListData()
         .then((value) => data = value);
-    for (SommistrazioneVacciniLatest element in data) {
+    for (SommistrazioneVacciniSummaryLatest element in data) {
       var exist = regioni.where((f) => (f.sigla == element.area));
       if (exist.isEmpty) {
         regioni.add(Regione(
