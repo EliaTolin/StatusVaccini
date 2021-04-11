@@ -91,7 +91,7 @@ abstract class OpenData {
     return data;
   }
 
-  //RITORNA IL GRAFICO DELLA DOSI SOMMISTRATE PER GIORNO
+  //RITORNA UNA MAPPA CONTENENTE LE DOSI SOMMISTRATE PER GIORNO
   static Future<Map<String, int>> getSommistrazioniPerGiorno() async {
     var summary;
     await SommistrazioneVacciniSummaryLatest.getListData()
@@ -111,24 +111,49 @@ abstract class OpenData {
       }
     }
 
-    DateTime lastDate;
-    bool firstTime = false;
+    var now = new DateTime.now();
     var formatter = new DateFormat('yyyy-MM-dd');
+    String formattedDate = formatter.format(now);
 
-    somministrazioniPerGiorno.forEach((key, value) {
-      if (!firstTime) lastDate = DateTime.parse(key);
-      firstTime = true;
-      if (!lastDate.isAtSameMomentAs(DateTime.parse(key)) &&
-          lastDate.isBefore(DateTime.parse(key)))
-        while (lastDate.isBefore(DateTime.parse(key))) {
-          somministrazioniPerGiorno.putIfAbsent(
-              formatter.format(lastDate), () => 0);
-          lastDate = lastDate.add(new Duration(days: 1));
-        }
-      lastDate = lastDate.add(new Duration(days: 1));
-    });
+    if (!somministrazioniPerGiorno.containsKey(formattedDate)) {
+      somministrazioniPerGiorno.putIfAbsent(formattedDate, () => 0);
+    }
+
+    somministrazioniPerGiorno = _addZeroDays(somministrazioniPerGiorno);
 
     return somministrazioniPerGiorno;
+  }
+
+  //RITORNA UNA MAPPA CONTENENTE DELLE DOSI CONSEGNATE PER GIORNO
+  static Future<Map<String, int>> getConsegnePerGiorno() async {
+    var summary;
+    await ConsegneVacciniLatest.getListData().then((value) => summary = value);
+    //{'giorno':dosi}
+    Map<String, int> consegnePerGiorno =
+        new SortedMap<String, int>(Ordering.byKey());
+
+    for (ConsegneVacciniLatest element in summary) {
+      String date = element.data_consegna.substring(0, 10);
+      int tempTot = element.numero_dosi;
+
+      if (!consegnePerGiorno.containsKey(date)) {
+        consegnePerGiorno.putIfAbsent(date, () => tempTot);
+      } else {
+        consegnePerGiorno.update(date, (value) => value + tempTot);
+      }
+    }
+
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String formattedDate = formatter.format(now);
+
+    if (!consegnePerGiorno.containsKey(formattedDate)) {
+      consegnePerGiorno.putIfAbsent(formattedDate, () => 0);
+    }
+
+    consegnePerGiorno = _addZeroDays(consegnePerGiorno);
+
+    return consegnePerGiorno;
   }
 
   //RITORNA IL GRAFICO DELLA DOSI SOMMISTRATE PER GIORNO
@@ -152,20 +177,11 @@ abstract class OpenData {
       }
     }
 
-    DateTime lastDate;
-    bool firstTime = false;
+    somministrazioniPerGiorno = _addZeroDays(somministrazioniPerGiorno);
+
     somministrazioniPerGiorno.forEach((key, value) {
-      if (!firstTime) lastDate = DateTime.parse(key);
-      firstTime = true;
-      if (!lastDate.isAtSameMomentAs(DateTime.parse(key)) &&
-          lastDate.isBefore(DateTime.parse(key)))
-        while (lastDate.isBefore(DateTime.parse(key))) {
-          data.add(FlSpot(lastDate.millisecondsSinceEpoch.toDouble(), 0));
-          lastDate = lastDate.add(new Duration(days: 1));
-        }
       data.add(FlSpot(DateTime.parse(key).millisecondsSinceEpoch.toDouble(),
           value.toDouble()));
-      lastDate = lastDate.add(new Duration(days: 1));
     });
 
     return data;
@@ -198,21 +214,12 @@ abstract class OpenData {
     if (!consegnePerGiorno.containsKey(formattedDate)) {
       consegnePerGiorno.putIfAbsent(formattedDate, () => 0);
     }
-    DateTime lastDate;
-    bool firstTime = false;
+
+    consegnePerGiorno = _addZeroDays(consegnePerGiorno);
 
     consegnePerGiorno.forEach((key, value) {
-      if (!firstTime) lastDate = DateTime.parse(key);
-      firstTime = true;
-      if (!lastDate.isAtSameMomentAs(DateTime.parse(key)) &&
-          lastDate.isBefore(DateTime.parse(key)))
-        while (lastDate.isBefore(DateTime.parse(key))) {
-          data.add(FlSpot(lastDate.millisecondsSinceEpoch.toDouble(), 0));
-          lastDate = lastDate.add(new Duration(days: 1));
-        }
       data.add(FlSpot(DateTime.parse(key).millisecondsSinceEpoch.toDouble(),
           value.toDouble()));
-      lastDate = lastDate.add(new Duration(days: 1));
     });
 
     return data;
@@ -474,6 +481,32 @@ abstract class OpenData {
 
     return regioni;
   }
+
+  static Map<String, int> _addZeroDays(Map<String, int> mapData) {
+    Map<String, int> fullData = new SortedMap<String, int>(Ordering.byKey());
+    var formatter = new DateFormat('yyyy-MM-dd');
+
+    DateTime lastDate;
+    bool firstTime = false;
+
+    mapData.forEach((key, value) {
+      fullData.putIfAbsent(key, () => value);
+      if (!firstTime) {
+        lastDate = DateTime.parse(key);
+        firstTime = true;
+      }
+      if (!lastDate.isAtSameMomentAs(DateTime.parse(key)) &&
+          lastDate.isBefore(DateTime.parse(key)))
+        while (lastDate.isBefore(DateTime.parse(key))) {
+          fullData.putIfAbsent(formatter.format(lastDate), () => 0);
+          lastDate = lastDate.add(new Duration(days: 1));
+        }
+      lastDate = lastDate.add(new Duration(days: 1));
+    });
+
+    return fullData;
+  }
+
 }
 
 class UltimaConsegna {
