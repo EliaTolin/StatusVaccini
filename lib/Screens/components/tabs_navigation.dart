@@ -2,6 +2,7 @@ import 'package:statusvaccini/screens/views/home_view.dart';
 import 'package:statusvaccini/screens/views/info_view.dart';
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:statusvaccini/screens/views/recap_view.dart';
 
 class TabNavigationItem {
   final Widget page;
@@ -15,6 +16,15 @@ class TabNavigationItem {
   });
 
   static List<TabNavigationItem> get items => [
+        TabNavigationItem(
+          page: RecapScreen(),
+          icon: Icon(
+            Icons.add_chart,
+            color: SVConst.backColor,
+            size: 35,
+          ),
+          title: "Recap",
+        ),
         TabNavigationItem(
           page: HomePageView(),
           icon: Icon(
