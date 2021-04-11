@@ -6,15 +6,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:statusvaccini/screens/components/widgets/riga_variazione_widget.dart';
 
-//Class for draw Card with Linear Card
 // ignore: must_be_immutable
-class SommistrazioniCard extends StatefulWidget {
+class VariazioniSommistrazioniCard extends StatefulWidget {
   String labelText = "";
   String iconpath = "";
   String firstLabel;
   String secondLabel;
   @override
-  SommistrazioniCard({
+  VariazioniSommistrazioniCard({
     this.labelText,
     this.iconpath,
     this.firstLabel,
@@ -22,12 +21,14 @@ class SommistrazioniCard extends StatefulWidget {
     Key key,
   }) : super(key: key);
 
-  _SommistrazioniCardState createState() => _SommistrazioniCardState();
+  _VariazioniSommistrazioniCardState createState() =>
+      _VariazioniSommistrazioniCardState();
 }
 
 // ignore: must_be_immutable
-class _SommistrazioniCardState extends State<SommistrazioniCard> {
-  //Flag for use ready Graph, all information are loaded
+class _VariazioniSommistrazioniCardState
+    extends State<VariazioniSommistrazioniCard> {
+  //Flag for use ready Information, all information are loaded
   bool _readyInformation = false;
   //List of FlSpot, are element of graph
   double sizeListView = 200;
