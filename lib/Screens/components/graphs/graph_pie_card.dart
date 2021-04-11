@@ -98,6 +98,7 @@ class _GraphPieCardState extends State<GraphPieCard> {
                 fit: FlexFit.tight,
                 child: AutoSizeText(
                   widget.labelText.toString(),
+                  textAlign: TextAlign.end,
                   maxLines: 1,
                   style: TextStyle(
                     fontSize: 25,
