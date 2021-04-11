@@ -46,4 +46,6 @@ class DataInformation {
     'VDA': 125034,
     'VEN': 4879133,
   };
+
+  static const int popolazioneItalia = 59641488;
 }
