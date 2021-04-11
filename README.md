@@ -67,15 +67,15 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
      
      -> [ 0 % ] Creare il grafico lineare contente le vaccinazioni giornaliere in media mobile
 
-##### - [ 0% ]    Inserire informazioni sintetiche nella pagina "recap".
+##### - [ 50% ]    Inserire informazioni sintetiche nella pagina "recap".
 
-    -> [ 0 % ] Informazioni sintetiche sulle totali vaccinazioni
+    -> [100 % ] Informazioni sintetiche sulle totali vaccinazioni
 
     -> [ 0 % ] Informazioni sintetiche sulla prima dose con percentuale sul totale della popolazione
 
     -> [ 0 % ] Informazioni sintetiche sulla seconda dose con percentuale sul totale della popolazione 
 
-    -> [ 0 % ] Aggiungere percentuali degli andamenti rispetto al giono prima. 
+    -> [ 100 % ] Aggiungere percentuali degli andamenti rispetto al giono prima. 
 
 ##### - [ 70% ]    Creare la pagina "info" con i dettagli sul progetto e informazioni varie, tra cui link a questo repository.
 
