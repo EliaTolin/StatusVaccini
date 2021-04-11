@@ -7,6 +7,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:sortedmap/sortedmap.dart';
 import 'package:intl/intl.dart';
+import 'package:statusvaccini/screens/components/cards/somministrazioni_summary_card.dart';
 
 abstract class OpenData {
   //RITORNA L'ULTIMO AGGIORNAMENTO DELLE INFORMAZIONI
@@ -403,7 +404,7 @@ abstract class OpenData {
   //RITORNA UNA MAPPA CON LE SOMMISTRAZIONI PER FASCE D'ETA'
   static Future<Map<String, int>> getInfoSommistrazioniFasceEta() async {
     var summary;
-    await SommistrazioneVacciniLatest.getListData()
+    await SommistrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
     Map<String, int> fasceEtaInfo =
@@ -429,7 +430,7 @@ abstract class OpenData {
   static Future<Map<String, int>> getPrimaSommistrazionePerRegione() async {
     var summary;
 
-    await SommistrazioneVacciniLatest.getListData()
+    await SommistrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
     Map<String, int> somministrazioniRegione =
@@ -456,7 +457,7 @@ abstract class OpenData {
   static Future<Map<String, int>> getSecondaSommistrazionePerRegione() async {
     var summary;
 
-    await SommistrazioneVacciniLatest.getListData()
+    await SommistrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
     Map<String, int> somministrazioniRegione =
@@ -483,7 +484,7 @@ abstract class OpenData {
   static Future<List<Regione>> graphInfoSommistrazioniPerRegione() async {
     var data;
     List<Regione> regioni = [];
-    await SommistrazioneVacciniLatest.getListData()
+    await SommistrazioneVacciniSummaryLatest.getListData()
         .then((value) => data = value);
     for (SommistrazioneVacciniLatest element in data) {
       var exist = regioni.where((f) => (f.sigla == element.area));
