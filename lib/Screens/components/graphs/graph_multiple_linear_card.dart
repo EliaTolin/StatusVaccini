@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:intl/intl.dart';
 
 //Class for draw Card with Linear Card
 // ignore: must_be_immutable
@@ -168,6 +169,23 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
           gridData: FlGridData(show: false),
           borderData: FlBorderData(show: false),
           titlesData: FlTitlesData(show: false),
+          lineTouchData: LineTouchData(
+            touchTooltipData: LineTouchTooltipData(
+                getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+              return touchedBarSpots.map((barSpot) {
+                final flSpot = barSpot;
+                final NumberFormat numberFormat =
+                    NumberFormat.decimalPattern('it');
+                return LineTooltipItem(
+                  numberFormat.format(flSpot.y),
+                  const TextStyle(
+                    color: SVConst.mainColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              }).toList();
+            }),
+          ),
           lineBarsData: getChartBarData(),
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:statusvaccini/models/opendata.dart';
+import 'package:intl/intl.dart';
 
 //Class for draw Card with Pie Chart
 // ignore: must_be_immutable
@@ -177,16 +178,21 @@ class _GraphPieCardState extends State<GraphPieCard> {
       final isTouched = i == touchedIndex;
       final double fontSize = isTouched ? 25 : 16;
       final double radius = isTouched ? 60 : 50;
-      final Color textColor = isTouched ? Color(0xff000000) : Color(0x00);
+      final Color textColor = isTouched ? Colors.white : Color(0x00);
+      final Color backgroundColor =
+          isTouched ? SVConst.pieColors[i] : Color(0x00);
+      final NumberFormat numberFormat = NumberFormat.decimalPattern('it');
+
       return PieChartSectionData(
         color: SVConst.pieColors[i],
         value: data[i].percentualeSuTot,
-        title: data[i].percentualeSuTot.toString() + "%",
+        title: numberFormat.format(data[i].numeroDosi),
         radius: radius,
         titleStyle: TextStyle(
           fontSize: fontSize,
           fontWeight: FontWeight.bold,
           color: textColor,
+          backgroundColor: backgroundColor,
         ),
       );
     });

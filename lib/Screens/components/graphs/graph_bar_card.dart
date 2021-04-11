@@ -5,6 +5,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
 //Class for draw Card with Linear Card
 // ignore: must_be_immutable
@@ -232,13 +233,15 @@ class _GraphBarCardState extends State<GraphBarCard> {
               rangeEta = data.keys.elementAt(group.x.toInt());
               var tmp = (rod.y - 1).toString().split('.');
               int dosi = int.parse(tmp[0]);
+              final NumberFormat numberFormat =
+                  NumberFormat.decimalPattern('it');
 
               double percentuale =
                   double.parse(((dosi * 100) / dosiTotali).toStringAsFixed(2));
 
               String textContent = rangeEta +
                   '\n' +
-                  (dosi).toString() +
+                  numberFormat.format(dosi) +
                   '\n' +
                   percentuale.toString() +
                   "%";

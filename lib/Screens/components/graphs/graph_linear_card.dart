@@ -199,6 +199,23 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
           gridData: FlGridData(show: false),
           borderData: FlBorderData(show: false),
           titlesData: FlTitlesData(show: false),
+          lineTouchData: LineTouchData(
+            touchTooltipData: LineTouchTooltipData(
+                getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+              return touchedBarSpots.map((barSpot) {
+                final flSpot = barSpot;
+                final NumberFormat numberFormat =
+                    NumberFormat.decimalPattern('it');
+                return LineTooltipItem(
+                  numberFormat.format(flSpot.y),
+                  const TextStyle(
+                    color: SVConst.mainColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              }).toList();
+            }),
+          ),
           lineBarsData: [
             LineChartBarData(
               spots: data,
