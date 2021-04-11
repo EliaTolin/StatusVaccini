@@ -210,8 +210,12 @@ class _GraphLinearUltimeSommistrazioniState
                 final flSpot = barSpot;
                 final NumberFormat numberFormat =
                     NumberFormat.decimalPattern('it');
+                String label = numberFormat.format(flSpot.y) + '\n';
+                var formatter = new DateFormat('dd/MM/yyyy');
+                label += formatter.format(
+                    DateTime.fromMillisecondsSinceEpoch((flSpot.x).toInt()));
                 return LineTooltipItem(
-                  numberFormat.format(flSpot.y),
+                  label,
                   const TextStyle(
                     color: SVConst.mainColor,
                     fontWeight: FontWeight.bold,

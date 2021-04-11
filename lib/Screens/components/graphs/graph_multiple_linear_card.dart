@@ -172,14 +172,25 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
           lineTouchData: LineTouchData(
             touchTooltipData: LineTouchTooltipData(
                 getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+              bool firstElement = true;
               return touchedBarSpots.map((barSpot) {
                 final flSpot = barSpot;
                 final NumberFormat numberFormat =
                     NumberFormat.decimalPattern('it');
+                String label = "";
+                if (firstElement) {
+                  var formatter = new DateFormat('dd/MM/yyyy');
+                  label = formatter.format(
+                      DateTime.fromMillisecondsSinceEpoch((flSpot.x).toInt()));
+                  label = label + '\n';
+                  firstElement = false;
+                }
+                label = label + numberFormat.format(flSpot.y);
+                final Color color = flSpot.bar.colors[0];
                 return LineTooltipItem(
-                  numberFormat.format(flSpot.y),
-                  const TextStyle(
-                    color: SVConst.mainColor,
+                  label,
+                  TextStyle(
+                    color: color,
                     fontWeight: FontWeight.bold,
                   ),
                 );
