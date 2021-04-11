@@ -255,6 +255,36 @@ abstract class OpenData {
     return sommTot;
   }
 
+  //RITORNA IL NUMERO TOTALE DELLE PRIME DOSI
+  static Future<int> getTotalePrimeDosi() async {
+    var summary;
+    int somministrazioni = 0;
+
+    await SommistrazioneVacciniSummaryLatest.getListData()
+        .then((value) => summary = value);
+
+    for (SommistrazioneVacciniSummaryLatest element in summary) {
+      somministrazioni += element.prima_dose;
+    }
+
+    return somministrazioni;
+  }
+
+  //RITORNA IL NUMERO TOTALE DELLE SECONDI DOSI
+  static Future<int> getTotaleSecondiDosi() async {
+    var summary;
+    int somministrazioni = 0;
+
+    await SommistrazioneVacciniSummaryLatest.getListData()
+        .then((value) => summary = value);
+
+    for (SommistrazioneVacciniSummaryLatest element in summary) {
+      somministrazioni += element.seconda_dose;
+    }
+
+    return somministrazioni;
+  }
+
   //RITORNA IL NUMERO DELLE DOSI PER FORNITORE
   static Future<List<Fornitore>> getDosiPerFornitore() async {
     var data;
@@ -506,7 +536,6 @@ abstract class OpenData {
 
     return fullData;
   }
-
 }
 
 class UltimaConsegna {
