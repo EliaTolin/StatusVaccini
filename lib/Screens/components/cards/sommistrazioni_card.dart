@@ -31,9 +31,9 @@ class _SommistrazioniCardState extends State<SommistrazioniCard> {
   bool _readyInformation = false;
   //List of FlSpot, are element of graph
   double sizeListView = 200;
-
+  //Map for sommistration
   Map<String, int> sommistrazioni = new Map<String, int>();
-
+  //Get date
   DateTime now = new DateTime.now();
 
   @override
@@ -331,7 +331,6 @@ class _RigaVariazioneState extends State<RigaVariazioneWidget> {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
               flex: 1,
@@ -339,7 +338,6 @@ class _RigaVariazioneState extends State<RigaVariazioneWidget> {
                 widget.label,
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                  // fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.black,
                 ),
