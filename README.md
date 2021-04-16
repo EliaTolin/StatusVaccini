@@ -67,21 +67,19 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
      
      -> [ 0 % ] Creare il grafico lineare contente le vaccinazioni giornaliere in media mobile
 
-##### - [ 50% ]    Inserire informazioni sintetiche nella pagina "recap".
+##### - [ 100% ]    Inserire informazioni sintetiche nella pagina "recap".
 
     -> [100 % ] Informazioni sintetiche sulle totali vaccinazioni
 
-    -> [ 0 % ] Informazioni sintetiche sulla prima dose con percentuale sul totale della popolazione
+    -> [ 100 % ] Informazioni sintetiche sulla prima dose con percentuale sul totale della popolazione
 
-    -> [ 0 % ] Informazioni sintetiche sulla seconda dose con percentuale sul totale della popolazione 
+    -> [ 100 % ] Informazioni sintetiche sulla seconda dose con percentuale sul totale della popolazione 
 
     -> [ 100 % ] Aggiungere percentuali degli andamenti rispetto al giono prima. 
 
 ##### - [ 70% ]    Creare la pagina "info" con i dettagli sul progetto e informazioni varie, tra cui link a questo repository.
 
     -> [ 100 % ] Inserire nella link al repository GitHub 
-
-    -> [ 100 % ] Inserire nella BuyMeACoffe per il supporto
 
     -> [ 0 % ] Inserire nel condivisione app
 
@@ -90,7 +88,7 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
     -> [ 100 % ] Inserire il contatto per informazioni
 
 #### PROBLEMS
-    --> Sostituire nel grafico a torta le percentuali con il totale delle sommistrazioni per fornitore
+    --> Aggiungere quali dosi sono state consegnate
 
 *Per informazioni:*
 
