@@ -90,11 +90,15 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
     -> [ 0 % ] Inserire nel condivisione app
 
     -> [ 0 % ] Inserire votazione nello store
+
+    -> [ 0 % ] Inserire sezione dedicata alle donazioni
     
     -> [ 100 % ] Inserire il contatto per informazioni
 
-#### PROBLEMS
+#### PROBLEMS AND REQUEST FEATURE
     --> Aggiungere quali dosi sono state consegnate
+    --> Record consegne in pagina "recap"
+    --> Record somministrazioni in pagina "recap"
 
 *Per informazioni:*
 
