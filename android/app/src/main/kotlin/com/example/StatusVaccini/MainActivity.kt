@@ -1,4 +1,4 @@
-package com.eliatolin.statusvaccini
+package com.eliatolin.svaccini
 
 import io.flutter.embedding.android.FlutterActivity
 

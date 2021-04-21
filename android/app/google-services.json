@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "847317058791",
+    "project_id": "fir-vaccini",
+    "storage_bucket": "fir-vaccini.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847317058791:android:859b6c57f9b3a51b794e42",
+        "android_client_info": {
+          "package_name": "com.eliatolin.svaccini"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847317058791-lius95ajnu1o39a7lb1aa0d8gpccmt6f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNqy2UTKuigLcKiJxilieXFCBZvjC24Xc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847317058791-lius95ajnu1o39a7lb1aa0d8gpccmt6f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
