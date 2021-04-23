@@ -16,30 +16,30 @@ class HomeItems {
 
   static List<HomeItems> get items => [
         HomeItems(
-          card: GraphLinearUltimeSommistrazioni(
+          card: GraphLinearUltimeSomministrazioni(
             typeinfo: "sommistrazioni",
-            labelText: "Sommistrazioni",
+            labelText: "Somministrazioni",
             iconpath: "assets/icons/date.svg",
-            funTextInformation: () => OpenData.getUltimeSommistrazioni(),
-            funGetData: () => OpenData.graphSommistrazioniPerGiorno(),
+            funTextInformation: () => OpenData.getUltimeSomministrazioni(),
+            funGetData: () => OpenData.graphSomministrazioniPerGiorno(),
           ),
         ),
         HomeItems(
           card: GraphLinearCard(
             typeinfo: "sommistrazioni",
-            labelText: "Vaccini sommistrati",
+            labelText: "Vaccini somministrati",
             secondLabelText: "",
             iconpath: "assets/icons/virus.svg",
             funTextInformation: () => OpenData.getSomministrazioniTotali(),
-            funGetData: () => OpenData.graphSommistrazioniTotali(),
+            funGetData: () => OpenData.graphSomministrazioniTotali(),
           ),
         ),
         HomeItems(
           card: GraphBarCard(
-            labelText: "Sommistrazioni",
+            labelText: "Somministrazioni",
             secondLabelText: "Per fascia d'età",
             iconpath: "assets/icons/bar-chart.svg",
-            funGetData: () => OpenData.getInfoSommistrazioniFasceEta(),
+            funGetData: () => OpenData.getInfoSomministrazioniFasceEta(),
           ),
         ),
         HomeItems(
@@ -84,10 +84,10 @@ class HomeItems {
         ),
         HomeItems(
           card: CardViewRegioni(
-            labelText: "Sommistrazioni",
+            labelText: "Somministrazioni",
             iconpath: "assets/icons/placeholder.svg",
-            funGetData: () => OpenData.graphInfoSommistrazioniPerRegione(),
-            firstLabel: "Sommistrazioni per regione",
+            funGetData: () => OpenData.graphInfoSomministrazioniPerRegione(),
+            firstLabel: "Somministrazioni per regione",
             secondLabel: "in rapporto agli abitanti",
           ),
         ),

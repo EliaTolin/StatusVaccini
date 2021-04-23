@@ -17,9 +17,9 @@ class RecapItems {
           ),
         ),
         RecapItems(
-          card: VariazioniSommistrazioniCard(
+          card: VariazioniSomministrazioniCard(
             iconpath: "assets/icons/syringe.svg",
-            firstLabel: "Sommistrazioni",
+            firstLabel: "Somministrazioni",
             secondLabel: "Variazioni nei giorni",
           ),
         ),

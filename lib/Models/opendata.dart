@@ -23,10 +23,11 @@ abstract class OpenData {
   }
 
   //RITORNA IL NUMERO DELLE SOMMISTRAZIONI EFFETTUATE OGGI
-  static Future<UltimeSommistrazioni> getUltimeSommistrazioni() async {
+  static Future<UltimeSomministrazioni> getUltimeSomministrazioni() async {
     var summary;
-    UltimeSommistrazioni ultimeSommistrazioni = new UltimeSommistrazioni();
-    ultimeSommistrazioni.data = new DateTime(1979, 01, 01);
+    UltimeSomministrazioni ultimeSomministrazioni =
+        new UltimeSomministrazioni();
+    ultimeSomministrazioni.data = new DateTime(1979, 01, 01);
 
     //GET INFORMATION
     await SommistrazioneVacciniSummaryLatest.getListData()
@@ -40,22 +41,22 @@ abstract class OpenData {
       DateTime dataSommistrazione = new DateTime(int.parse(splitDate[0]),
           int.parse(splitDate[1]), int.parse(splitDate[2]));
 
-      if (ultimeSommistrazioni.data.isBefore(dataSommistrazione)) {
+      if (ultimeSomministrazioni.data.isBefore(dataSommistrazione)) {
         if (element.prima_dose != 0 || element.seconda_dose != 0)
-          ultimeSommistrazioni = new UltimeSommistrazioni(
+          ultimeSomministrazioni = new UltimeSomministrazioni(
               data: dataSommistrazione,
               primaDose: element.prima_dose,
               secondaDose: element.seconda_dose,
               dosiTotali: (element.prima_dose + element.seconda_dose));
-      } else if (ultimeSommistrazioni.data
+      } else if (ultimeSomministrazioni.data
           .isAtSameMomentAs(dataSommistrazione)) {
-        ultimeSommistrazioni.dosiTotali +=
+        ultimeSomministrazioni.dosiTotali +=
             (element.prima_dose + element.seconda_dose);
-        ultimeSommistrazioni.primaDose += element.prima_dose;
-        ultimeSommistrazioni.secondaDose += element.seconda_dose;
+        ultimeSomministrazioni.primaDose += element.prima_dose;
+        ultimeSomministrazioni.secondaDose += element.seconda_dose;
       }
     }
-    return ultimeSommistrazioni;
+    return ultimeSomministrazioni;
   }
 
   //RITORNA IL NUMERO DELLE SOMMISTRAZIONI TOTALI
@@ -74,7 +75,7 @@ abstract class OpenData {
   }
 
   //RITORNA IL GRAFICO DELLA SOMMISTRAZIONI TOTALI
-  static Future<List<FlSpot>> graphSommistrazioniTotali() async {
+  static Future<List<FlSpot>> graphSomministrazioniTotali() async {
     List<FlSpot> data = [];
     var summary;
     int vaccini = 0;
@@ -92,7 +93,7 @@ abstract class OpenData {
   }
 
   //RITORNA UNA MAPPA CONTENENTE LE DOSI SOMMISTRATE PER GIORNO
-  static Future<Map<String, int>> getSommistrazioniPerGiorno() async {
+  static Future<Map<String, int>> getSomministrazioniPerGiorno() async {
     var summary;
     await SommistrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
@@ -157,7 +158,7 @@ abstract class OpenData {
   }
 
   //RITORNA IL GRAFICO DELLA DOSI SOMMISTRATE PER GIORNO
-  static Future<List<FlSpot>> graphSommistrazioniPerGiorno() async {
+  static Future<List<FlSpot>> graphSomministrazioniPerGiorno() async {
     List<FlSpot> data = [];
     var summary;
     await SommistrazioneVacciniSummaryLatest.getListData()
@@ -401,7 +402,7 @@ abstract class OpenData {
   }
 
   //RITORNA UNA MAPPA CON LE SOMMISTRAZIONI PER FASCE D'ETA'
-  static Future<Map<String, int>> getInfoSommistrazioniFasceEta() async {
+  static Future<Map<String, int>> getInfoSomministrazioniFasceEta() async {
     var summary;
     await SommistrazioneVacciniLatest.getListData()
         .then((value) => summary = value);
@@ -480,7 +481,7 @@ abstract class OpenData {
   }
 
   //RITORNA UNA LISTA DI CLASSE DI REGIONI CONTENTE LE INFORMAZIONI SULLE SOMMISTRAZIONI
-  static Future<List<Regione>> graphInfoSommistrazioniPerRegione() async {
+  static Future<List<Regione>> graphInfoSomministrazioniPerRegione() async {
     var data;
     List<Regione> regioni = [];
     await SommistrazioneVacciniSummaryLatest.getListData()
@@ -570,13 +571,13 @@ class Regione {
       this.secondeDosi});
 }
 
-class UltimeSommistrazioni {
+class UltimeSomministrazioni {
   DateTime data;
   int primaDose;
   int secondaDose;
   int dosiTotali;
 
-  UltimeSommistrazioni({
+  UltimeSomministrazioni({
     this.data,
     this.primaDose = 0,
     this.secondaDose = 0,

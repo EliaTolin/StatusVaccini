@@ -7,13 +7,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:statusvaccini/screens/components/widgets/riga_variazione_widget.dart';
 
 // ignore: must_be_immutable
-class VariazioniSommistrazioniCard extends StatefulWidget {
+class VariazioniSomministrazioniCard extends StatefulWidget {
   String labelText = "";
   String iconpath = "";
   String firstLabel;
   String secondLabel;
   @override
-  VariazioniSommistrazioniCard({
+  VariazioniSomministrazioniCard({
     this.labelText,
     this.iconpath,
     this.firstLabel,
@@ -21,18 +21,18 @@ class VariazioniSommistrazioniCard extends StatefulWidget {
     Key key,
   }) : super(key: key);
 
-  _VariazioniSommistrazioniCardState createState() =>
-      _VariazioniSommistrazioniCardState();
+  _VariazioniSomministrazioniCardState createState() =>
+      _VariazioniSomministrazioniCardState();
 }
 
 // ignore: must_be_immutable
-class _VariazioniSommistrazioniCardState
-    extends State<VariazioniSommistrazioniCard> {
+class _VariazioniSomministrazioniCardState
+    extends State<VariazioniSomministrazioniCard> {
   //Flag for use ready Information, all information are loaded
   bool _readyInformation = false;
   //List of FlSpot, are element of graph
   double sizeListView = 200;
-  //Map for sommistration
+  //Map for somministration
   Map<String, int> sommistrazioni = new Map<String, int>();
   //Get date
   DateTime now = new DateTime.now();
@@ -204,7 +204,7 @@ class _VariazioniSommistrazioniCardState
 
   //Load information for graph.
   void getInfoData() async {
-    await OpenData.getSommistrazioniPerGiorno()
+    await OpenData.getSomministrazioniPerGiorno()
         .then((value) => sommistrazioni = value);
 
     if (sommistrazioni.isNotEmpty)

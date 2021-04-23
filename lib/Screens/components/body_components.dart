@@ -70,8 +70,8 @@ class LabelUltimeConsegne extends ChangeNotifier {
   notifyListeners();
 }
 
-class LabelUltimeSommistrazioni extends ChangeNotifier {
-  LabelUltimeSommistrazioni({this.str = "oggi"});
+class LabelUltimeSomministrazioni extends ChangeNotifier {
+  LabelUltimeSomministrazioni({this.str = "oggi"});
   String str;
   String get label => str;
   void setLabel(String value) {

@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 
 //Class for draw Card with Linear Card
 // ignore: must_be_immutable
-class GraphLinearUltimeSommistrazioni extends StatefulWidget {
+class GraphLinearUltimeSomministrazioni extends StatefulWidget {
   String typeinfo = "";
   String labelText = "";
   String iconpath = "";
@@ -20,7 +20,7 @@ class GraphLinearUltimeSommistrazioni extends StatefulWidget {
   Function funGetData;
 
   @override
-  GraphLinearUltimeSommistrazioni({
+  GraphLinearUltimeSomministrazioni({
     this.typeinfo,
     this.labelText,
     this.iconpath,
@@ -29,13 +29,13 @@ class GraphLinearUltimeSommistrazioni extends StatefulWidget {
     Key key,
   }) : super(key: key);
 
-  _GraphLinearUltimeSommistrazioniState createState() =>
-      _GraphLinearUltimeSommistrazioniState();
+  _GraphLinearUltimeSomministrazioniState createState() =>
+      _GraphLinearUltimeSomministrazioniState();
 }
 
 // ignore: must_be_immutable
-class _GraphLinearUltimeSommistrazioniState
-    extends State<GraphLinearUltimeSommistrazioni> {
+class _GraphLinearUltimeSomministrazioniState
+    extends State<GraphLinearUltimeSomministrazioni> {
   //The information showed in the card
   String _textInformation = "NOT SET INFORMATION";
   //Flag for use ready Graph, all information are loaded
@@ -90,7 +90,8 @@ class _GraphLinearUltimeSommistrazioniState
   }
 
   Column cardContent() {
-    final labelSommistrazioni = Provider.of<LabelUltimeSommistrazioni>(context);
+    final labelSomministrazioni =
+        Provider.of<LabelUltimeSomministrazioni>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -129,7 +130,7 @@ class _GraphLinearUltimeSommistrazioniState
                       height: 4,
                     ),
                     AutoSizeText(
-                      labelSommistrazioni.label,
+                      labelSomministrazioni.label,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                           color: const Color(0xff379982),
@@ -248,18 +249,19 @@ class _GraphLinearUltimeSommistrazioniState
     // DateTime now = DateTime.now();
     await widget.funTextInformation().then((value) => tempValue = value);
 
-    bool isUltimeSommistrazioni =
-        tempValue is UltimeSommistrazioni ? true : false;
+    bool isUltimeSomministrazioni =
+        tempValue is UltimeSomministrazioni ? true : false;
 
-    if (isUltimeSommistrazioni) {
-      UltimeSommistrazioni ultimeSommistrazioni = tempValue;
+    if (isUltimeSomministrazioni) {
+      UltimeSomministrazioni ultimeSomministrazioni = tempValue;
       DateTime now = new DateTime.now();
       var formatter = new DateFormat('dd/MM/yyyy');
-      if (now.difference(ultimeSommistrazioni.data).inDays != 0) {
-        Provider.of<LabelUltimeSommistrazioni>(context, listen: false).setLabel(
-            "il giorno " + formatter.format(ultimeSommistrazioni.data));
+      if (now.difference(ultimeSomministrazioni.data).inDays != 0) {
+        Provider.of<LabelUltimeSomministrazioni>(context, listen: false)
+            .setLabel(
+                "il giorno " + formatter.format(ultimeSomministrazioni.data));
       }
-      _textInformation = numberFormat.format(ultimeSommistrazioni.dosiTotali);
+      _textInformation = numberFormat.format(ultimeSomministrazioni.dosiTotali);
     } else {
       throw new Exception("The data is not UltimaSommistrazione");
     }

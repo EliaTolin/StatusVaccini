@@ -31,7 +31,7 @@ class _ConsegneCardState extends State<ConsegneCard> {
   bool _readyInformation = false;
   //List of FlSpot, are element of graph
   double sizeListView = 200;
-  //Map for sommistration
+  //Map for somministration
   Map<String, int> consegne = new Map<String, int>();
   //Get date
   DateTime now = new DateTime.now();

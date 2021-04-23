@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<LabelUltimeConsegne>(
           create: (context) => LabelUltimeConsegne(),
         ),
-        ChangeNotifierProvider<LabelUltimeSommistrazioni>(
-          create: (context) => LabelUltimeSommistrazioni(),
+        ChangeNotifierProvider<LabelUltimeSomministrazioni>(
+          create: (context) => LabelUltimeSomministrazioni(),
         ),
       ],
       child: MaterialApp(
