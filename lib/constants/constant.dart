@@ -13,7 +13,7 @@ class SVConst {
   static const iconColor = mainColor;
   static const cardColor = Colors.white;
 
-  static const List<Color> pieColors = [
+  static const List<Color> listColors = [
     Color.fromARGB(255, 172, 25, 100),
     Color.fromRGBO(255, 172, 25, 100),
     Color.fromRGBO(13, 255, 118, 100),

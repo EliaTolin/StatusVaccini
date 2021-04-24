@@ -180,11 +180,11 @@ class _GraphPieCardState extends State<GraphPieCard> {
       final double radius = isTouched ? 60 : 50;
       final Color textColor = isTouched ? Colors.white : Color(0x00);
       final Color backgroundColor =
-          isTouched ? SVConst.pieColors[i] : Color(0x00);
+          isTouched ? SVConst.listColors[i] : Color(0x00);
       final NumberFormat numberFormat = NumberFormat.decimalPattern('it');
 
       return PieChartSectionData(
-        color: SVConst.pieColors[i],
+        color: SVConst.listColors[i],
         value: data[i].percentualeSuTot,
         title: numberFormat.format(data[i].numeroDosi),
         radius: radius,
@@ -214,7 +214,7 @@ class _GraphPieCardState extends State<GraphPieCard> {
       sectionPieList.add(PieItem(
         percentuale: element.percentualeSuTot.toString() + "%",
         textItem: element.nome,
-        colorItem: SVConst.pieColors[i],
+        colorItem: SVConst.listColors[i],
       ));
       i++;
     });

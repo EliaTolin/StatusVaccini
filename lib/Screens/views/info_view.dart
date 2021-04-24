@@ -21,19 +21,9 @@ class _InfoViewState extends State<InfoView> {
             padding: const EdgeInsets.all(12.0),
             child: Column(
               children: [
+                buildCardContact(),
                 buildCardOpenSource(),
-                InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap: () async {
-                    const url = 'https://github.com/EliaTolin/StatusVaccini';
-                    if (await canLaunch(url)) {
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  },
-                  child: buildCardGit(),
-                ),
+                buildCardGit(),
                 SizedBox(
                   height: 100,
                 ),
@@ -43,7 +33,7 @@ class _InfoViewState extends State<InfoView> {
         ));
   }
 
-  Card buildCardGit() {
+  Card buildCardContact() {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(SVConst.radiusComponent),
@@ -57,40 +47,17 @@ class _InfoViewState extends State<InfoView> {
             // HEADER WITH TITLE AND SUBTITLE
             Row(
               children: <Widget>[
-                Container(
-                    // height: SVConst.kSizeIcons,
-                    // width: SVConst.kSizeIcons,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                        iconSize: 100,
-                        icon: SvgPicture.asset(
-                          "assets/icons/git.svg",
-                          // height: SVConst.kSizeIcons,
-                          // width: SVConst.kSizeIcons,
-                        ),
-                        onPressed: () async {
-                          const url =
-                              'https://github.com/EliaTolin/StatusVaccini';
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          } else {
-                            throw 'Could not launch $url';
-                          }
-                        })),
-                SizedBox(width: 25),
                 Flexible(
                   fit: FlexFit.tight,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AutoSizeText(
-                        "GitHub",
+                        "Contatti",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            color: Colors.red,
+                            color: SVConst.listColors[0],
                             fontSize: 25,
                             fontWeight: FontWeight.bold),
                       ),
@@ -102,14 +69,21 @@ class _InfoViewState extends State<InfoView> {
                           children: [
                             TextSpan(
                                 text:
-                                    "Cliccando  questo riquadro trovi il repository contente il codice, puoi sfrutturare la sezione Issue per segnalare problematiche o consigli."),
+                                    "Per problematiche, consigli e informazioni: \n"),
+                            TextSpan(
+                              text: "mail@eliatolin.it",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
                         ),
-                        textAlign: TextAlign.end,
+                        textAlign: TextAlign.left,
                         style: TextStyle(
-                            color: SVConst.textGreen,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
                       ),
                     ],
                   ),
@@ -146,7 +120,7 @@ class _InfoViewState extends State<InfoView> {
                         "Open Source",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            color: Colors.blue,
+                            color: SVConst.listColors[4],
                             fontSize: 25,
                             fontWeight: FontWeight.bold),
                       ),
@@ -163,9 +137,9 @@ class _InfoViewState extends State<InfoView> {
                         ),
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            color: SVConst.textGreen,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
                       ),
                     ],
                   ),
@@ -186,6 +160,94 @@ class _InfoViewState extends State<InfoView> {
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  InkWell buildCardGit() {
+    return InkWell(
+      splashColor: Colors.blue.withAlpha(30),
+      onTap: () async {
+        const url = 'https://github.com/EliaTolin/StatusVaccini';
+        if (await canLaunch(url)) {
+          await launch(url);
+        } else {
+          throw 'Could not launch $url';
+        }
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(SVConst.radiusComponent),
+        ),
+        borderOnForeground: false,
+        semanticContainer: false,
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              // HEADER WITH TITLE AND SUBTITLE
+              Row(
+                children: <Widget>[
+                  // SizedBox(width: 25),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AutoSizeText(
+                          "GitHub",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              color: SVConst.listColors[3],
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        AutoSizeText.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                  text:
+                                      "Il codice sorgente è disponibile nel repository GitHub.\nClicca  sull'icona \"Git\" per accederci."),
+                            ],
+                          ),
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      iconSize: 100,
+                      icon: SvgPicture.asset(
+                        "assets/icons/git.svg",
+                      ),
+                      onPressed: () async {
+                        const url =
+                            'https://github.com/EliaTolin/StatusVaccini';
+                        if (await canLaunch(url)) {
+                          await launch(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
