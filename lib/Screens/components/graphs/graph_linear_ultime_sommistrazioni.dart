@@ -120,6 +120,7 @@ class _GraphLinearUltimeSomministrazioniState
                   children: [
                     AutoSizeText(
                       widget.labelText,
+                      maxLines: 1,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                           color: Colors.black,

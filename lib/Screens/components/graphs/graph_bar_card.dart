@@ -106,6 +106,7 @@ class _GraphBarCardState extends State<GraphBarCard> {
                   children: [
                     AutoSizeText(
                       widget.labelText,
+                      maxLines: 1,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                           color: Colors.black,

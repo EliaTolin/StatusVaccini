@@ -115,6 +115,7 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
                   children: [
                     AutoSizeText(
                       widget.labelText,
+                      maxLines: 2,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                           color: Colors.black,
