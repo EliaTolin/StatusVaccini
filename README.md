@@ -9,6 +9,7 @@
 # statusvaccini 🧬
 
 L'obiettivo di Status Vaccini è creare un'applicazione per il monitoraggio della compagna vaccinale Italiana.
+I dati utilizzati sono forniti dai <a href='https://github.com/italia/covid19-opendata-vaccini'>Open Data Istituzionali</a>.
 
 ## Funzionalità 💉
 
