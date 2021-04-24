@@ -37,18 +37,14 @@ class _UltimoAggiornamentoCardState extends State<UltimoAggiornamentoCard> {
       ),
       borderOnForeground: false,
       semanticContainer: false,
-      child: InkWell(
-        splashColor: Colors.blue.withAlpha(30),
-        onTap: () {},
-        child: SizedBox(
-          width: double.infinity,
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Wrap(
-              children: <Widget>[
-                cardContent(),
-              ],
-            ),
+      child: SizedBox(
+        width: double.infinity,
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Wrap(
+            children: <Widget>[
+              cardContent(),
+            ],
           ),
         ),
       ),

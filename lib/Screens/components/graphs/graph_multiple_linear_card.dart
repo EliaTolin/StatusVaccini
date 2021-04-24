@@ -57,20 +57,16 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
       ),
       borderOnForeground: false,
       semanticContainer: false,
-      child: InkWell(
-        splashColor: Colors.blue.withAlpha(30),
-        onTap: () {},
-        child: SizedBox(
-          width: double.infinity,
+      child: SizedBox(
+        width: double.infinity,
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
           child: Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Wrap(
-                children: <Widget>[
-                  cardContent(),
-                ],
-              ),
+            padding: const EdgeInsets.all(12),
+            child: Wrap(
+              children: <Widget>[
+                cardContent(),
+              ],
             ),
           ),
         ),
