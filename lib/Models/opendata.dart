@@ -10,16 +10,16 @@ import 'package:intl/intl.dart';
 
 abstract class OpenData {
   //RITORNA L'ULTIMO AGGIORNAMENTO DELLE INFORMAZIONI
-  Future<String> getLastUpdateData() async {
+  static Future<DateTime> getLastUpdateData() async {
     var response = await http.get(Uri.parse(URLConst.lastUpdateDataSet));
     String lastUpdate;
 
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
-      var jsonData = jsonResponse['data'];
-      lastUpdate = jsonData['ultimo_aggiornamento'];
+      lastUpdate = jsonResponse['ultimo_aggiornamento'];
     }
-    return lastUpdate;
+    var date = DateTime.parse(lastUpdate);
+    return date; 
   }
 
   //RITORNA IL NUMERO DELLE SOMMISTRAZIONI EFFETTUATE OGGI

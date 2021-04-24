@@ -1,4 +1,5 @@
 import 'package:statusvaccini/models/opendata.dart';
+import 'package:statusvaccini/screens/components/cards/ultimo_aggiornamento_card.dart';
 import 'package:statusvaccini/screens/components/graphs/graph_bar_card.dart';
 import 'package:statusvaccini/screens/components/graphs/graph_linear_card.dart';
 import 'package:statusvaccini/screens/components/graphs/graph_multiple_linear_card.dart';
@@ -15,6 +16,9 @@ class HomeItems {
   HomeItems({@required this.card});
 
   static List<HomeItems> get items => [
+        HomeItems(
+          card: UltimoAggiornamentoCard(),
+        ),
         HomeItems(
           card: GraphLinearUltimeSomministrazioni(
             typeinfo: "sommistrazioni",
