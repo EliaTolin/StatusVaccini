@@ -19,7 +19,7 @@ abstract class OpenData {
       lastUpdate = jsonResponse['ultimo_aggiornamento'];
     }
     var date = DateTime.parse(lastUpdate);
-    return date; 
+    return date;
   }
 
   //RITORNA IL NUMERO DELLE SOMMISTRAZIONI EFFETTUATE OGGI
@@ -294,8 +294,8 @@ abstract class OpenData {
     for (ConsegneVacciniLatest element in data) {
       var exist = fornitori.where((f) => (f.nome == element.fornitore));
       if (exist.isEmpty) {
-        fornitori.add(Fornitore(
-            nome: element.fornitore, numeroDosi: element.numero_dosi));
+        fornitori
+            .add(Fornitore(element.fornitore, numeroDosi: element.numero_dosi));
       } else {
         fornitori.forEach((f) {
           if (f.nome == element.fornitore) {
@@ -332,14 +332,46 @@ abstract class OpenData {
       List<String> splitDate = dataTemp.split("-");
       DateTime dataConsegna = new DateTime(int.parse(splitDate[0]),
           int.parse(splitDate[1]), int.parse(splitDate[2]));
-
       if (ultimaConsegna.data.isBefore(dataConsegna)) {
-        ultimaConsegna =
-            new UltimaConsegna(data: dataConsegna, dosi: element.numero_dosi);
-      } else if (ultimaConsegna.data.difference(dataConsegna).inDays == 0) {
-        ultimaConsegna.dosi += element.numero_dosi;
+        ultimaConsegna = new UltimaConsegna(data: dataConsegna);
       }
     }
+
+    for (ConsegneVacciniLatest element in summary) {
+      var dataTemp = element.data_consegna.substring(0, 10);
+      List<String> splitDate = dataTemp.split("-");
+      DateTime dataConsegna = new DateTime(
+        int.parse(splitDate[0]),
+        int.parse(splitDate[1]),
+        int.parse(splitDate[2]),
+      );
+
+      if (dataConsegna.day == ultimaConsegna.data.day &&
+          dataConsegna.month == ultimaConsegna.data.month &&
+          dataConsegna.year == ultimaConsegna.data.year) {
+        if (ultimaConsegna.fornitori == null) {
+          ultimaConsegna.fornitori = [];
+          ultimaConsegna.fornitori.add(new Fornitore(element.fornitore,
+              numeroDosi: element.numero_dosi));
+        } else {
+          int i = 0;
+          bool exist = false;
+
+          for (Fornitore f in ultimaConsegna.fornitori) {
+            if (f.nome == element.fornitore) {
+              exist = true;
+              ultimaConsegna.fornitori[i].numeroDosi += element.numero_dosi;
+            }
+            i++;
+          }
+          
+          if (!exist)
+            ultimaConsegna.fornitori.add(new Fornitore(element.fornitore,
+                numeroDosi: element.numero_dosi));
+        }
+      }
+    }
+
     return ultimaConsegna;
   }
 
@@ -541,10 +573,10 @@ abstract class OpenData {
 
 class UltimaConsegna {
   DateTime data;
-  int dosi;
+  List<Fornitore> fornitori = List<Fornitore>.empty();
   UltimaConsegna({
     this.data,
-    this.dosi,
+    this.fornitori,
   });
 }
 
@@ -553,7 +585,7 @@ class Fornitore {
   int numeroDosi;
   double percentualeSuTot;
 
-  Fornitore({this.nome, this.numeroDosi, this.percentualeSuTot});
+  Fornitore(this.nome, {this.numeroDosi = 0, this.percentualeSuTot = 0});
 }
 
 class Regione {

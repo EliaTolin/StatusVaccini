@@ -98,9 +98,9 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
     -> [ 100 % ] Inserire il contatto per informazioni
 
 #### PROBLEMS AND REQUEST FEATURE
-    --> Aggiungere quali dosi sono state consegnate
     --> Record consegne in pagina "recap"
     --> Record somministrazioni in pagina "recap"
+    --> Migliorare visibilità informazioni nel grafico a torta
 
 *Per informazioni:*
 

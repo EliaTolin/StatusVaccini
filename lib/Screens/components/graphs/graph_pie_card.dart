@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:statusvaccini/models/opendata.dart';
 import 'package:intl/intl.dart';
+import 'package:statusvaccini/screens/components/widgets/information_item.dart';
 
 //Class for draw Card with Pie Chart
 // ignore: must_be_immutable
@@ -38,7 +39,7 @@ class _GraphPieCardState extends State<GraphPieCard> {
   //List with all providers
   List<Fornitore> data = [];
   //List with section of PieChart
-  List<PieItem> sectionPieList = [];
+  List<LegendItem> sectionPieList = [];
 
   //InitState with preload data Information
   @override
@@ -211,66 +212,12 @@ class _GraphPieCardState extends State<GraphPieCard> {
   void loadSection() {
     int i = 0;
     data.forEach((element) {
-      sectionPieList.add(PieItem(
-        percentuale: element.percentualeSuTot.toString() + "%",
+      sectionPieList.add(LegendItem(
+        dataValue: element.percentualeSuTot.toString() + "%",
         textItem: element.nome,
         colorItem: SVConst.listColors[i],
       ));
       i++;
     });
-  }
-}
-
-//The class for items of legend
-class PieItem extends StatelessWidget {
-  final Color colorItem;
-  final String textItem;
-  final String percentuale;
-  PieItem(
-      {this.colorItem, @required this.textItem, @required this.percentuale});
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 8,
-        bottom: 8,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Text(
-              percentuale,
-              maxLines: 1,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-            height: 20,
-            child: Container(color: colorItem),
-          ),
-          Expanded(
-            flex: 1,
-            child: SizedBox(width: 10),
-          ),
-          Expanded(
-            flex: 3,
-            child: Text(
-              textItem,
-              maxLines: 2,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

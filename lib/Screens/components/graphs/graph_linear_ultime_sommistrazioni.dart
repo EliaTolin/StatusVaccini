@@ -46,6 +46,7 @@ class _GraphLinearUltimeSomministrazioniState
   List<FlSpot> data = [];
   //If the receive data is old
   bool oldData = false;
+
   //InitState with preload data Information
   @override
   void initState() {
@@ -147,34 +148,36 @@ class _GraphLinearUltimeSomministrazioniState
   }
 
   //Draw the information when are ready
-  Row futureInformationContent() {
-    return Row(
+  Column futureInformationContent() {
+    return Column(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: AutoSizeText.rich(
-            TextSpan(
-              style: TextStyle(color: Colors.black),
-              children: [
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AutoSizeText.rich(
                 TextSpan(
-                  text: _textInformation + "\n",
-                  style: GoogleFonts.roboto(
-                    fontSize: 30,
-                  ),
+                  style: TextStyle(color: Colors.black),
+                  children: [
+                    TextSpan(
+                      text: _textInformation + "\n",
+                      style: GoogleFonts.roboto(
+                        fontSize: 30,
+                      ),
+                    ),
+                    TextSpan(
+                      text: widget.typeinfo,
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                    )
+                  ],
                 ),
-                TextSpan(
-                  text: widget.typeinfo,
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
-                )
-              ],
+              ),
             ),
-          ),
+          ],
         ),
-        Expanded(
-          child: drawGraph(),
-        ),
+        drawGraph(),
       ],
     );
   }

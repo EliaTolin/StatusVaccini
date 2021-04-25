@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:statusvaccini/screens/components/widgets/information_item.dart';
 
 //Class for draw Card with Linear Card
 // ignore: must_be_immutable
@@ -45,6 +46,10 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
   List<FlSpot> data = [];
   //If the receive data is old
   bool oldData = false;
+
+  UltimaConsegna ultimaConsegna;
+  List<InfoItem> sectionInformation = [];
+
   //InitState with preload data Information
   @override
   void initState() {
@@ -144,35 +149,54 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
   }
 
   //Draw the information when are ready
-  Row futureInformationContent() {
-    return Row(
+  Column futureInformationContent() {
+    return Column(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: AutoSizeText.rich(
-            TextSpan(
-              style: TextStyle(color: Colors.black),
-              children: [
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AutoSizeText.rich(
                 TextSpan(
-                  text: _textInformation + "\n",
-                  style: GoogleFonts.roboto(
-                    fontSize: 30,
-                  ),
+                  style: TextStyle(color: Colors.black),
+                  children: [
+                    TextSpan(
+                      text: _textInformation + "\n",
+                      style: GoogleFonts.roboto(
+                        fontSize: 30,
+                      ),
+                    ),
+                    TextSpan(
+                      text: widget.typeinfo,
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                    )
+                  ],
                 ),
-                TextSpan(
-                  text: widget.typeinfo,
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
-                )
-              ],
+              ),
             ),
-          ),
+          ],
         ),
-        Expanded(
-          child: drawGraph(),
+        drawGraph(),
+        SizedBox(
+          height: 20,
         ),
+        drawSectionInformation(),
       ],
+    );
+  }
+
+  //Draw the legend of graph
+  Padding drawSectionInformation() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          for (final section in sectionInformation) section,
+        ],
+      ),
     );
   }
 
@@ -240,13 +264,14 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
   void getTextInformation() async {
     final NumberFormat numberFormat = NumberFormat.decimalPattern('it');
     var tempValue;
+    int dosiTotali = 0;
     // DateTime now = DateTime.now();
     await widget.funTextInformation().then((value) => tempValue = value);
 
     bool isUltimeConsegne = tempValue is UltimaConsegna ? true : false;
 
     if (isUltimeConsegne) {
-      UltimaConsegna ultimaConsegna = tempValue;
+      ultimaConsegna = tempValue;
       DateTime now = new DateTime.now();
       var formatter = new DateFormat('dd/MM/yyyy');
       if (now.difference(ultimaConsegna.data).inDays != 0) {
@@ -254,10 +279,16 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
             "ultima consegna il giorno " +
                 formatter.format(ultimaConsegna.data));
       }
-      _textInformation = numberFormat.format(ultimaConsegna.dosi);
+
+      for (Fornitore f in ultimaConsegna.fornitori) dosiTotali += f.numeroDosi;
+
+      _textInformation = numberFormat.format(dosiTotali);
     } else {
       throw new Exception("The data is not UltimaConsegna");
     }
+
+    loadSection();
+
     setState(() {
       _readyTextInformation = true;
     });
@@ -271,5 +302,20 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
       setState(() {
         _readyGraph = true;
       });
+  }
+
+  void loadSection() {
+    int i = 0;
+    final NumberFormat numberFormat = NumberFormat.decimalPattern('it');
+    for (Fornitore f in ultimaConsegna.fornitori) {
+      sectionInformation.add(
+        InfoItem(
+          textItem: f.nome,
+          colorItem: SVConst.listColors[i],
+          dataValue: numberFormat.format(f.numeroDosi),
+        ),
+      );
+      i++;
+    }
   }
 }
