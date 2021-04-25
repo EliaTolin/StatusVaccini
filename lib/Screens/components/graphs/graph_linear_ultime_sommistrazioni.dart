@@ -151,33 +151,38 @@ class _GraphLinearUltimeSomministrazioniState
   Column futureInformationContent() {
     return Column(
       children: <Widget>[
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AutoSizeText.rich(
-                TextSpan(
-                  style: TextStyle(color: Colors.black),
-                  children: [
+        SizedBox(height: 20),
+        Stack(
+          children: <Widget>[
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AutoSizeText.rich(
                     TextSpan(
-                      text: _textInformation + "\n",
-                      style: GoogleFonts.roboto(
-                        fontSize: 30,
-                      ),
+                      style: TextStyle(color: Colors.black),
+                      children: [
+                        TextSpan(
+                          text: _textInformation + "\n",
+                          style: GoogleFonts.roboto(
+                            fontSize: 30,
+                          ),
+                        ),
+                        TextSpan(
+                          text: widget.typeinfo,
+                          style: TextStyle(
+                            fontSize: 24,
+                          ),
+                        )
+                      ],
                     ),
-                    TextSpan(
-                      text: widget.typeinfo,
-                      style: TextStyle(
-                        fontSize: 24,
-                      ),
-                    )
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
+            drawGraph(),
           ],
         ),
-        drawGraph(),
       ],
     );
   }
