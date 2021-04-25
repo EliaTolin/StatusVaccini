@@ -268,7 +268,7 @@ class _GraphLinearUltimeSomministrazioniState
       }
       _textInformation = numberFormat.format(ultimeSomministrazioni.dosiTotali);
     } else {
-      throw new Exception("The data is not UltimaSommistrazione");
+      throw new Exception("The data is not UltimaSomministrazione");
     }
     setState(() {
       _readyTextInformation = true;

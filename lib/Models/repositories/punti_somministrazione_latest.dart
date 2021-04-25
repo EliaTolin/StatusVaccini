@@ -6,30 +6,30 @@ import 'package:http/http.dart' as http;
 
 // punti-somministrazione-latest:
 // punti di somministrazione per ciascuna Regione e Provincia Autonoma.
-class PuntiSommistrazioneTipologia {
+class PuntiSomministrazioneTipologia {
   final int index;
   final String area;
   final String denominazione_struttura;
   final String tipologia;
   final String nome_regione;
 
-  PuntiSommistrazioneTipologia(
+  PuntiSomministrazioneTipologia(
       {this.index,
       this.area,
       this.denominazione_struttura,
       this.tipologia,
       this.nome_regione});
 
-  static Future<List<PuntiSommistrazioneTipologia>> getListData() async {
+  static Future<List<PuntiSomministrazioneTipologia>> getListData() async {
     var response =
-        await http.get(Uri.parse(URLConst.puntiSommistrazioneTipologia));
-    List<PuntiSommistrazioneTipologia> list = [];
+        await http.get(Uri.parse(URLConst.puntiSomministrazioneTipologia));
+    List<PuntiSomministrazioneTipologia> list = [];
 
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
       var jsonData = jsonResponse['data'];
       for (dynamic element in jsonData) {
-        list.add(new PuntiSommistrazioneTipologia(
+        list.add(new PuntiSomministrazioneTipologia(
           index: element['index'],
           area: element['area'],
           denominazione_struttura: element['denominazione_struttura'],
@@ -41,11 +41,11 @@ class PuntiSommistrazioneTipologia {
     return list;
   }
 
-  static Future<List<PuntiSommistrazioneTipologia>> getListFromMap(
+  static Future<List<PuntiSomministrazioneTipologia>> getListFromMap(
       Map<String, dynamic> mapData) async {
-    List<PuntiSommistrazioneTipologia> list = [];
+    List<PuntiSomministrazioneTipologia> list = [];
     mapData.forEach((key, value) {
-      list.add(new PuntiSommistrazioneTipologia(
+      list.add(new PuntiSomministrazioneTipologia(
         index: value['index'],
         area: value['area'],
         denominazione_struttura: value['denominazione_struttura'],

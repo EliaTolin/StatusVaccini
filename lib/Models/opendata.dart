@@ -1,8 +1,8 @@
 import 'dart:convert' as convert;
 import 'package:statusvaccini/constants/url_constant.dart';
 import 'package:statusvaccini/models/repositories/consegne_vaccini_latest.dart';
-import 'package:statusvaccini/models/repositories/sommistrazione_vaccini_summary_latest.dart';
-import 'package:statusvaccini/models/repositories/sommistrazione_vaccini_latest.dart';
+import 'package:statusvaccini/models/repositories/somministrazione_vaccini_summary_latest.dart';
+import 'package:statusvaccini/models/repositories/somministrazione_vaccini_latest.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:sortedmap/sortedmap.dart';
@@ -30,26 +30,26 @@ abstract class OpenData {
     ultimeSomministrazioni.data = new DateTime(1979, 01, 01);
 
     //GET INFORMATION
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SomministrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
 
-    for (SommistrazioneVacciniSummaryLatest element in summary) {
+    for (SomministrazioneVacciniSummaryLatest element in summary) {
       var dataTemp = element.data_somministrazione.substring(0, 10);
 
       List<String> splitDate = dataTemp.split("-");
 
-      DateTime dataSommistrazione = new DateTime(int.parse(splitDate[0]),
+      DateTime dataSomministrazione = new DateTime(int.parse(splitDate[0]),
           int.parse(splitDate[1]), int.parse(splitDate[2]));
 
-      if (ultimeSomministrazioni.data.isBefore(dataSommistrazione)) {
+      if (ultimeSomministrazioni.data.isBefore(dataSomministrazione)) {
         if (element.prima_dose != 0 || element.seconda_dose != 0)
           ultimeSomministrazioni = new UltimeSomministrazioni(
-              data: dataSommistrazione,
+              data: dataSomministrazione,
               primaDose: element.prima_dose,
               secondaDose: element.seconda_dose,
               dosiTotali: (element.prima_dose + element.seconda_dose));
       } else if (ultimeSomministrazioni.data
-          .isAtSameMomentAs(dataSommistrazione)) {
+          .isAtSameMomentAs(dataSomministrazione)) {
         ultimeSomministrazioni.dosiTotali +=
             (element.prima_dose + element.seconda_dose);
         ultimeSomministrazioni.primaDose += element.prima_dose;
@@ -64,10 +64,10 @@ abstract class OpenData {
     var summary;
     int sommTot = 0;
 
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SomministrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
 
-    for (SommistrazioneVacciniSummaryLatest element in summary) {
+    for (SomministrazioneVacciniSummaryLatest element in summary) {
       sommTot += element.prima_dose;
       sommTot += element.seconda_dose;
     }
@@ -80,10 +80,10 @@ abstract class OpenData {
     var summary;
     int vaccini = 0;
 
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SomministrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
 
-    for (SommistrazioneVacciniSummaryLatest element in summary) {
+    for (SomministrazioneVacciniSummaryLatest element in summary) {
       vaccini += element.prima_dose;
       vaccini += element.seconda_dose;
       data.add(FlSpot(element.index.toDouble(), vaccini.toDouble()));
@@ -95,13 +95,13 @@ abstract class OpenData {
   //RITORNA UNA MAPPA CONTENENTE LE DOSI SOMMISTRATE PER GIORNO
   static Future<Map<String, int>> getSomministrazioniPerGiorno() async {
     var summary;
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SomministrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
     Map<String, int> somministrazioniPerGiorno =
         new SortedMap<String, int>(Ordering.byKey());
 
-    for (SommistrazioneVacciniSummaryLatest element in summary) {
+    for (SomministrazioneVacciniSummaryLatest element in summary) {
       String date = element.data_somministrazione.substring(0, 10);
       int tempTot = element.prima_dose + element.seconda_dose;
 
@@ -161,13 +161,13 @@ abstract class OpenData {
   static Future<List<FlSpot>> graphSomministrazioniPerGiorno() async {
     List<FlSpot> data = [];
     var summary;
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SomministrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
     Map<String, int> somministrazioniPerGiorno =
         new SortedMap<String, int>(Ordering.byKey());
 
-    for (SommistrazioneVacciniSummaryLatest element in summary) {
+    for (SomministrazioneVacciniSummaryLatest element in summary) {
       String date = element.data_somministrazione.substring(0, 10);
       int tempTot = element.prima_dose + element.seconda_dose;
 
@@ -261,10 +261,10 @@ abstract class OpenData {
     var summary;
     int somministrazioni = 0;
 
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SomministrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
 
-    for (SommistrazioneVacciniSummaryLatest element in summary) {
+    for (SomministrazioneVacciniSummaryLatest element in summary) {
       somministrazioni += element.prima_dose;
     }
 
@@ -276,10 +276,10 @@ abstract class OpenData {
     var summary;
     int somministrazioni = 0;
 
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SomministrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
 
-    for (SommistrazioneVacciniSummaryLatest element in summary) {
+    for (SomministrazioneVacciniSummaryLatest element in summary) {
       somministrazioni += element.seconda_dose;
     }
 
@@ -364,7 +364,7 @@ abstract class OpenData {
             }
             i++;
           }
-          
+
           if (!exist)
             ultimaConsegna.fornitori.add(new Fornitore(element.fornitore,
                 numeroDosi: element.numero_dosi));
@@ -379,13 +379,13 @@ abstract class OpenData {
   static Future<List<FlSpot>> graphPrimeDosi() async {
     List<FlSpot> data = [];
     var summary;
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SomministrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
     Map<String, int> consegnePerGiorno =
         new SortedMap<String, int>(Ordering.byKey());
 
-    for (SommistrazioneVacciniSummaryLatest element in summary) {
+    for (SomministrazioneVacciniSummaryLatest element in summary) {
       String date = element.data_somministrazione.substring(0, 10);
 
       int dosiTemp = element.prima_dose;
@@ -408,13 +408,13 @@ abstract class OpenData {
   static Future<List<FlSpot>> graphSecondeDosi() async {
     List<FlSpot> data = [];
     var summary;
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SomministrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
     Map<String, int> consegnePerGiorno =
         new SortedMap<String, int>(Ordering.byKey());
 
-    for (SommistrazioneVacciniSummaryLatest element in summary) {
+    for (SomministrazioneVacciniSummaryLatest element in summary) {
       String date = element.data_somministrazione.substring(0, 10);
 
       int dosiTemp = element.seconda_dose;
@@ -436,13 +436,13 @@ abstract class OpenData {
   //RITORNA UNA MAPPA CON LE SOMMISTRAZIONI PER FASCE D'ETA'
   static Future<Map<String, int>> getInfoSomministrazioniFasceEta() async {
     var summary;
-    await SommistrazioneVacciniLatest.getListData()
+    await SomministrazioneVacciniLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
     Map<String, int> fasceEtaInfo =
         new SortedMap<String, int>(Ordering.byKey());
 
-    for (SommistrazioneVacciniLatest element in summary) {
+    for (SomministrazioneVacciniLatest element in summary) {
       String eta = element.fascia_anagrafica;
 
       int dosiTemp = 0;
@@ -459,16 +459,16 @@ abstract class OpenData {
   }
 
   //RITORNA UNA MAPPA CONTENTE IL NUMERO DI PRIME SOMMISTRAZIONI PER REGIONE
-  static Future<Map<String, int>> getPrimaSommistrazionePerRegione() async {
+  static Future<Map<String, int>> getPrimaSomministrazionePerRegione() async {
     var summary;
 
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SomministrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
     Map<String, int> somministrazioniRegione =
         new SortedMap<String, int>(Ordering.byKey());
 
-    for (SommistrazioneVacciniSummaryLatest element in summary) {
+    for (SomministrazioneVacciniSummaryLatest element in summary) {
       String sigla = element.area;
 
       int dosiTemp = 0;
@@ -486,16 +486,16 @@ abstract class OpenData {
   }
 
   //RITORNA UNA MAPPA CONTENTE IL NUMERO DI SECONDE SOMMISTRAZIONI PER REGIONE
-  static Future<Map<String, int>> getSecondaSommistrazionePerRegione() async {
+  static Future<Map<String, int>> getSecondaSomministrazionePerRegione() async {
     var summary;
 
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SomministrazioneVacciniSummaryLatest.getListData()
         .then((value) => summary = value);
     //{'giorno':dosi}
     Map<String, int> somministrazioniRegione =
         new SortedMap<String, int>(Ordering.byKey());
 
-    for (SommistrazioneVacciniSummaryLatest element in summary) {
+    for (SomministrazioneVacciniSummaryLatest element in summary) {
       String sigla = element.area;
 
       int dosiTemp = 0;
@@ -516,9 +516,9 @@ abstract class OpenData {
   static Future<List<Regione>> graphInfoSomministrazioniPerRegione() async {
     var data;
     List<Regione> regioni = [];
-    await SommistrazioneVacciniSummaryLatest.getListData()
+    await SomministrazioneVacciniSummaryLatest.getListData()
         .then((value) => data = value);
-    for (SommistrazioneVacciniSummaryLatest element in data) {
+    for (SomministrazioneVacciniSummaryLatest element in data) {
       var exist = regioni.where((f) => (f.sigla == element.area));
       if (exist.isEmpty) {
         regioni.add(Regione(

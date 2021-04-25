@@ -11,9 +11,9 @@ class URLConst {
       'https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/consegne-vaccini-latest.json';
 
   //punti-somministrazione-latest: punti di somministrazione per ciascuna Regione e Provincia Autonoma.
-  static final String puntiSommistrazioneLatest =
+  static final String puntiSomministrazioneLatest =
       'https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/punti-somministrazione-latest.json';
-  static final String puntiSommistrazioneTipologia =
+  static final String puntiSomministrazioneTipologia =
       'https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/punti-somministrazione-tipologia.json';
 
   //somministrazioni-vaccini-latest: dati sulle somministrazioni giornaliere dei vaccini suddivisi per regioni,
@@ -23,7 +23,7 @@ class URLConst {
 
   //somministrazioni-vaccini-summary-latest: dati sul totale delle somministrazioni giornaliere per regioni
   //e categorie di appartenenza dei soggetti vaccinati.
-  static final String sommistrazioneVacciniSummaryLatest =
+  static final String somministrazioneVacciniSummaryLatest =
       'https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-summary-latest.json';
   //vaccini-summary-latest: dati sul totale delle consegne e somministrazioni avvenute sino ad oggi, includendo la percentuale di
   //dosi somministrate (sul totale delle dosi consegnate) suddivise per regioni.

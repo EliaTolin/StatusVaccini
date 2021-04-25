@@ -33,7 +33,7 @@ class _VariazioniSomministrazioniCardState
   //List of FlSpot, are element of graph
   double sizeListView = 200;
   //Map for somministration
-  Map<String, int> sommistrazioni = new Map<String, int>();
+  Map<String, int> somministrazioni = new Map<String, int>();
   //Get date
   DateTime now = new DateTime.now();
 
@@ -156,19 +156,19 @@ class _VariazioniSomministrazioniCardState
                 ? Column(
                     children: [
                       RigaVariazioneWidget(
-                        mapData: sommistrazioni,
+                        mapData: somministrazioni,
                         startDate: now.subtract(new Duration(days: 1)),
                         label: "Ultimi due giorni",
                       ),
                       SizedBox(height: 20),
                       RigaVariazioneWidget(
-                        mapData: sommistrazioni,
+                        mapData: somministrazioni,
                         startDate: now.subtract(new Duration(days: 14)),
                         label: "Questa settimana rispetto alla scorsa",
                       ),
                       SizedBox(height: 20),
                       RigaVariazioneWidget(
-                        mapData: sommistrazioni,
+                        mapData: somministrazioni,
                         startDate: now.subtract(new Duration(days: 31)),
                         label: "Questo mese rispetto allo scorso",
                       ),
@@ -205,9 +205,9 @@ class _VariazioniSomministrazioniCardState
   //Load information for graph.
   void getInfoData() async {
     await OpenData.getSomministrazioniPerGiorno()
-        .then((value) => sommistrazioni = value);
+        .then((value) => somministrazioni = value);
 
-    if (sommistrazioni.isNotEmpty)
+    if (somministrazioni.isNotEmpty)
       setState(() {
         _readyInformation = true;
       });

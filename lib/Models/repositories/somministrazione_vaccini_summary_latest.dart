@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 // categorie di appartenenza dei soggetti vaccinati.
 
 //CHIAVE: INDEX
-class SommistrazioneVacciniSummaryLatest {
+class SomministrazioneVacciniSummaryLatest {
   final int index;
   final String area;
   final String data_somministrazione;
@@ -24,7 +24,7 @@ class SommistrazioneVacciniSummaryLatest {
   final int seconda_dose;
   final String nome_regione;
 
-  SommistrazioneVacciniSummaryLatest({
+  SomministrazioneVacciniSummaryLatest({
     this.index,
     this.area,
     this.data_somministrazione,
@@ -40,17 +40,18 @@ class SommistrazioneVacciniSummaryLatest {
     this.nome_regione,
   });
 
-  static Future<List<SommistrazioneVacciniSummaryLatest>> getListData() async {
-    var response =
-        await http.get(Uri.parse(URLConst.sommistrazioneVacciniSummaryLatest));
-    List<SommistrazioneVacciniSummaryLatest> list = [];
+  static Future<List<SomministrazioneVacciniSummaryLatest>>
+      getListData() async {
+    var response = await http
+        .get(Uri.parse(URLConst.somministrazioneVacciniSummaryLatest));
+    List<SomministrazioneVacciniSummaryLatest> list = [];
 
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
       var jsonData = jsonResponse['data'];
 
       for (var element in jsonData) {
-        list.add(new SommistrazioneVacciniSummaryLatest(
+        list.add(new SomministrazioneVacciniSummaryLatest(
           index: element['index'],
           area: element['area'],
           data_somministrazione: element['data_somministrazione'],
@@ -72,11 +73,11 @@ class SommistrazioneVacciniSummaryLatest {
     return list;
   }
 
-  static List<SommistrazioneVacciniSummaryLatest> getListFromMap(
+  static List<SomministrazioneVacciniSummaryLatest> getListFromMap(
       Map<String, dynamic> mapData) {
-    List<SommistrazioneVacciniSummaryLatest> list = [];
+    List<SomministrazioneVacciniSummaryLatest> list = [];
     mapData.forEach((key, value) {
-      list.add(new SommistrazioneVacciniSummaryLatest(
+      list.add(new SomministrazioneVacciniSummaryLatest(
         index: value['index'],
         area: value['area'],
         data_somministrazione: value['data_somministrazione'],

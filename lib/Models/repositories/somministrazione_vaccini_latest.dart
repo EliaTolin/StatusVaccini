@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 // fasce d'età e categorie di appartenenza dei soggetti vaccinati.
 
 //CHIAVE: INDEX
-class SommistrazioneVacciniLatest {
+class SomministrazioneVacciniLatest {
   final int index;
   final String area;
   final String fornitore;
@@ -25,7 +25,7 @@ class SommistrazioneVacciniLatest {
   final int seconda_dose;
   final String nome_regione;
 
-  SommistrazioneVacciniLatest(
+  SomministrazioneVacciniLatest(
       {this.index,
       this.area,
       this.fornitore,
@@ -41,17 +41,17 @@ class SommistrazioneVacciniLatest {
       this.seconda_dose,
       this.nome_regione});
 
-  static Future<List<SommistrazioneVacciniLatest>> getListData() async {
+  static Future<List<SomministrazioneVacciniLatest>> getListData() async {
     var response =
         await http.get(Uri.parse(URLConst.somministrazioneVacciniLatest));
-    List<SommistrazioneVacciniLatest> list = [];
+    List<SomministrazioneVacciniLatest> list = [];
 
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
       var jsonData = jsonResponse['data'];
 
       for (var element in jsonData) {
-        list.add(new SommistrazioneVacciniLatest(
+        list.add(new SomministrazioneVacciniLatest(
           index: element['index'],
           area: element['area'],
           fornitore: element['fornitore'],
@@ -74,11 +74,11 @@ class SommistrazioneVacciniLatest {
     return list;
   }
 
-  static List<SommistrazioneVacciniLatest> getListFromMap(
+  static List<SomministrazioneVacciniLatest> getListFromMap(
       Map<String, dynamic> mapData) {
-    List<SommistrazioneVacciniLatest> list = [];
+    List<SomministrazioneVacciniLatest> list = [];
     mapData.forEach((key, value) {
-      list.add(new SommistrazioneVacciniLatest(
+      list.add(new SomministrazioneVacciniLatest(
         index: value['index'],
         area: value['area'],
         fornitore: value['fornitore'],

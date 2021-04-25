@@ -5,7 +5,7 @@ import 'package:statusvaccini/screens/components/graphs/graph_linear_card.dart';
 import 'package:statusvaccini/screens/components/graphs/graph_multiple_linear_card.dart';
 import 'package:statusvaccini/screens/components/cards/regioni_card_view.dart';
 import 'package:statusvaccini/screens/components/graphs/graph_linear_ultime_consegne.dart';
-import 'package:statusvaccini/screens/components/graphs/graph_linear_ultime_sommistrazioni.dart';
+import 'package:statusvaccini/screens/components/graphs/graph_linear_ultime_somministrazioni.dart';
 import 'package:flutter/material.dart';
 
 import '../graphs/graph_pie_card.dart';
@@ -21,7 +21,7 @@ class HomeItems {
         ),
         HomeItems(
           card: GraphLinearUltimeSomministrazioni(
-            typeinfo: "sommistrazioni",
+            typeinfo: "somministrazioni",
             labelText: "Somministrazioni",
             iconpath: "assets/icons/date.svg",
             funTextInformation: () => OpenData.getUltimeSomministrazioni(),
@@ -30,7 +30,7 @@ class HomeItems {
         ),
         HomeItems(
           card: GraphLinearCard(
-            typeinfo: "sommistrazioni",
+            typeinfo: "somministrazioni",
             labelText: "Vaccini somministrati",
             secondLabelText: "",
             iconpath: "assets/icons/virus.svg",
