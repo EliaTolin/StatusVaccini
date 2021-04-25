@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:statusvaccini/screens/components/cards/record_card.dart';
 import 'package:statusvaccini/screens/components/cards/variazioni_consegne_card.dart';
 import 'package:statusvaccini/screens/components/cards/somministrazioni_summary_card.dart';
 import 'package:statusvaccini/screens/components/cards/variazioni_somministrazioni_card.dart';
@@ -15,6 +16,9 @@ class RecapItems {
             firstLabel: "Summary",
             secondLabel: "Vaccinazioni",
           ),
+        ),
+        RecapItems(
+          card: RecordCard(),
         ),
         RecapItems(
           card: VariazioniSomministrazioniCard(

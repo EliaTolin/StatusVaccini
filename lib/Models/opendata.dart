@@ -125,6 +125,39 @@ abstract class OpenData {
     return somministrazioniPerGiorno;
   }
 
+  //RITORNA LA MAPPA CONTENTE IL GIORNO CON LE SOMMINISTRAZIONI MAGGIORI
+  static Future<Map<String, int>> getRecordSomministrazioni() async {
+    Map<String, int> recordSomministrazioni = new Map<String, int>();
+    Map<String, int> somministrazioniPerGiorno;
+    await getSomministrazioniPerGiorno()
+        .then((value) => somministrazioniPerGiorno = value);
+
+    somministrazioniPerGiorno.forEach((key, value) {
+      if (recordSomministrazioni.isEmpty ||
+          value >= recordSomministrazioni.values.toList()[0]) {
+        recordSomministrazioni.clear();
+        recordSomministrazioni[key] = value;
+      }
+    });
+    return recordSomministrazioni;
+  }
+
+  //RITORNA LA MAPPA CONTENTE IL GIORNO CON LE CONSEGNE MAGGIORI
+  static Future<Map<String, int>> getRecordConsegne() async {
+    Map<String, int> recordConsegne = new Map<String, int>();
+    Map<String, int> consegnePerGiorno;
+    await getConsegnePerGiorno().then((value) => consegnePerGiorno = value);
+
+    consegnePerGiorno.forEach((key, value) {
+      if (recordConsegne.isEmpty ||
+          value >= recordConsegne.values.toList()[0]) {
+        recordConsegne.clear();
+        recordConsegne[key] = value;
+      }
+    });
+    return recordConsegne;
+  }
+
   //RITORNA UNA MAPPA CONTENENTE DELLE DOSI CONSEGNATE PER GIORNO
   static Future<Map<String, int>> getConsegnePerGiorno() async {
     var summary;
