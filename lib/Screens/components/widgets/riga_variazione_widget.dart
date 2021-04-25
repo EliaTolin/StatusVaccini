@@ -64,21 +64,21 @@ class _RigaVariazioneState extends State<RigaVariazioneWidget> {
         startDate = startDate.add(new Duration(days: 1));
       }
       int differenzaGiorni = now.difference(startDate).inDays;
-      double mediaA = 0;
-      double mediaB = 0;
+      double sommaA = 0;
+      double sommaB = 0;
       for (int i = 0; i < (differenzaGiorni / 2); i++) {
         String dataB = formatter.format(now.subtract(new Duration(days: i)));
-        if (widget.mapData[dataB] != null) mediaB += widget.mapData[dataB];
+        if (widget.mapData[dataB] != null) sommaB += widget.mapData[dataB];
 
         String dataA =
             formatter.format(widget.startDate.add(new Duration(days: i)));
-        if (widget.mapData[dataA] != null) mediaA += widget.mapData[dataA];
+        if (widget.mapData[dataA] != null) sommaA += widget.mapData[dataA];
       }
 
-      mediaA /= (differenzaGiorni / 2);
-      mediaB /= (differenzaGiorni / 2);
-      differenza = (mediaB - mediaA).toInt();
-      percentuale = (differenza * 100) / mediaA;
+      // sommaA /= (differenzaGiorni / 2);
+      // sommaB /= (differenzaGiorni / 2);
+      differenza = (sommaB - sommaA).toInt();
+      percentuale = (differenza * 100) / sommaA;
       percentuale = double.parse(percentuale.toStringAsFixed(2));
     }
 
