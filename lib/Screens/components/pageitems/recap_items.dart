@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:statusvaccini/screens/components/cards/consegne_card.dart';
+import 'package:statusvaccini/screens/components/cards/variazioni_consegne_card.dart';
 import 'package:statusvaccini/screens/components/cards/somministrazioni_summary_card.dart';
 import 'package:statusvaccini/screens/components/cards/variazioni_somministrazioni_card.dart';
 
@@ -24,7 +24,7 @@ class RecapItems {
           ),
         ),
         RecapItems(
-          card: ConsegneCard(
+          card: VariazioniConsegneCard(
             iconpath: "assets/icons/fast_delivery.svg",
             firstLabel: "Consegne dosi",
             secondLabel: "Variazioni nei giorni",

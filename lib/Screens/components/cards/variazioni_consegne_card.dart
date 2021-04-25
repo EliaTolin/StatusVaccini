@@ -8,13 +8,13 @@ import 'package:statusvaccini/screens/components/widgets/riga_variazione_widget.
 
 //Class for draw Card with Linear Card
 // ignore: must_be_immutable
-class ConsegneCard extends StatefulWidget {
+class VariazioniConsegneCard extends StatefulWidget {
   String labelText = "";
   String iconpath = "";
   String firstLabel;
   String secondLabel;
   @override
-  ConsegneCard({
+  VariazioniConsegneCard({
     this.labelText,
     this.iconpath,
     this.firstLabel,
@@ -22,11 +22,11 @@ class ConsegneCard extends StatefulWidget {
     Key key,
   }) : super(key: key);
 
-  _ConsegneCardState createState() => _ConsegneCardState();
+  _VariazioniConsegneCardState createState() => _VariazioniConsegneCardState();
 }
 
 // ignore: must_be_immutable
-class _ConsegneCardState extends State<ConsegneCard> {
+class _VariazioniConsegneCardState extends State<VariazioniConsegneCard> {
   //Flag for use ready Graph, all information are loaded
   bool _readyInformation = false;
   //List of FlSpot, are element of graph
