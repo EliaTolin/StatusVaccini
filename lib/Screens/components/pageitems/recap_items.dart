@@ -18,9 +18,6 @@ class RecapItems {
           ),
         ),
         RecapItems(
-          card: RecordCard(),
-        ),
-        RecapItems(
           card: VariazioniSomministrazioniCard(
             iconpath: "assets/icons/syringe.svg",
             firstLabel: "Somministrazioni",
@@ -33,6 +30,9 @@ class RecapItems {
             firstLabel: "Consegne dosi",
             secondLabel: "Variazioni nei giorni",
           ),
+        ),
+        RecapItems(
+          card: RecordCard(),
         ),
       ];
 }
