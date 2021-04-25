@@ -18,11 +18,7 @@ class RecapItems {
           ),
         ),
         RecapItems(
-          card: RecordCard(
-            iconpath: "assets/icons/syringe.svg",
-            firstLabel: "Record",
-            secondLabel: "consegne e somministrazioni",
-          ),
+          card: RecordCard(),
         ),
         RecapItems(
           card: VariazioniSomministrazioniCard(

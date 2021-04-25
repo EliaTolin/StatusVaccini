@@ -9,16 +9,8 @@ import 'package:statusvaccini/models/repositories/data_information.dart';
 //Class for draw Card with Linear Card
 // ignore: must_be_immutable
 class RecordCard extends StatefulWidget {
-  String labelText = "";
-  String iconpath = "";
-  String firstLabel;
-  String secondLabel;
   @override
   RecordCard({
-    this.labelText,
-    this.iconpath,
-    this.firstLabel,
-    this.secondLabel,
     Key key,
   }) : super(key: key);
 
@@ -29,12 +21,10 @@ class RecordCard extends StatefulWidget {
 class _RecordCardState extends State<RecordCard> {
   //Flag for use ready information, all information are loaded
   bool _readyInformation = false;
-  //List of FlSpot, are element of graph
-  double sizeListView = 200;
-  //Total of first somministration
-  int primeDosi = -1;
-  //Total of second somministration
-  int secondeDosi = -1;
+  //Map with record of somministrazion
+  Map<String, int> recordSomministrazioni;
+  //Map with record of delivery
+  Map<String, int> recordConsegne;
   //Get date
   DateTime now = new DateTime.now();
 
@@ -53,7 +43,9 @@ class _RecordCardState extends State<RecordCard> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ready() ? buildContenent() : waitFutureInformation(),
+            Expanded(
+              child: ready() ? buildContenent() : waitFutureInformation(),
+            ),
           ],
         )
         //CONTENT OF BOX
@@ -82,62 +74,79 @@ class _RecordCardState extends State<RecordCard> {
 
   Container buildContenent() {
     final NumberFormat numberFormat = NumberFormat.decimalPattern('it');
+    DateTime tempDate;
+    //Refactoring date for delivery
+    String dataConsegne;
+    tempDate = DateTime.parse(recordConsegne.keys.toList()[0]);
+    dataConsegne = tempDate.day.toString() +
+        "/" +
+        tempDate.month.toString() +
+        "/" +
+        tempDate.year.toString();
+
+    //Refactoring darte for somministration
+    String dataSomministrazioni;
+    tempDate = DateTime.parse(recordSomministrazioni.keys.toList()[0]);
+    dataSomministrazioni = tempDate.day.toString() +
+        "/" +
+        tempDate.month.toString() +
+        "/" +
+        tempDate.year.toString();
+
     return Container(
       child: Column(
         children: [
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  AutoSizeText(
-                    "Record somministrazioni",
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                      color: const Color(0xff379982),
-                    ),
+          //RECORD SOMMINISTRAZIONI
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                AutoSizeText(
+                  "Record somministrazioni",
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    color: const Color(0xff379982),
                   ),
-                  SizedBox(width: 10),
-                  AutoSizeText(
-                    numberFormat.format(primeDosi),
-                    maxLines: 1,
-                    textAlign: TextAlign.end,
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.black,
-                    ),
+                ),
+                SizedBox(width: 10),
+                AutoSizeText(
+                  numberFormat.format(
+                    recordSomministrazioni.values.toList()[0],
                   ),
-                  SizedBox(width: 10),
-                  Column(
-                    children: [
-                      AutoSizeText.rich(
-                        TextSpan(
-                          text: 'il giorno ',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: '25/04/2021',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.normal),
-                            ),
-                          ],
-                        ),
-                        maxLines: 3,
-                      )
+                  maxLines: 1,
+                  textAlign: TextAlign.end,
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(width: 10),
+                AutoSizeText.rich(
+                  TextSpan(
+                    text: 'il giorno ',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: dataSomministrazioni,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.normal),
+                      ),
                     ],
                   ),
-                ],
-              ),
+                  maxLines: 1,
+                ),
+              ],
             ),
           ),
           SizedBox(
             height: 10,
           ),
+          //RECORD CONSEGNE
           Container(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -155,7 +164,9 @@ class _RecordCardState extends State<RecordCard> {
                   ),
                   SizedBox(width: 10),
                   AutoSizeText(
-                    numberFormat.format(secondeDosi),
+                    numberFormat.format(
+                      recordConsegne.values.toList()[0],
+                    ),
                     maxLines: 1,
                     textAlign: TextAlign.end,
                     style: TextStyle(
@@ -174,13 +185,13 @@ class _RecordCardState extends State<RecordCard> {
                           ),
                           children: <TextSpan>[
                             TextSpan(
-                              text: '25/04/2021',
+                              text: dataConsegne,
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.normal),
                             ),
                           ],
                         ),
-                        maxLines: 3,
+                        maxLines: 1,
                       )
                     ],
                   ),
@@ -201,25 +212,27 @@ class _RecordCardState extends State<RecordCard> {
   //Show the wait status
   Column waitFutureInformation() {
     return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          SizedBox(height: 40),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircularProgressIndicator(),
-            ],
-          )
-        ]);
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(height: 40),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircularProgressIndicator(),
+          ],
+        )
+      ],
+    );
   }
 
-  //Load information for graph.
+  //Load information for card
   void getInfoData() async {
-    await OpenData.getTotalePrimeDosi().then((value) => primeDosi = value);
+    await OpenData.getRecordSomministrazioni()
+        .then((value) => recordSomministrazioni = value);
 
-    await OpenData.getTotaleSecondiDosi().then((value) => secondeDosi = value);
+    await OpenData.getRecordConsegne().then((value) => recordConsegne = value);
 
-    if (primeDosi != -1 && secondeDosi != -1)
+    if (recordSomministrazioni.isNotEmpty && recordConsegne.isNotEmpty)
       setState(() {
         _readyInformation = true;
       });
