@@ -14,6 +14,7 @@ class GraphLinearUltimeSomministrazioniRegioni extends StatelessWidget {
   final String iconpath;
   final Function funTextInformation;
   final Function funGetData;
+  final String dataUltimeSomministrazioni;
 
   @override
   GraphLinearUltimeSomministrazioniRegioni({
@@ -22,6 +23,7 @@ class GraphLinearUltimeSomministrazioniRegioni extends StatelessWidget {
     this.iconpath = "",
     @required this.funTextInformation,
     @required this.funGetData,
+    @required this.dataUltimeSomministrazioni,
     Key key,
   }) : super(key: key);
 
@@ -80,7 +82,7 @@ class GraphLinearUltimeSomministrazioniRegioni extends StatelessWidget {
                                   height: 4,
                                 ),
                                 AutoSizeText(
-                                  labelText,
+                                  dataUltimeSomministrazioni,
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                       color: const Color(0xff379982),

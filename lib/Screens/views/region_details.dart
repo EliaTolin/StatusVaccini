@@ -23,15 +23,18 @@ class RegionDetailsView extends StatelessWidget {
           builder: (context, snapshot) {
             if (!snapshot.hasData)
               return Center(child: CircularProgressIndicator());
-            return SingleChildScrollView(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                for (final regionDetailsItem
-                    in RegionDetailsItems.getItems(regione, snapshot.data))
-                  regionDetailsItem.card
-              ],
-            ));
+            return Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: SingleChildScrollView(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  for (final regionDetailsItem
+                      in RegionDetailsItems.getItems(regione, snapshot.data))
+                    regionDetailsItem.card
+                ],
+              )),
+            );
           }),
     );
   }

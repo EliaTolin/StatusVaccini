@@ -27,6 +27,11 @@ class SomministrazioniRegioneCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       GraphLinearUltimeSomministrazioniRegioni(
+        dataUltimeSomministrazioni:
+            datiGiornate.last.data.difference(DateTime.now()).inMinutes <
+                    24 * 60
+                ? "oggi"
+                : "il giorno ${stringFromDate(datiGiornate.last.data)}",
         typeinfo: "Somministrazioni",
         labelText: "Dosi somministrate in ${datiRegione.nome}",
         iconpath: "assets/icons/syringe.svg",
