@@ -1,9 +1,9 @@
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:statusvaccini/constants/route_constant.dart';
-import 'package:statusvaccini/screens/components/body_components.dart';
+import 'package:statusvaccini/Screens/components/body_components.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'screens/views/undefined_view.dart';
+import 'Screens/views/undefined_view.dart';
 import 'router.dart' as router;
 
 void main() => runApp(MyApp());

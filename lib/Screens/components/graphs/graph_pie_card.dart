@@ -1,36 +1,34 @@
-// ignore: must_be_immutable
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:statusvaccini/models/opendata.dart';
+import 'package:statusvaccini/Models/opendata.dart';
 import 'package:intl/intl.dart';
-import 'package:statusvaccini/screens/components/widgets/information_item.dart';
+import 'package:statusvaccini/Screens/components/widgets/information_item.dart';
 
 //Class for draw Card with Pie Chart
-// ignore: must_be_immutable
+
 class GraphPieCard extends StatefulWidget {
-  String typeinfo = "";
-  String labelText = "";
-  String iconpath = "";
-  Function funTextInformation;
-  Function funGetData;
+  final String typeinfo;
+  final String labelText;
+  final String iconpath;
+  final Function funTextInformation;
+  final Function funGetData;
 
   @override
   GraphPieCard({
-    this.typeinfo,
-    this.labelText,
-    this.iconpath,
-    this.funTextInformation,
-    this.funGetData,
+    this.typeinfo = "",
+    this.labelText = "",
+    this.iconpath = "",
+    @required this.funTextInformation,
+    @required this.funGetData,
     Key key,
   }) : super(key: key);
 
   _GraphPieCardState createState() => _GraphPieCardState();
 }
 
-// ignore: must_be_immutable
 class _GraphPieCardState extends State<GraphPieCard> {
   //Flag use for ready information, all information are loaded
   bool _readyGraph = false;

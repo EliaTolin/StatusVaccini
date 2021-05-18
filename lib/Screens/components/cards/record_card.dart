@@ -1,13 +1,11 @@
-// ignore: must_be_immutable
-import 'package:statusvaccini/models/opendata.dart';
+import 'package:statusvaccini/Models/opendata.dart';
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:statusvaccini/models/repositories/data_information.dart';
+import 'package:statusvaccini/Models/repositories/data_information.dart';
 
 //Class for draw Card with Linear Card
-// ignore: must_be_immutable
 class RecordCard extends StatefulWidget {
   @override
   RecordCard({
@@ -17,7 +15,6 @@ class RecordCard extends StatefulWidget {
   _RecordCardState createState() => _RecordCardState();
 }
 
-// ignore: must_be_immutable
 class _RecordCardState extends State<RecordCard> {
   //Flag for use ready information, all information are loaded
   bool _readyInformation = false;

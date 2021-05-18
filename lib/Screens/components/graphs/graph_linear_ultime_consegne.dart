@@ -1,7 +1,6 @@
-// ignore: must_be_immutable
-import 'package:statusvaccini/models/opendata.dart';
+import 'package:statusvaccini/Models/opendata.dart';
 import 'package:statusvaccini/constants/constant.dart';
-import 'package:statusvaccini/screens/components/body_components.dart';
+import 'package:statusvaccini/Screens/components/body_components.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,24 +8,24 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:statusvaccini/screens/components/widgets/information_item.dart';
+import 'package:statusvaccini/Screens/components/widgets/information_item.dart';
 
 //Class for draw Card with Linear Card
-// ignore: must_be_immutable
+
 class GraphLinearUltimeConsegne extends StatefulWidget {
-  String typeinfo = "";
-  String labelText = "";
-  String iconpath = "";
-  Function funTextInformation;
-  Function funGetData;
+  final String typeinfo;
+  final String labelText;
+  final String iconpath;
+  final Function funTextInformation;
+  final Function funGetData;
 
   @override
   GraphLinearUltimeConsegne({
-    this.typeinfo,
-    this.labelText,
-    this.iconpath,
-    this.funTextInformation,
-    this.funGetData,
+    this.typeinfo = "",
+    this.labelText = "",
+    this.iconpath = "",
+    @required this.funTextInformation,
+    @required this.funGetData,
     Key key,
   }) : super(key: key);
 
@@ -34,7 +33,6 @@ class GraphLinearUltimeConsegne extends StatefulWidget {
       _GraphLinearUltimeConsegneState();
 }
 
-// ignore: must_be_immutable
 class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
   //The information showed in the card
   String _textInformation = "NOT SET INFORMATION";

@@ -1,4 +1,3 @@
-// ignore: must_be_immutable
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -8,26 +7,25 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
 //Class for draw Card with Linear Card
-// ignore: must_be_immutable
+
 class GraphBarCard extends StatefulWidget {
-  String labelText = "";
-  String iconpath = "";
-  String secondLabelText = "";
-  Function funGetData;
+  final String labelText;
+  final String iconpath;
+  final String secondLabelText;
+  final Function funGetData;
 
   @override
   GraphBarCard({
-    this.labelText,
-    this.secondLabelText,
-    this.iconpath,
-    this.funGetData,
+    this.labelText = "",
+    this.secondLabelText = "",
+    this.iconpath = "",
+    @required this.funGetData,
     Key key,
   }) : super(key: key);
 
   _GraphBarCardState createState() => _GraphBarCardState();
 }
 
-// ignore: must_be_immutable
 class _GraphBarCardState extends State<GraphBarCard> {
   //Flag for use ready Graph, all information are loaded
   bool _readyGraph = false;

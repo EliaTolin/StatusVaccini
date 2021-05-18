@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:statusvaccini/screens/components/cards/record_card.dart';
-import 'package:statusvaccini/screens/components/cards/variazioni_consegne_card.dart';
-import 'package:statusvaccini/screens/components/cards/somministrazioni_summary_card.dart';
-import 'package:statusvaccini/screens/components/cards/variazioni_somministrazioni_card.dart';
+import 'package:statusvaccini/Screens/components/cards/record_card.dart';
+import 'package:statusvaccini/Screens/components/cards/variazioni_consegne_card.dart';
+import 'package:statusvaccini/Screens/components/cards/somministrazioni_summary_card.dart';
+import 'package:statusvaccini/Screens/components/cards/variazioni_somministrazioni_card.dart';
 
 class RecapItems {
   Widget card;
@@ -12,6 +12,7 @@ class RecapItems {
   static List<RecapItems> get items => [
         RecapItems(
           card: SomministrazioniSummaryCard(
+            labelText: "",
             iconpath: "assets/icons/fast_delivery.svg",
             firstLabel: "Summary",
             secondLabel: "Vaccinazioni",
