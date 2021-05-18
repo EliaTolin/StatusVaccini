@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:statusvaccini/Models/opendata.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:statusvaccini/Screens/components/graphs/graph_linear_card.dart';
+import 'package:statusvaccini/Screens/components/graphs/graph_linear_ultime_somministrazioni_regioni.dart';
 
 class SomministrazioniRegioneCard extends StatelessWidget {
   @override
@@ -25,13 +25,13 @@ class SomministrazioniRegioneCard extends StatelessWidget {
       "${date.day}/${date.month}/${date.year}";
 
   @override
-  Widget build(BuildContext context) => GraphLinearCard(
+  Widget build(BuildContext context) =>
+      GraphLinearUltimeSomministrazioniRegioni(
         typeinfo: "Somministrazioni",
         labelText: "Dosi somministrate in ${datiRegione.nome}",
-        secondLabelText: "il giorno ${stringFromDate(latestGiornata.data)}",
         iconpath: "assets/icons/syringe.svg",
         funTextInformation: () =>
-            Future.value(latestGiornata.dosiSomministrate),
+            Future.value(latestGiornata.dosiSomministrate.toString()),
         funGetData: () => Future.value(graphDosiTotali),
       );
 }

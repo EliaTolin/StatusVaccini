@@ -25,6 +25,7 @@ class RegionDetailsView extends StatelessWidget {
               return Center(child: CircularProgressIndicator());
             return SingleChildScrollView(
                 child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 for (final regionDetailsItem
                     in RegionDetailsItems.getItems(regione, snapshot.data))

@@ -78,7 +78,7 @@ class RegionDetailsItems {
         ),
         RegionDetailsItems(
           card: GraphMultipleLinearCard(
-            labelText: "Vaccinati e dosi somministrate ogni giorno",
+            labelText: "Vaccinati e dosi somministrate per giorno",
             iconpath: "assets/icons/syringe.svg",
             funGetData: [
               () => getDosiSomministrate(datiGiornoPerGiorno),
