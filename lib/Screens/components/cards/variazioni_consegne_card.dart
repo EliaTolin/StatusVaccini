@@ -1,31 +1,29 @@
-// ignore: must_be_immutable
-import 'package:statusvaccini/models/opendata.dart';
+import 'package:statusvaccini/Models/opendata.dart';
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:statusvaccini/screens/components/widgets/riga_variazione_widget.dart';
+import 'package:statusvaccini/Screens/components/widgets/riga_variazione_widget.dart';
 
 //Class for draw Card with Linear Card
-// ignore: must_be_immutable
+
 class VariazioniConsegneCard extends StatefulWidget {
-  String labelText = "";
-  String iconpath = "";
-  String firstLabel;
-  String secondLabel;
+  final String labelText;
+  final String iconpath;
+  final String firstLabel;
+  final String secondLabel;
   @override
   VariazioniConsegneCard({
-    this.labelText,
-    this.iconpath,
-    this.firstLabel,
-    this.secondLabel,
+    this.labelText = "",
+    @required this.iconpath,
+    @required this.firstLabel,
+    @required this.secondLabel,
     Key key,
   }) : super(key: key);
 
   _VariazioniConsegneCardState createState() => _VariazioniConsegneCardState();
 }
 
-// ignore: must_be_immutable
 class _VariazioniConsegneCardState extends State<VariazioniConsegneCard> {
   //Flag for use ready Graph, all information are loaded
   bool _readyInformation = false;

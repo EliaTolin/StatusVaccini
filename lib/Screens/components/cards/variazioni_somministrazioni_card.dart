@@ -1,23 +1,21 @@
-// ignore: must_be_immutable
-import 'package:statusvaccini/models/opendata.dart';
+import 'package:statusvaccini/Models/opendata.dart';
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:statusvaccini/screens/components/widgets/riga_variazione_widget.dart';
+import 'package:statusvaccini/Screens/components/widgets/riga_variazione_widget.dart';
 
-// ignore: must_be_immutable
 class VariazioniSomministrazioniCard extends StatefulWidget {
-  String labelText = "";
-  String iconpath = "";
-  String firstLabel;
-  String secondLabel;
+  final String labelText;
+  final String iconpath;
+  final String firstLabel;
+  final String secondLabel;
   @override
   VariazioniSomministrazioniCard({
-    this.labelText,
-    this.iconpath,
-    this.firstLabel,
-    this.secondLabel,
+    this.labelText = "",
+    @required this.iconpath,
+    @required this.firstLabel,
+    @required this.secondLabel,
     Key key,
   }) : super(key: key);
 
@@ -25,7 +23,6 @@ class VariazioniSomministrazioniCard extends StatefulWidget {
       _VariazioniSomministrazioniCardState();
 }
 
-// ignore: must_be_immutable
 class _VariazioniSomministrazioniCardState
     extends State<VariazioniSomministrazioniCard> {
   //Flag for use ready Information, all information are loaded

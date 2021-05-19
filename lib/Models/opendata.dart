@@ -1,8 +1,8 @@
 import 'dart:convert' as convert;
 import 'package:statusvaccini/constants/url_constant.dart';
-import 'package:statusvaccini/models/repositories/consegne_vaccini_latest.dart';
-import 'package:statusvaccini/models/repositories/somministrazione_vaccini_summary_latest.dart';
-import 'package:statusvaccini/models/repositories/somministrazione_vaccini_latest.dart';
+import 'package:statusvaccini/Models/repositories/consegne_vaccini_latest.dart';
+import 'package:statusvaccini/Models/repositories/somministrazione_vaccini_summary_latest.dart';
+import 'package:statusvaccini/Models/repositories/somministrazione_vaccini_latest.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:sortedmap/sortedmap.dart';
@@ -578,6 +578,63 @@ abstract class OpenData {
     return regioni;
   }
 
+  /// Restituisce i dati giorno per giorno per una regione.
+  static Future<List<DatiRegioneGiornata>> getDatiRegioniGiornoPerGiorno(
+      String area) async {
+    var datiSomministrazioni =
+        await SomministrazioneVacciniLatest.getListData();
+    var datiConsegne = await ConsegneVacciniLatest.getListData();
+    List<DatiRegioneGiornata> dati = [];
+
+    for (SomministrazioneVacciniLatest element in datiSomministrazioni) {
+      if (element.area != area) continue;
+      DateTime date = DateTime.parse(element.data_somministrazione);
+      Iterable<DatiRegioneGiornata> listaSel;
+
+      if ((listaSel = dati.where((e) => e.data == date)).isEmpty) {
+        var datiCur = DatiRegioneGiornata(date);
+        datiCur.dosiSomministrate = element.prima_dose + element.seconda_dose;
+        datiCur.vaccinati = element.seconda_dose;
+        if (element.fornitore == "Janssen")
+          datiCur.vaccinati += element.prima_dose;
+        dati.add(datiCur);
+      } else {
+        assert(listaSel.length == 1);
+        var datiCur = listaSel.first;
+        datiCur.dosiSomministrate += element.prima_dose + element.seconda_dose;
+        datiCur.vaccinati += element.seconda_dose;
+        if (element.fornitore == "Janssen")
+          datiCur.vaccinati += element.prima_dose;
+        int i = dati.indexWhere((e) => e.data == date);
+        dati[i] = datiCur;
+      }
+    }
+
+    for (ConsegneVacciniLatest element in datiConsegne) {
+      if (element.area != area) continue;
+      DateTime date = DateTime.parse(element.data_consegna);
+      int i = dati.indexWhere((e) => e.data == date);
+      if (i == -1) {
+        var datiCur = DatiRegioneGiornata(date);
+        datiCur.dosiConsegnate = element.numero_dosi;
+        dati.add(datiCur);
+      } else {
+        dati[i].dosiConsegnate += element.numero_dosi;
+      }
+    }
+
+    return dati;
+  }
+
+  static Future<int> getConsegnePerRegione(String area) async {
+    int consegne = 0;
+    for (ConsegneVacciniLatest element
+        in await ConsegneVacciniLatest.getListData()) {
+      if (area == element.area) consegne += element.numero_dosi;
+    }
+    return consegne;
+  }
+
   static Map<String, int> _addZeroDays(Map<String, int> mapData) {
     Map<String, int> fullData = new SortedMap<String, int>(Ordering.byKey());
     var formatter = new DateFormat('yyyy-MM-dd');
@@ -627,13 +684,15 @@ class Regione {
   int totaleDosiSommistrate;
   int primeDosi;
   int secondeDosi;
+  List<DatiRegioneGiornata> giornate;
 
   Regione(
       {this.nome,
       this.sigla,
       this.totaleDosiSommistrate,
       this.primeDosi,
-      this.secondeDosi});
+      this.secondeDosi,
+      this.giornate});
 }
 
 class UltimeSomministrazioni {
@@ -648,4 +707,12 @@ class UltimeSomministrazioni {
     this.secondaDose = 0,
     this.dosiTotali = 0,
   });
+}
+
+class DatiRegioneGiornata {
+  DatiRegioneGiornata(this.data);
+  DateTime data;
+  int dosiSomministrate = 0;
+  int vaccinati = 0;
+  int dosiConsegnate = 0;
 }

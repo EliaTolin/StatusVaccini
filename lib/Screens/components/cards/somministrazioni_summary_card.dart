@@ -1,23 +1,21 @@
-// ignore: must_be_immutable
-import 'package:statusvaccini/models/opendata.dart';
+import 'package:statusvaccini/Models/opendata.dart';
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
-import 'package:statusvaccini/models/repositories/data_information.dart';
+import 'package:statusvaccini/Models/repositories/data_information.dart';
 
-// ignore: must_be_immutable
 class SomministrazioniSummaryCard extends StatefulWidget {
-  String labelText = "";
-  String iconpath = "";
-  String firstLabel;
-  String secondLabel;
+  final String labelText;
+  final String iconpath;
+  final String firstLabel;
+  final String secondLabel;
   @override
   SomministrazioniSummaryCard({
-    this.labelText,
-    this.iconpath,
-    this.firstLabel,
-    this.secondLabel,
+    this.labelText = "",
+    @required this.iconpath,
+    @required this.firstLabel,
+    @required this.secondLabel,
     Key key,
   }) : super(key: key);
 
@@ -25,7 +23,6 @@ class SomministrazioniSummaryCard extends StatefulWidget {
       _SomministrazioniSummaryCardState();
 }
 
-// ignore: must_be_immutable
 class _SomministrazioniSummaryCardState
     extends State<SomministrazioniSummaryCard> {
   //Flag for use ready information, all information are loaded

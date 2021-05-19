@@ -1,6 +1,6 @@
-// ignore: must_be_immutable
-import 'package:statusvaccini/models/opendata.dart';
-import 'package:statusvaccini/models/repositories/data_information.dart';
+import 'package:statusvaccini/Models/opendata.dart';
+import 'package:statusvaccini/Models/repositories/data_information.dart';
+import 'package:statusvaccini/Screens/views/region_details.dart';
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,27 +8,26 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 //Class for draw Card with Linear Card
-// ignore: must_be_immutable
+
 class CardViewRegioni extends StatefulWidget {
-  String labelText = "";
-  String iconpath = "";
-  Function funGetData;
-  String firstLabel;
-  String secondLabel;
+  final String labelText;
+  final String iconpath;
+  final Function funGetData;
+  final String firstLabel;
+  final String secondLabel;
   @override
   CardViewRegioni({
-    this.labelText,
-    this.iconpath,
-    this.funGetData,
-    this.firstLabel,
-    this.secondLabel,
+    @required this.labelText,
+    @required this.iconpath,
+    @required this.funGetData,
+    @required this.firstLabel,
+    @required this.secondLabel,
     Key key,
   }) : super(key: key);
 
   _CardViewRegioniState createState() => _CardViewRegioniState();
 }
 
-// ignore: must_be_immutable
 class _CardViewRegioniState extends State<CardViewRegioni> {
   //Flag for use ready Graph, all information are loaded
   bool _readyInformation = false;
@@ -121,6 +120,8 @@ class _CardViewRegioniState extends State<CardViewRegioni> {
 
     List<Widget> list = [];
     int i = 0;
+
+    data.sort((a, b) => a.nome.compareTo(b.nome));
     for (Regione element in data) {
       String nome = element.sigla;
 
@@ -133,14 +134,18 @@ class _CardViewRegioniState extends State<CardViewRegioni> {
       double percSecondaDose = ((element.secondeDosi * 100) /
           DataInformation.abitantiRegioni[element.sigla]);
 
-      list.add(ElementBox(
-        index: i,
-        percentualeTot: double.parse(percTot.toStringAsFixed(2)),
-        nameItem: nome,
-        heightElement: sizeListView,
-        percentualePrimeDosi: double.parse(percPrimaDose.toStringAsFixed(2)),
-        percentualeSecondeDosi:
-            double.parse(percSecondaDose.toStringAsFixed(2)),
+      list.add(InkWell(
+        onTap: () => Navigator.push(context,
+            MaterialPageRoute(builder: (_) => RegionDetailsView(element))),
+        child: ElementBox(
+          index: i,
+          percentualeTot: double.parse(percTot.toStringAsFixed(2)),
+          nameItem: nome,
+          heightElement: sizeListView,
+          percentualePrimeDosi: double.parse(percPrimaDose.toStringAsFixed(2)),
+          percentualeSecondeDosi:
+              double.parse(percSecondaDose.toStringAsFixed(2)),
+        ),
       ));
       i++;
     }

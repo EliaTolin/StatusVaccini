@@ -1,4 +1,3 @@
-// ignore: must_be_immutable
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -8,30 +7,29 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
 
 //Class for draw Card with Linear Card
-// ignore: must_be_immutable
+
 class GraphLinearCard extends StatefulWidget {
-  String typeinfo = "";
-  String labelText = "";
-  String secondLabelText = "";
-  String iconpath = "";
-  Function funTextInformation;
-  Function funGetData;
+  final String typeinfo;
+  final String labelText;
+  final String secondLabelText;
+  final String iconpath;
+  final Function funTextInformation;
+  final Function funGetData;
 
   @override
   GraphLinearCard({
-    this.typeinfo,
-    this.labelText,
-    this.secondLabelText,
-    this.iconpath,
-    this.funTextInformation,
-    this.funGetData,
+    this.typeinfo = "",
+    this.labelText = "",
+    this.secondLabelText = "",
+    this.iconpath = "",
+    @required this.funTextInformation,
+    @required this.funGetData,
     Key key,
   }) : super(key: key);
 
   _GraphLinearCardState createState() => _GraphLinearCardState();
 }
 
-// ignore: must_be_immutable
 class _GraphLinearCardState extends State<GraphLinearCard> {
   //The information showed in the card
   String _textInformation = "NOT SET INFORMATION";

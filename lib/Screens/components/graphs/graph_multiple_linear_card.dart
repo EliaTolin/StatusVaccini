@@ -1,4 +1,3 @@
-// ignore: must_be_immutable
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -7,20 +6,20 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
 
 //Class for draw Card with Linear Card
-// ignore: must_be_immutable
+
 class GraphMultipleLinearCard extends StatefulWidget {
-  String typeinfo = "";
-  String labelText = "";
-  String iconpath = "";
-  List<Function> funGetData = [];
-  List<String> textLegends = [];
+  final String typeinfo;
+  final String labelText;
+  final String iconpath;
+  final List<Function> funGetData;
+  final List<String> textLegends;
   @override
   GraphMultipleLinearCard({
-    this.typeinfo,
-    this.labelText,
-    this.iconpath,
-    this.funGetData,
-    this.textLegends,
+    this.typeinfo = "",
+    this.labelText = "",
+    this.iconpath = "",
+    @required this.funGetData,
+    @required this.textLegends,
     Key key,
   }) : super(key: key) {
     if (funGetData.length != textLegends.length)
@@ -33,7 +32,6 @@ class GraphMultipleLinearCard extends StatefulWidget {
       _GraphMultipleLinearCardState();
 }
 
-// ignore: must_be_immutable
 class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
   //Flag for use ready Graph, all information are loaded
   bool _readyGraph = false;

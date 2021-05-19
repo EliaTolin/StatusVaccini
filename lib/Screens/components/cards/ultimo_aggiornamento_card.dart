@@ -1,10 +1,8 @@
-// ignore: must_be_immutable
-import 'package:statusvaccini/models/opendata.dart';
+import 'package:statusvaccini/Models/opendata.dart';
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-// ignore: must_be_immutable
 class UltimoAggiornamentoCard extends StatefulWidget {
   @override
   UltimoAggiornamentoCard({
@@ -15,7 +13,6 @@ class UltimoAggiornamentoCard extends StatefulWidget {
       _UltimoAggiornamentoCardState();
 }
 
-// ignore: must_be_immutable
 class _UltimoAggiornamentoCardState extends State<UltimoAggiornamentoCard> {
   //Flag for use ready Text Information, all informatiomn are loaded
   bool _readyTextInformation = false;

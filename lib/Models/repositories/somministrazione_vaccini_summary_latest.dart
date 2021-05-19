@@ -66,7 +66,7 @@ class SomministrazioneVacciniSummaryLatest {
           categoria_over80: element['categoria_over80'],
           prima_dose: element['prima_dose'],
           seconda_dose: element['seconda_dose'],
-          nome_regione: element['nome_regione'],
+          nome_regione: element['nome_area'],
         ));
       }
     }

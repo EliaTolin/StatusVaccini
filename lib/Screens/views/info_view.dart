@@ -1,7 +1,7 @@
 import 'package:statusvaccini/constants/constant.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:statusvaccini/screens/components/body_components.dart';
+import 'package:statusvaccini/Screens/components/body_components.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
