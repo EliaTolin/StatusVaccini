@@ -75,6 +75,9 @@ class _GraphBarCardState extends State<GraphBarCard> {
   }
 
   Column cardContent() {
+    double iconSize = MediaQuery.of(context).size.width >= 400
+        ? SVConst.kSizeIcons
+        : SVConst.kSizeIconsSmall;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -83,16 +86,16 @@ class _GraphBarCardState extends State<GraphBarCard> {
           child: Row(
             children: <Widget>[
               Container(
-                height: SVConst.kSizeIcons,
-                width: SVConst.kSizeIcons,
+                height: iconSize,
+                width: iconSize,
                 decoration: BoxDecoration(
                   //color: SVConst.iconColor,
                   shape: BoxShape.circle,
                 ),
                 child: SvgPicture.asset(
                   widget.iconpath,
-                  height: SVConst.kSizeIcons,
-                  width: SVConst.kSizeIcons,
+                  height: iconSize,
+                  width: iconSize,
                 ),
               ),
               SizedBox(width: 25),

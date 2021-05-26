@@ -88,6 +88,9 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
   }
 
   Column cardContent() {
+    double iconSize = MediaQuery.of(context).size.width >= 400
+        ? SVConst.kSizeIcons
+        : SVConst.kSizeIconsSmall;
     final labelConsegne = Provider.of<LabelUltimeConsegne>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -97,15 +100,15 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
           child: Row(
             children: <Widget>[
               Container(
-                height: SVConst.kSizeIcons,
-                width: SVConst.kSizeIcons,
+                height: iconSize,
+                width: iconSize,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                 ),
                 child: SvgPicture.asset(
                   widget.iconpath,
-                  height: SVConst.kSizeIcons,
-                  width: SVConst.kSizeIcons,
+                  height: iconSize,
+                  width: iconSize,
                 ),
               ),
               SizedBox(width: 25),

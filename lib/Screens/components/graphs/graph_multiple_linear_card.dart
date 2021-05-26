@@ -78,6 +78,9 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
   }
 
   Column cardContent() {
+    double iconSize = MediaQuery.of(context).size.width >= 400
+        ? SVConst.kSizeIcons
+        : SVConst.kSizeIconsSmall;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -86,16 +89,16 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
           child: Row(
             children: <Widget>[
               Container(
-                height: SVConst.kSizeIcons,
-                width: SVConst.kSizeIcons,
+                height: iconSize,
+                width: iconSize,
                 decoration: BoxDecoration(
                   //color: SVConst.iconColor,
                   shape: BoxShape.circle,
                 ),
                 child: SvgPicture.asset(
                   widget.iconpath,
-                  height: SVConst.kSizeIcons,
-                  width: SVConst.kSizeIcons,
+                  height: iconSize,
+                  width: iconSize,
                 ),
               ),
               SizedBox(width: 25),
@@ -115,16 +118,16 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
           ),
         ),
         ready()
-            ? Stack(
+            ? Column(
                 children: <Widget>[
                   //If the data aren't ready, show wait status.
-                  futureInformationContent(),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Column(
                       children: [chartItemList[0], chartItemList[1]],
                     ),
-                  )
+                  ),
+                  futureInformationContent(),
                 ],
               )
             : waitFutureInformation(),

@@ -97,6 +97,9 @@ class _InfoViewState extends State<InfoView> {
   }
 
   Card buildCardOpenSource() {
+    double iconSize = MediaQuery.of(context).size.width >= 400
+        ? SVConst.kSizeIcons
+        : SVConst.kSizeIconsSmall;
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(SVConst.radiusComponent),
@@ -146,15 +149,15 @@ class _InfoViewState extends State<InfoView> {
                 ),
                 SizedBox(width: 25),
                 Container(
-                  height: SVConst.kSizeIcons,
-                  width: SVConst.kSizeIcons,
+                  height: iconSize,
+                  width: iconSize,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                   ),
                   child: SvgPicture.asset(
                     "assets/icons/guide.svg",
-                    height: SVConst.kSizeIcons,
-                    width: SVConst.kSizeIcons,
+                    height: iconSize,
+                    width: iconSize,
                   ),
                 ),
               ],
