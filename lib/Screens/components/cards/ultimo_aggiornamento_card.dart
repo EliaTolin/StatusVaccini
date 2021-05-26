@@ -99,7 +99,9 @@ class _UltimoAggiornamentoCardState extends State<UltimoAggiornamentoCard> {
                   TextSpan(
                       text: ultimoAggiornamento.hour.toString() +
                           ":" +
-                          ultimoAggiornamento.minute.toString(),
+                          (ultimoAggiornamento.minute < 10
+                              ? "0" + ultimoAggiornamento.minute.toString()
+                              : ultimoAggiornamento.minute.toString()),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       )),
