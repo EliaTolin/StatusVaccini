@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:statusvaccini/Models/opendata.dart';
 import 'package:statusvaccini/Screens/components/cards/regioni_somministrazioni_summary.dart';
 import 'package:statusvaccini/Screens/components/cards/somministrazioni_regione.dart';
-import 'package:statusvaccini/Screens/components/graphs/graph_linear_card.dart';
 import 'package:statusvaccini/Screens/components/graphs/graph_multiple_linear_card.dart';
+import 'package:statusvaccini/screens/components/graphs/graph_linear_ultime_consegne.dart';
 
 class RegionDetailsItems {
   Widget card;
@@ -88,14 +88,15 @@ class RegionDetailsItems {
           ),
         ),
         RegionDetailsItems(
-            card: GraphLinearCard(
+            card: GraphLinearUltimeConsegne(
           iconpath: "assets/icons/order.svg",
-          labelText: "Dosi consegnate nella regione",
-          secondLabelText: "totali",
+          labelText: "Dosi consegnate in ${regione.nome}",
+          // secondLabelText: "totali",
           typeinfo: "Dosi",
-          funGetData: () => getDosiConsegnate(datiGiornoPerGiorno),
           funTextInformation: () =>
-              OpenData.getConsegnePerRegione(regione.sigla),
+              OpenData.getUltimeDosiConsegnatePerRegione(regione.sigla),
+          funGetData: () =>
+              OpenData.graphConsegnePerGiornoPerRegione(regione.sigla),
         ))
       ];
 }
