@@ -117,6 +117,7 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
                   children: [
                     AutoSizeText(
                       widget.labelText,
+                      maxLines: 2,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                           color: Colors.black,
