@@ -626,13 +626,146 @@ abstract class OpenData {
     return dati;
   }
 
-  static Future<int> getConsegnePerRegione(String area) async {
-    int consegne = 0;
-    for (ConsegneVacciniLatest element
-        in await ConsegneVacciniLatest.getListData()) {
-      if (area == element.area) consegne += element.numero_dosi;
+  //RITORNA IL NUMERO DELLA DOSI CONSEGNATE OGGI
+  static Future<UltimaConsegna> getUltimeDosiConsegnatePerRegione(
+      String area) async {
+    var summary;
+
+    UltimaConsegna ultimaConsegna = new UltimaConsegna();
+
+    ultimaConsegna.data = new DateTime(1979, 01, 01);
+
+    await ConsegneVacciniLatest.getListData().then((value) => summary = value);
+
+    for (ConsegneVacciniLatest element in summary) {
+      if (element.area == area) {
+        var dataTemp = element.data_consegna.substring(0, 10);
+        List<String> splitDate = dataTemp.split("-");
+        DateTime dataConsegna = new DateTime(int.parse(splitDate[0]),
+            int.parse(splitDate[1]), int.parse(splitDate[2]));
+        if (ultimaConsegna.data.isBefore(dataConsegna)) {
+          ultimaConsegna = new UltimaConsegna(data: dataConsegna);
+        }
+      }
     }
-    return consegne;
+
+    for (ConsegneVacciniLatest element in summary) {
+      if (element.area == area) {
+        var dataTemp = element.data_consegna.substring(0, 10);
+        List<String> splitDate = dataTemp.split("-");
+        DateTime dataConsegna = new DateTime(
+          int.parse(splitDate[0]),
+          int.parse(splitDate[1]),
+          int.parse(splitDate[2]),
+        );
+
+        if (dataConsegna.day == ultimaConsegna.data.day &&
+            dataConsegna.month == ultimaConsegna.data.month &&
+            dataConsegna.year == ultimaConsegna.data.year) {
+          if (ultimaConsegna.fornitori == null) {
+            ultimaConsegna.fornitori = [];
+            ultimaConsegna.fornitori.add(new Fornitore(element.fornitore,
+                numeroDosi: element.numero_dosi));
+          } else {
+            int i = 0;
+            bool exist = false;
+
+            for (Fornitore f in ultimaConsegna.fornitori) {
+              if (f.nome == element.fornitore) {
+                exist = true;
+                ultimaConsegna.fornitori[i].numeroDosi += element.numero_dosi;
+              }
+              i++;
+            }
+
+            if (!exist)
+              ultimaConsegna.fornitori.add(new Fornitore(element.fornitore,
+                  numeroDosi: element.numero_dosi));
+          }
+        }
+      }
+    }
+    return ultimaConsegna;
+  }
+
+  //RITORNA IL NUMERO DELLA CONSEGNE DI DOSI PER GIORNO
+  static Future<List<FlSpot>> graphConsegnePerGiornoPerRegione(
+      String area) async {
+    List<FlSpot> data = [];
+    var summary;
+    await ConsegneVacciniLatest.getListData().then((value) => summary = value);
+    //{'giorno':dosi}
+    Map<String, int> consegnePerGiorno =
+        new SortedMap<String, int>(Ordering.byKey());
+
+    for (ConsegneVacciniLatest element in summary) {
+      if (element.area == area) {
+        String date = element.data_consegna.substring(0, 10);
+        int tempTot = element.numero_dosi;
+
+        if (!consegnePerGiorno.containsKey(date)) {
+          consegnePerGiorno.putIfAbsent(date, () => tempTot);
+        } else {
+          consegnePerGiorno.update(date, (value) => value + tempTot);
+        }
+      }
+    }
+
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String formattedDate = formatter.format(now);
+
+    if (!consegnePerGiorno.containsKey(formattedDate)) {
+      consegnePerGiorno.putIfAbsent(formattedDate, () => 0);
+    }
+
+    consegnePerGiorno = _addZeroDays(consegnePerGiorno);
+
+    consegnePerGiorno.forEach((key, value) {
+      data.add(FlSpot(DateTime.parse(key).millisecondsSinceEpoch.toDouble(),
+          value.toDouble()));
+    });
+
+    return data;
+  }
+
+  static Future<Map<String, int>> getConsegnePerRegione(String area) async {
+    // int consegne = 0;
+    // for (ConsegneVacciniLatest element
+    //     in await ConsegneVacciniLatest.getListData()) {
+    //   if (area == element.area) consegne += element.numero_dosi;
+    // }
+    // return consegne;
+    var summary;
+    await ConsegneVacciniLatest.getListData().then((value) => summary = value);
+    //{'giorno':dosi}
+    Map<String, int> consegnePerGiorno =
+        new SortedMap<String, int>(Ordering.byKey());
+
+    for (ConsegneVacciniLatest element in summary) {
+      if (element.area == area) {
+        String date = element.data_consegna.substring(0, 10);
+        int tempTot = element.numero_dosi;
+
+        if (!consegnePerGiorno.containsKey(date)) {
+          consegnePerGiorno.putIfAbsent(date, () => tempTot);
+        } else {
+          consegnePerGiorno.update(date, (value) => value + tempTot);
+        }
+      }
+    }
+
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String formattedDate = formatter.format(now);
+
+    if (!consegnePerGiorno.containsKey(formattedDate)) {
+      consegnePerGiorno.putIfAbsent(formattedDate, () => 0);
+    }
+
+    consegnePerGiorno = _addZeroDays(consegnePerGiorno);
+
+    return consegnePerGiorno;
   }
 
   static Map<String, int> _addZeroDays(Map<String, int> mapData) {
