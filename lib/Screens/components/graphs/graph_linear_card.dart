@@ -81,6 +81,9 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
   }
 
   Column cardContent() {
+    double iconSize = MediaQuery.of(context).size.width >= 400
+        ? SVConst.kSizeIcons
+        : SVConst.kSizeIconsSmall;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -89,15 +92,15 @@ class _GraphLinearCardState extends State<GraphLinearCard> {
           child: Row(
             children: <Widget>[
               Container(
-                height: SVConst.kSizeIcons,
-                width: SVConst.kSizeIcons,
+                height: iconSize,
+                width: iconSize,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                 ),
                 child: SvgPicture.asset(
                   widget.iconpath,
-                  height: SVConst.kSizeIcons,
-                  width: SVConst.kSizeIcons,
+                  height: iconSize,
+                  width: iconSize,
                 ),
               ),
               SizedBox(width: 25),

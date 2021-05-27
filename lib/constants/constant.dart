@@ -104,4 +104,5 @@ class SVConst {
   //SIZE ELEMENT
   static const double kHeighBarRatio = 0.15;
   static const double kSizeIcons = 50;
+  static const double kSizeIconsSmall = 30;
 }
