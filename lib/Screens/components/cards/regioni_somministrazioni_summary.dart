@@ -35,207 +35,189 @@ class RegioniSomministrazioniSummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final NumberFormat numberFormat = NumberFormat.decimalPattern('it');
     return Container(
-        padding: EdgeInsets.all(12.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(SVConst.radiusComponent),
-            color: Colors.white),
-        child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      AutoSizeText(
-                        "Dosi consegnate",
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                          color: const Color(0xff379982),
-                        ),
+      padding: EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(SVConst.radiusComponent),
+          color: Colors.white),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    AutoSizeText(
+                      "Dosi consegnate",
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: const Color(0xff379982),
                       ),
-                      SizedBox(width: 10),
-                      AutoSizeText(
-                        numberFormat.format(totaleConsegne),
-                        maxLines: 1,
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.black,
-                        ),
+                    ),
+                    SizedBox(width: 10),
+                    AutoSizeText(
+                      numberFormat.format(totaleConsegne),
+                      maxLines: 1,
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.black,
                       ),
-                      SizedBox(width: 10),
-                      Column(
-                        children: [
-                          AutoSizeText.rich(
-                            TextSpan(
-                              text: getPercentuale(totaleConsegne),
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'della popolazione',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                              ],
-                            ),
-                            maxLines: 3,
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(width: 10),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      AutoSizeText(
-                        "Dosi somministrate",
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                          color: const Color(0xff379982),
-                        ),
+            ),
+            SizedBox(width: 10),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    AutoSizeText(
+                      "Dosi somministrate",
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: const Color(0xff379982),
                       ),
-                      SizedBox(width: 10),
-                      AutoSizeText(
-                        numberFormat.format(totaleSomministrazioni),
-                        maxLines: 1,
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.black,
-                        ),
+                    ),
+                    SizedBox(width: 10),
+                    AutoSizeText(
+                      numberFormat.format(totaleSomministrazioni),
+                      maxLines: 1,
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.black,
                       ),
-                      SizedBox(width: 10),
-                      Column(
-                        children: [
-                          AutoSizeText.rich(
-                            TextSpan(
-                              text: getPercentualeSomministrazioni(),
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'delle dosi consegnate',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                              ],
-                            ),
-                            maxLines: 3,
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              AutoSizeText(
-                "Prime dosi",
-                maxLines: 1,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: const Color(0xff379982),
-                ),
-              ),
-              SizedBox(width: 10),
-              AutoSizeText(
-                numberFormat.format(regione.primeDosi),
-                maxLines: 1,
-                textAlign: TextAlign.end,
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.black,
-                ),
-              ),
-              SizedBox(width: 10),
-              Column(
-                children: [
-                  AutoSizeText.rich(
-                    TextSpan(
-                      text: getPercentuale(regione.primeDosi),
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'della popolazione',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.normal),
-                        ),
+                    ),
+                    SizedBox(width: 10),
+                    Column(
+                      children: [
+                        AutoSizeText.rich(
+                          TextSpan(
+                            text: getPercentualeSomministrazioni(),
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'delle dosi consegnate',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                          maxLines: 3,
+                        )
                       ],
                     ),
-                    maxLines: 3,
-                  )
-                ],
+                  ],
+                ),
               ),
-              SizedBox(
-                height: 10,
+            ),
+            AutoSizeText(
+              "Prime dosi",
+              maxLines: 1,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                color: const Color(0xff379982),
               ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      AutoSizeText(
-                        "Immunizzati",
-                        maxLines: 1,
+            ),
+            SizedBox(width: 10),
+            AutoSizeText(
+              numberFormat.format(regione.primeDosi),
+              maxLines: 1,
+              textAlign: TextAlign.end,
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(width: 10),
+            Column(
+              children: [
+                AutoSizeText.rich(
+                  TextSpan(
+                    text: getPercentuale(regione.primeDosi),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'della popolazione',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                          color: const Color(0xff379982),
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      AutoSizeText(
-                        numberFormat.format(totaleImmunizzati),
-                        maxLines: 1,
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.black,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Column(
-                        children: [
-                          AutoSizeText.rich(
-                            TextSpan(
-                              text: getPercentuale(totaleImmunizzati),
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'della popolazione',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                              ],
-                            ),
-                            maxLines: 3,
-                          )
-                        ],
+                            fontSize: 15, fontWeight: FontWeight.normal),
                       ),
                     ],
                   ),
+                  maxLines: 3,
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    AutoSizeText(
+                      "Immunizzati",
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: const Color(0xff379982),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    AutoSizeText(
+                      numberFormat.format(totaleImmunizzati),
+                      maxLines: 1,
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Column(
+                      children: [
+                        AutoSizeText.rich(
+                          TextSpan(
+                            text: getPercentuale(totaleImmunizzati),
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'della popolazione',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                          maxLines: 3,
+                        )
+                      ],
+                    ),
+                  ],
                 ),
-              )
-            ])));
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

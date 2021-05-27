@@ -74,7 +74,7 @@ class GraphLinearUltimeSomministrazioniRegioni extends StatelessWidget {
                               children: [
                                 AutoSizeText(
                                   labelText,
-                                  maxLines: 1,
+                                  maxLines: 2,
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                       color: Colors.black,
@@ -126,7 +126,7 @@ class GraphLinearUltimeSomministrazioniRegioni extends StatelessWidget {
                                               TextSpan(
                                                 text: typeinfo,
                                                 style: TextStyle(
-                                                  fontSize: 24,
+                                                  fontSize: 22,
                                                 ),
                                               )
                                             ],
@@ -181,7 +181,7 @@ class GraphLinearUltimeSomministrazioniRegioni extends StatelessWidget {
                                         lineBarsData: [
                                           LineChartBarData(
                                             spots: snapshot.data,
-                                            isCurved: false,
+                                            isCurved: true,
                                             dotData: FlDotData(show: false),
                                             colors: [SVConst.mainColor],
                                             belowBarData: BarAreaData(

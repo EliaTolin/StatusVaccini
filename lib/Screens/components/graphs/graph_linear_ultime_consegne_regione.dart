@@ -1,39 +1,38 @@
-import 'package:statusvaccini/Models/opendata.dart';
 import 'package:statusvaccini/constants/constant.dart';
-import 'package:statusvaccini/Screens/components/body_components.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:statusvaccini/Screens/components/widgets/information_item.dart';
 
 //Class for draw Card with Linear Card
 
-class GraphLinearUltimeConsegne extends StatefulWidget {
+class GraphUltimeConsegneRegioni extends StatefulWidget {
   final String typeinfo;
   final String labelText;
+  final String secondLabelText;
   final String iconpath;
   final Function funTextInformation;
   final Function funGetData;
 
   @override
-  GraphLinearUltimeConsegne({
+  GraphUltimeConsegneRegioni({
     this.typeinfo = "",
     this.labelText = "",
+    this.secondLabelText = "",
     this.iconpath = "",
     @required this.funTextInformation,
     @required this.funGetData,
     Key key,
   }) : super(key: key);
 
-  _GraphLinearUltimeConsegneState createState() =>
-      _GraphLinearUltimeConsegneState();
+  _GraphUltimeConsegneRegioniState createState() =>
+      _GraphUltimeConsegneRegioniState();
 }
 
-class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
+class _GraphUltimeConsegneRegioniState
+    extends State<GraphUltimeConsegneRegioni> {
   //The information showed in the card
   String _textInformation = "NOT SET INFORMATION";
   //Flag for use ready Graph, all information are loaded
@@ -44,10 +43,6 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
   List<FlSpot> data = [];
   //If the receive data is old
   bool oldData = false;
-
-  UltimaConsegna ultimaConsegna;
-  List<InfoItem> sectionInformation = [];
-
   //InitState with preload data Information
   @override
   void initState() {
@@ -88,10 +83,6 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
   }
 
   Column cardContent() {
-    double iconSize = MediaQuery.of(context).size.width >= 400
-        ? SVConst.kSizeIcons
-        : SVConst.kSizeIconsSmall;
-    final labelConsegne = Provider.of<LabelUltimeConsegne>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -100,15 +91,15 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
           child: Row(
             children: <Widget>[
               Container(
-                height: iconSize,
-                width: iconSize,
+                height: SVConst.kSizeIcons,
+                width: SVConst.kSizeIcons,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                 ),
                 child: SvgPicture.asset(
                   widget.iconpath,
-                  height: iconSize,
-                  width: iconSize,
+                  height: SVConst.kSizeIcons,
+                  width: SVConst.kSizeIcons,
                 ),
               ),
               SizedBox(width: 25),
@@ -131,7 +122,7 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
                       height: 4,
                     ),
                     AutoSizeText(
-                      labelConsegne.label,
+                      widget.secondLabelText,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                           color: const Color(0xff379982),
@@ -191,21 +182,8 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
         SizedBox(
           height: 20,
         ),
-        drawSectionInformation(),
+        // drawSectionInformation(),
       ],
-    );
-  }
-
-  //Draw the legend of graph
-  Padding drawSectionInformation() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          for (final section in sectionInformation) section,
-        ],
-      ),
     );
   }
 
@@ -238,12 +216,8 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
                 final flSpot = barSpot;
                 final NumberFormat numberFormat =
                     NumberFormat.decimalPattern('it');
-                String label = numberFormat.format(flSpot.y) + '\n';
-                var formatter = new DateFormat('dd/MM/yyyy');
-                label += formatter.format(
-                    DateTime.fromMillisecondsSinceEpoch((flSpot.x).toInt()));
                 return LineTooltipItem(
-                  label,
+                  numberFormat.format(flSpot.y),
                   const TextStyle(
                     color: SVConst.mainColor,
                     fontWeight: FontWeight.bold,
@@ -273,30 +247,10 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
   void getTextInformation() async {
     final NumberFormat numberFormat = NumberFormat.decimalPattern('it');
     var tempValue;
-    int dosiTotali = 0;
     // DateTime now = DateTime.now();
     await widget.funTextInformation().then((value) => tempValue = value);
 
-    bool isUltimeConsegne = tempValue is UltimaConsegna ? true : false;
-
-    if (isUltimeConsegne) {
-      ultimaConsegna = tempValue;
-      DateTime now = new DateTime.now();
-      var formatter = new DateFormat('dd/MM/yyyy');
-      if (now.difference(ultimaConsegna.data).inDays != 0) {
-        Provider.of<LabelUltimeConsegne>(context, listen: false).setLabel(
-            "ultima consegna il giorno " +
-                formatter.format(ultimaConsegna.data));
-      }
-
-      for (Fornitore f in ultimaConsegna.fornitori) dosiTotali += f.numeroDosi;
-
-      _textInformation = numberFormat.format(dosiTotali);
-    } else {
-      throw new Exception("The data is not UltimaConsegna");
-    }
-
-    loadSection();
+    _textInformation = numberFormat.format(tempValue);
 
     setState(() {
       _readyTextInformation = true;
@@ -311,20 +265,5 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
       setState(() {
         _readyGraph = true;
       });
-  }
-
-  void loadSection() {
-    int i = 0;
-    final NumberFormat numberFormat = NumberFormat.decimalPattern('it');
-    for (Fornitore f in ultimaConsegna.fornitori) {
-      sectionInformation.add(
-        InfoItem(
-          textItem: f.nome,
-          colorItem: SVConst.listColors[i],
-          dataValue: numberFormat.format(f.numeroDosi),
-        ),
-      );
-      i++;
-    }
   }
 }
