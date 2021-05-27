@@ -67,14 +67,6 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 
     -> [ 100 % ] Creare informazioni riguardo alle dosi sommistrate nelle regioni
 
-##### - [ 0% ] Per ogni grafico sintetico creare la possibilità di espansione di esso per consultare i dati. 
-     
-     -> [ 0 % ] Riportare i grafici già esistenti.
-     
-     -> [ 0 % ] Creare il grafico lineare contente le dosi consegnate in media mobile
-     
-     -> [ 0 % ] Creare il grafico lineare contente le vaccinazioni giornaliere in media mobile
-
 ##### - [ 100% ]    Inserire informazioni sintetiche nella pagina "recap".
 
     -> [100 % ] Informazioni sintetiche sulle totali vaccinazioni
