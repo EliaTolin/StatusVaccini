@@ -106,7 +106,8 @@ class _GraphMultipleLinearCardState extends State<GraphMultipleLinearCard> {
                 fit: FlexFit.tight,
                 child: AutoSizeText(
                   widget.labelText.toString(),
-                  maxLines: 1,
+                  maxLines: 2,
+                  textAlign: TextAlign.right,
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,

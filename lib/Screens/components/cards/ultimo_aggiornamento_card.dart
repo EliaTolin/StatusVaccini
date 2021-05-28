@@ -97,7 +97,9 @@ class _UltimoAggiornamentoCardState extends State<UltimoAggiornamentoCard> {
                     text: "Ultimo aggiornamento dei dati alle ore\n",
                   ),
                   TextSpan(
-                      text: ultimoAggiornamento.hour.toString() +
+                      text: (ultimoAggiornamento.hour < 10
+                              ? "0" + ultimoAggiornamento.hour.toString()
+                              : ultimoAggiornamento.hour.toString()) +
                           ":" +
                           (ultimoAggiornamento.minute < 10
                               ? "0" + ultimoAggiornamento.minute.toString()
