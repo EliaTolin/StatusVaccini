@@ -91,7 +91,9 @@ giornalmente sulla consegna delle dosi e tutte le informazioni che lo stato da d
 
 #### PROBLEMS AND REQUEST FEATURE
     --> Migliorare visibilità informazioni nel grafico a torta
-
+    --> Aumentare grandezza icone
+    --> Fare test di funzionalità e stabilità
+    
 *Per informazioni:*
 
 _Elia Tolin_
