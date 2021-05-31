@@ -42,6 +42,13 @@ class _VariazioniConsegneCardState extends State<VariazioniConsegneCard> {
   }
 
   @override
+  void setState(fn) {
+    if (this.mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     double iconSize = MediaQuery.of(context).size.width >= 400
         ? SVConst.kSizeIcons

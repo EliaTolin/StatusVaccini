@@ -55,6 +55,13 @@ class _GraphLinearUltimeSomministrazioniState
   }
 
   @override
+  void setState(fn) {
+    if (this.mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(

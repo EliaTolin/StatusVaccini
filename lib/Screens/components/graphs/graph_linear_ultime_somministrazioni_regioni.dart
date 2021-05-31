@@ -15,6 +15,7 @@ class GraphLinearUltimeSomministrazioniRegioni extends StatelessWidget {
   final Function funTextInformation;
   final Function funGetData;
   final String dataUltimeSomministrazioni;
+  final NumberFormat numberFormat = NumberFormat.decimalPattern('it');
 
   @override
   GraphLinearUltimeSomministrazioniRegioni({
@@ -118,7 +119,10 @@ class GraphLinearUltimeSomministrazioniRegioni extends StatelessWidget {
                                                 TextStyle(color: Colors.black),
                                             children: [
                                               TextSpan(
-                                                text: snapshot.data + "\n",
+                                                text: numberFormat.format(
+                                                        int.parse(
+                                                            snapshot.data)) +
+                                                    "\n",
                                                 style: GoogleFonts.roboto(
                                                   fontSize: 30,
                                                 ),

@@ -42,7 +42,13 @@ class _SomministrazioniSummaryCardState
     //GET DATA INFORMATION
     getInfoData();
   }
-
+  @override
+  void setState(fn) {
+    if (this.mounted) {
+      super.setState(fn);
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     var expanded = Column(

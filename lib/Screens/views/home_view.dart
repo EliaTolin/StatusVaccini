@@ -25,7 +25,7 @@ class _HomePageViewState extends State<HomePageView> {
               // FIX HEIGHT BODY.
               // WITHOUT SIZEDBOX THE ELEMENT GOING UNDER BOTTOMBAR AT THE END
               SizedBox(
-                height: 100,
+                height: 50,
               ),
             ],
           ),

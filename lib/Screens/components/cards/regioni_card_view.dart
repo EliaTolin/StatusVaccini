@@ -5,7 +5,6 @@ import 'package:statusvaccini/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 //Class for draw Card with Linear Card
 
@@ -127,27 +126,13 @@ class _CardViewRegioniState extends State<CardViewRegioni> {
     data.sort((a, b) => a.nome.compareTo(b.nome));
     for (Regione element in data) {
       String nome = element.sigla;
-
-      double percTot = ((element.totaleDosiSommistrate * 100) /
-          DataInformation.abitantiRegioni[element.sigla]);
-
-      double percPrimaDose = ((element.primeDosi * 100) /
-          DataInformation.abitantiRegioni[element.sigla]);
-
-      double percSecondaDose = ((element.secondeDosi * 100) /
-          DataInformation.abitantiRegioni[element.sigla]);
-
       list.add(InkWell(
         onTap: () => Navigator.push(context,
             MaterialPageRoute(builder: (_) => RegionDetailsView(element))),
         child: ElementBox(
           index: i,
-          percentualeTot: double.parse(percTot.toStringAsFixed(2)),
           nameItem: nome,
           heightElement: sizeListView,
-          percentualePrimeDosi: double.parse(percPrimaDose.toStringAsFixed(2)),
-          percentualeSecondeDosi:
-              double.parse(percSecondaDose.toStringAsFixed(2)),
         ),
       ));
       i++;
@@ -156,14 +141,16 @@ class _CardViewRegioniState extends State<CardViewRegioni> {
     //DRAW THE LISTBOX
     return Container(
       height: sizeListView + 100,
-      decoration: BoxDecoration(
-          color: SVConst.cardColor, borderRadius: BorderRadius.circular(16)),
+      // decoration: BoxDecoration(
+      //     color: SVConst.cardColor, borderRadius: BorderRadius.circular(16)),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.only(
+          top: 10,
+        ),
         child: ListView(
           shrinkWrap: true,
           primary: false,
-          scrollDirection: Axis.horizontal,
+          scrollDirection: Axis.vertical,
           children: list,
         ),
       ),
@@ -200,24 +187,23 @@ class ElementBox extends StatelessWidget {
   const ElementBox({
     Key key,
     @required this.index,
-    @required this.percentualeTot,
     @required this.nameItem,
     @required this.heightElement,
-    @required this.percentualePrimeDosi,
-    @required this.percentualeSecondeDosi,
   }) : super(key: key);
 
   final int index;
-  final double percentualeTot;
   final String nameItem;
   final double heightElement;
-  final double percentualePrimeDosi;
-  final double percentualeSecondeDosi;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.only(bottom: 8.0, top: 8.0, left: 18.0, right: 18.0),
+      padding: const EdgeInsets.only(
+        bottom: 15.0,
+        top: 8.0,
+        left: 10,
+        right: 10,
+      ),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -231,91 +217,32 @@ class ElementBox extends StatelessWidget {
             ),
           ],
         ),
-        height: heightElement,
+        // height: heightElement,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
+              // DataInformation.sigleRegioni[nameItem],
+              //SVConst.circularItemsColors[index],
               Container(
-                height: heightElement * 0.7,
-                child: AspectRatio(
-                  aspectRatio: 1.0,
-                  child: Center(
-                    child: CircularPercentIndicator(
-                      backgroundColor: Colors.white,
-                      radius: 120.0,
-                      lineWidth: 13.0,
-                      percent: (percentualeTot / 100),
-                      center: Text(
-                        percentualeTot.toString() + "%",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20.0),
-                      ),
-                      footer: Container(
-                        child: AutoSizeText(
-                          DataInformation.sigleRegioni[nameItem],
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: SVConst.circularItemsColors[index],
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17.0),
-                        ),
-                      ),
-                      circularStrokeCap: CircularStrokeCap.round,
-                      progressColor: SVConst.circularItemsColors[index],
-                    ),
+                child: AutoSizeText(
+                  DataInformation.sigleRegioni[nameItem],
+                  maxLines: 1,
+                  style: TextStyle(
+                    color: SVConst.circularItemsColors[index],
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
+              // SvgPicture.asset(
+              //   "assets/icons/arrow-back.svg",
+              //   color: Colors.black,
+              //   height:
+              // ),
               SizedBox(
-                height: 5,
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        AutoSizeText(
-                          "Prima dose : ",
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                        AutoSizeText(
-                          percentualePrimeDosi.toString() + "%",
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        AutoSizeText(
-                          "Seconda dose : ",
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        AutoSizeText(
-                          percentualeSecondeDosi.toString() + "%",
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                height: 30,
               ),
             ],
           ),

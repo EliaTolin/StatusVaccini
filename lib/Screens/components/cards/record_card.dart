@@ -33,6 +33,13 @@ class _RecordCardState extends State<RecordCard> {
   }
 
   @override
+  void setState(fn) {
+    if (this.mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     var expanded = Column(
       children: [

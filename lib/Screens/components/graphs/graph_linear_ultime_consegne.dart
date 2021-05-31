@@ -269,6 +269,13 @@ class _GraphLinearUltimeConsegneState extends State<GraphLinearUltimeConsegne> {
     );
   }
 
+  @override
+  void setState(fn) {
+    if (this.mounted) {
+      super.setState(fn);
+    }
+  }
+
   //Load the text information.
   void getTextInformation() async {
     final NumberFormat numberFormat = NumberFormat.decimalPattern('it');

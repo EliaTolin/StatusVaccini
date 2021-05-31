@@ -91,8 +91,8 @@ class HomeItems {
             labelText: "Somministrazioni",
             iconpath: "assets/icons/placeholder.svg",
             funGetData: () => OpenData.graphInfoSomministrazioniPerRegione(),
-            firstLabel: "Somministrazioni per regione",
-            secondLabel: "in rapporto agli abitanti",
+            firstLabel: "Informazioni per Regione",
+            secondLabel: "clicca sulla regione interessata",
           ),
         ),
       ];

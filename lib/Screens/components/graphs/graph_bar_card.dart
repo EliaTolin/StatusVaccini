@@ -45,6 +45,13 @@ class _GraphBarCardState extends State<GraphBarCard> {
   }
 
   @override
+  void setState(fn) {
+    if (this.mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
