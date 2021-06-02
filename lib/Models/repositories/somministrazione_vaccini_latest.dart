@@ -1,4 +1,6 @@
 import 'dart:convert' as convert;
+import 'package:statusvaccini/Models/opendata.dart';
+import 'package:statusvaccini/cache/cache.dart';
 import 'package:statusvaccini/constants/url_constant.dart';
 import 'package:http/http.dart' as http;
 
@@ -42,34 +44,40 @@ class SomministrazioneVacciniLatest {
       this.nome_regione});
 
   static Future<List<SomministrazioneVacciniLatest>> getListData() async {
-    var response =
-        await http.get(Uri.parse(URLConst.somministrazioneVacciniLatest));
+    String data;
+    var cache = Cache<SomministrazioneVacciniLatest>();
+    if (!(await cache.needsUpdate())) {
+      data = await cache.getData();
+    } else {
+      var latestUpdate = await OpenData.getLastUpdateData();
+      data = await http.read(Uri.parse(URLConst.somministrazioneVacciniLatest));
+      cache.update(latestUpdate, data);
+    }
+
     List<SomministrazioneVacciniLatest> list = [];
 
-    if (response.statusCode == 200) {
-      var jsonResponse = convert.jsonDecode(response.body);
-      var jsonData = jsonResponse['data'];
+    var jsonResponse = convert.jsonDecode(data);
+    var jsonData = jsonResponse['data'];
 
-      for (var element in jsonData) {
-        list.add(new SomministrazioneVacciniLatest(
-          index: element['index'],
-          area: element['area'],
-          fornitore: element['fornitore'],
-          data_somministrazione: element['data_somministrazione'],
-          fascia_anagrafica: element['fascia_anagrafica'],
-          sesso_maschile: element['sesso_maschile'],
-          sesso_femminile: element['sesso_femminile'],
-          categoria_operatori_sanitari_sociosanitari:
-              element['categoria_operatori_sanitari_sociosanitari'],
-          categoria_personale_non_sanitario:
-              element['categoria_personale_non_sanitario'],
-          categoria_ospiti_rsa: element['categoria_ospiti_rsa'],
-          categoria_over80: element['categoria_over80'],
-          prima_dose: element['prima_dose'],
-          seconda_dose: element['seconda_dose'],
-          nome_regione: element['nome_area'],
-        ));
-      }
+    for (var element in jsonData) {
+      list.add(new SomministrazioneVacciniLatest(
+        index: element['index'],
+        area: element['area'],
+        fornitore: element['fornitore'],
+        data_somministrazione: element['data_somministrazione'],
+        fascia_anagrafica: element['fascia_anagrafica'],
+        sesso_maschile: element['sesso_maschile'],
+        sesso_femminile: element['sesso_femminile'],
+        categoria_operatori_sanitari_sociosanitari:
+            element['categoria_operatori_sanitari_sociosanitari'],
+        categoria_personale_non_sanitario:
+            element['categoria_personale_non_sanitario'],
+        categoria_ospiti_rsa: element['categoria_ospiti_rsa'],
+        categoria_over80: element['categoria_over80'],
+        prima_dose: element['prima_dose'],
+        seconda_dose: element['seconda_dose'],
+        nome_regione: element['nome_area'],
+      ));
     }
     return list;
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:statusvaccini/Models/opendata.dart';
 import 'package:statusvaccini/Screens/components/pageitems/region_details_items.dart';
-import 'package:statusvaccini/screens/components/body_components.dart';
+import 'package:statusvaccini/Screens/components/body_components.dart';
 
 class RegionDetailsView extends StatelessWidget {
   RegionDetailsView(this.regione);

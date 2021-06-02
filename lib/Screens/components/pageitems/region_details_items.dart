@@ -4,7 +4,7 @@ import 'package:statusvaccini/Models/opendata.dart';
 import 'package:statusvaccini/Screens/components/cards/regioni_somministrazioni_summary.dart';
 import 'package:statusvaccini/Screens/components/cards/somministrazioni_regione.dart';
 import 'package:statusvaccini/Screens/components/graphs/graph_multiple_linear_card.dart';
-import 'package:statusvaccini/screens/components/graphs/graph_linear_ultime_consegne.dart';
+import 'package:statusvaccini/Screens/components/graphs/graph_linear_ultime_consegne.dart';
 
 class RegionDetailsItems {
   Widget card;
