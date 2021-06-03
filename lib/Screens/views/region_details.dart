@@ -10,7 +10,7 @@ class RegionDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: TopBarRegioni(size, title: "Dettagli ${regione.nome}"),
+      appBar: TopBarRegioni(size, title: "${regione.nome}"),
       body: FutureBuilder(
           future: OpenData.getDatiRegioniGiornoPerGiorno(regione.sigla),
           builder: (context, snapshot) {

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:statusvaccini/constants/constant.dart';
@@ -117,9 +118,11 @@ Column buildTopBarRegioni(Size size, String title, BuildContext context) {
                   width: 15,
                 ),
                 Container(
+                  // width: 290,
                   alignment: Alignment.bottomCenter,
-                  child: Text(
+                  child: AutoSizeText(
                     title,
+                    maxLines: 1,
                     style: TextStyle(
                       fontSize: 24,
                       color: SVConst.textColor,
