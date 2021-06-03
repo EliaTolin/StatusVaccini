@@ -1,4 +1,6 @@
 import 'dart:convert' as convert;
+import 'package:statusvaccini/Models/opendata.dart';
+import 'package:statusvaccini/cache/cache.dart';
 import 'package:statusvaccini/constants/url_constant.dart';
 import 'package:http/http.dart' as http;
 
@@ -25,22 +27,29 @@ class ConsegneVacciniLatest {
       this.nome_area});
 
   static Future<List<ConsegneVacciniLatest>> getListData() async {
-    var response = await http.get(Uri.parse(URLConst.consegneVacciniLatest));
+    String data;
+    var cache = Cache<ConsegneVacciniLatest>();
+    if (!(await cache.needsUpdate())) {
+      data = await cache.getData();
+    } else {
+      var latestUpdate = await OpenData.getLastUpdateData();
+      data = await http.read(Uri.parse(URLConst.consegneVacciniLatest));
+      cache.update(latestUpdate, data);
+    }
+
     List<ConsegneVacciniLatest> list = [];
 
-    if (response.statusCode == 200) {
-      var jsonResponse = convert.jsonDecode(response.body);
-      var jsonData = jsonResponse['data'];
+    var jsonResponse = convert.jsonDecode(data);
+    var jsonData = jsonResponse['data'];
 
-      for (var element in jsonData) {
-        list.add(new ConsegneVacciniLatest(
-            index: element['index'],
-            area: element['area'],
-            fornitore: element['fornitore'],
-            data_consegna: element['data_consegna'],
-            numero_dosi: element['numero_dosi'],
-            nome_area: element['nome_area']));
-      }
+    for (var element in jsonData) {
+      list.add(new ConsegneVacciniLatest(
+          index: element['index'],
+          area: element['area'],
+          fornitore: element['fornitore'],
+          data_consegna: element['data_consegna'],
+          numero_dosi: element['numero_dosi'],
+          nome_area: element['nome_area']));
     }
     return list;
   }
