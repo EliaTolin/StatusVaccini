@@ -160,37 +160,33 @@ class _GraphLinearUltimeSomministrazioniState
     return Column(
       children: <Widget>[
         SizedBox(height: 20),
-        Stack(
-          children: <Widget>[
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: AutoSizeText.rich(
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AutoSizeText.rich(
+                TextSpan(
+                  style: TextStyle(color: Colors.black),
+                  children: [
                     TextSpan(
-                      style: TextStyle(color: Colors.black),
-                      children: [
-                        TextSpan(
-                          text: _textInformation + "\n",
-                          style: GoogleFonts.roboto(
-                            fontSize: 30,
-                          ),
-                        ),
-                        TextSpan(
-                          text: widget.typeinfo,
-                          style: TextStyle(
-                            fontSize: 24,
-                          ),
-                        )
-                      ],
+                      text: _textInformation + "\n",
+                      style: GoogleFonts.roboto(
+                        fontSize: 30,
+                      ),
                     ),
-                  ),
+                    TextSpan(
+                      text: widget.typeinfo,
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                    )
+                  ],
                 ),
-              ],
+              ),
             ),
-            drawGraph(),
           ],
         ),
+        drawGraph(),
       ],
     );
   }

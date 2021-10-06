@@ -102,97 +102,31 @@ class GraphLinearUltimeSomministrazioniRegioni extends StatelessWidget {
                     Column(
                       children: <Widget>[
                         SizedBox(height: 20),
-                        Stack(
-                          children: <Widget>[
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: FutureBuilder(
-                                      future: funTextInformation(),
-                                      builder: (context, snapshot) {
-                                        if (!snapshot.hasData)
-                                          return CircularProgressIndicator();
-                                        return AutoSizeText.rich(
-                                          TextSpan(
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                            children: [
-                                              TextSpan(
-                                                text: numberFormat.format(
-                                                        int.parse(
-                                                            snapshot.data)) +
-                                                    "\n",
-                                                style: GoogleFonts.roboto(
-                                                  fontSize: 30,
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                text: typeinfo,
-                                                style: TextStyle(
-                                                  fontSize: 22,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        );
-                                      }),
-                                ),
-                              ],
-                            ),
-                            AspectRatio(
-                              aspectRatio: 1.5,
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
                               child: FutureBuilder(
-                                  future: funGetData(),
+                                  future: funTextInformation(),
                                   builder: (context, snapshot) {
                                     if (!snapshot.hasData)
                                       return CircularProgressIndicator();
-                                    return LineChart(
-                                      LineChartData(
-                                        gridData: FlGridData(show: false),
-                                        borderData: FlBorderData(show: false),
-                                        titlesData: FlTitlesData(show: false),
-                                        lineTouchData: LineTouchData(
-                                          touchTooltipData:
-                                              LineTouchTooltipData(
-                                                  getTooltipItems:
-                                                      (List<LineBarSpot>
-                                                          touchedBarSpots) {
-                                            return touchedBarSpots
-                                                .map((barSpot) {
-                                              final flSpot = barSpot;
-                                              final NumberFormat numberFormat =
-                                                  NumberFormat.decimalPattern(
-                                                      'it');
-                                              String label = numberFormat
-                                                      .format(flSpot.y) +
-                                                  '\n';
-                                              var formatter =
-                                                  new DateFormat('dd/MM/yyyy');
-                                              label += formatter.format(DateTime
-                                                  .fromMillisecondsSinceEpoch(
-                                                      (flSpot.x).toInt()));
-                                              return LineTooltipItem(
-                                                label,
-                                                const TextStyle(
-                                                  color: SVConst.mainColor,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              );
-                                            }).toList();
-                                          }),
-                                        ),
-                                        lineBarsData: [
-                                          LineChartBarData(
-                                            spots: snapshot.data,
-                                            isCurved: true,
-                                            dotData: FlDotData(show: false),
-                                            colors: [SVConst.mainColor],
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              colors: [
-                                                Colors.cyan.withAlpha(30)
-                                              ],
+                                    return AutoSizeText.rich(
+                                      TextSpan(
+                                        style: TextStyle(color: Colors.black),
+                                        children: [
+                                          TextSpan(
+                                            text: numberFormat.format(
+                                                    int.parse(snapshot.data)) +
+                                                "\n",
+                                            style: GoogleFonts.roboto(
+                                              fontSize: 30,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: typeinfo,
+                                            style: TextStyle(
+                                              fontSize: 22,
                                             ),
                                           )
                                         ],
@@ -201,6 +135,60 @@ class GraphLinearUltimeSomministrazioniRegioni extends StatelessWidget {
                                   }),
                             ),
                           ],
+                        ),
+                        AspectRatio(
+                          aspectRatio: 1.5,
+                          child: FutureBuilder(
+                              future: funGetData(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData)
+                                  return CircularProgressIndicator();
+                                return LineChart(
+                                  LineChartData(
+                                    gridData: FlGridData(show: false),
+                                    borderData: FlBorderData(show: false),
+                                    titlesData: FlTitlesData(show: false),
+                                    lineTouchData: LineTouchData(
+                                      touchTooltipData: LineTouchTooltipData(
+                                          getTooltipItems: (List<LineBarSpot>
+                                              touchedBarSpots) {
+                                        return touchedBarSpots.map((barSpot) {
+                                          final flSpot = barSpot;
+                                          final NumberFormat numberFormat =
+                                              NumberFormat.decimalPattern('it');
+                                          String label =
+                                              numberFormat.format(flSpot.y) +
+                                                  '\n';
+                                          var formatter =
+                                              new DateFormat('dd/MM/yyyy');
+                                          label += formatter.format(DateTime
+                                              .fromMillisecondsSinceEpoch(
+                                                  (flSpot.x).toInt()));
+                                          return LineTooltipItem(
+                                            label,
+                                            const TextStyle(
+                                              color: SVConst.mainColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          );
+                                        }).toList();
+                                      }),
+                                    ),
+                                    lineBarsData: [
+                                      LineChartBarData(
+                                        spots: snapshot.data,
+                                        isCurved: true,
+                                        dotData: FlDotData(show: false),
+                                        colors: [SVConst.mainColor],
+                                        belowBarData: BarAreaData(
+                                          show: true,
+                                          colors: [Colors.cyan.withAlpha(30)],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }),
                         ),
                       ],
                     )
